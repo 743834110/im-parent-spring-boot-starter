@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.min.js"></script>
+</head>
+<body>
+    <form action="/rest/te" method="post">
+        <input name="dd" value="dd">55
+        <input type="submit" value="提交">
+    </form>
+</body>
+<script>
+    $(function () {
+
+        // var reqBody = {
+        //     "reqBody": [
+        //         {
+        //             param: {
+        //                 configId: 1,
+        //                 createTime: new Date()
+        //             },
+        //             serverConfig: {
+        //                 configId: 2,
+        //                 createTime: new Date()
+        //             }
+        //         },
+        //         {
+        //             param: {
+        //                 configId: 1,
+        //                 createTime: new Date()
+        //             },
+        //             serverConfig: {
+        //                 configId: 2,
+        //                 createTime: new Date()
+        //             }
+        //         },
+        //         {
+        //             param: {
+        //                 configId: 1,
+        //                 createTime: new Date()
+        //             },
+        //             serverConfig: {
+        //                 configId: 2,
+        //                 createTime: new Date()
+        //             }
+        //         }
+        //     ]
+        // };
+        // reqBody = JSON.stringify(reqBody);
+        // console.log(reqBody)
+
+        var configs = {
+            configs: [
+                {
+                    configId: 1,
+                    createTime: new Date()
+                },
+                {
+                    configId: 2,
+                    createTime: new Date()
+                }
+            ]
+        }
+        configs = JSON.stringify(configs);
+        $.ajax({
+            url: "/rest/queryOrgService/queryServerConfig",
+            type: "POST",
+            dataType : 'json',
+            contentType : 'application/json',
+            data: configs,
+            success: function (xhr, status, res) {
+
+            }
+        })
+    })
+</script>
+</html>

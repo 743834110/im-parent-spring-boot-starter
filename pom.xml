@@ -20,6 +20,7 @@
     <spring.boot.version>2.0.6.RELEASE</spring.boot.version>
     <url>http://www.berby.xyz</url>
     <fastjson.version>1.2.35</fastjson.version>
+    <hutool.version>4.1.19</hutool.version>
   </properties>
 
   <dependencyManagement>
@@ -50,8 +51,25 @@
         <artifactId>fastjson</artifactId>
         <version>${fastjson.version}</version>
       </dependency>
+
+      <!--hutool工具包-->
+      <dependency>
+        <groupId>cn.hutool</groupId>
+        <artifactId>hutool-all</artifactId>
+        <version>${hutool.version}</version>
+      </dependency>
+
     </dependencies>
+
+
   </dependencyManagement>
+
+  <modules>
+    <module>im-db-spring-boot-starter</module>
+    <module>im-org-spring-boot-starter</module>
+    <module>im-controller-spring-boot-starter</module>
+    <module>jim-server-demo</module>
+  </modules>
 
   <build>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
