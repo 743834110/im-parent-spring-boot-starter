@@ -27,6 +27,7 @@ import xyz.berby.im.server.service.LoginServiceProcessor;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Observer;
 
 /**
  * IM服务端启动类;
