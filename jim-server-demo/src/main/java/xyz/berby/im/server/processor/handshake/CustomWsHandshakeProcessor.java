@@ -5,15 +5,11 @@ package xyz.berby.im.server.processor.handshake;
 
 import org.jim.common.ImAio;
 import org.jim.common.ImPacket;
-import org.jim.common.ImStatus;
-import org.jim.common.packets.ChatBody;
 import org.jim.common.packets.Command;
 import org.jim.common.packets.RespBody;
-import org.jim.common.utils.ChatKit;
 import org.jim.server.command.handler.processor.handshake.WsHandshakeProcessor;
 import org.tio.core.ChannelContext;
 import xyz.berby.im.entity.ServerConfig;
-import xyz.berby.im.server.util.CustomKit;
 import xyz.berby.im.service.ServerConfigService;
 import xyz.berby.im.vo.Pager;
 

@@ -1,8 +1,8 @@
 package xyz.berby.im.service.impl;
 
 import org.springframework.transaction.annotation.Transactional;
-import xyz.berby.im.entity.ServerConfig;
 import xyz.berby.im.dao.ServerConfigDao;
+import xyz.berby.im.entity.ServerConfig;
 import xyz.berby.im.service.ServerConfigService;
 import xyz.berby.im.vo.Pager;
 import org.springframework.stereotype.Service;

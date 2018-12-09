@@ -3,14 +3,23 @@ package xyz.berby.im.entity;
 import java.util.Date;
 import java.io.Serializable;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
+
 /**
  * (ServerConfig)实体类
  *
  * @author makejava
- * @since 2018-11-03 16:43:35
+ * @since 2018-12-09 11:05:38
  */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Accessors(chain = true)
 public class ServerConfig implements Serializable {
-    private static final long serialVersionUID = 412907255208962965L;
+    private static final long serialVersionUID = 240139665786080851L;
     //配置ID
     private String configId;
     //配置key
@@ -26,67 +35,7 @@ public class ServerConfig implements Serializable {
     
     private Date modifyTime;
 
-    public ServerConfig() {
-    }
-
     public ServerConfig(String mappingKey) {
         this.mappingKey = mappingKey;
     }
-
-    public String getConfigId() {
-        return configId;
-    }
-
-    public void setConfigId(String configId) {
-        this.configId = configId;
-    }
-
-    public String getMappingKey() {
-        return mappingKey;
-    }
-
-    public void setMappingKey(String mappingKey) {
-        this.mappingKey = mappingKey;
-    }
-
-    public String getMappingValue() {
-        return mappingValue;
-    }
-
-    public void setMappingValue(String mappingValue) {
-        this.mappingValue = mappingValue;
-    }
-
-    public String getCreatePerson() {
-        return createPerson;
-    }
-
-    public void setCreatePerson(String createPerson) {
-        this.createPerson = createPerson;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getModifyPerson() {
-        return modifyPerson;
-    }
-
-    public void setModifyPerson(String modifyPerson) {
-        this.modifyPerson = modifyPerson;
-    }
-
-    public Date getModifyTime() {
-        return modifyTime;
-    }
-
-    public void setModifyTime(Date modifyTime) {
-        this.modifyTime = modifyTime;
-    }
-
 }

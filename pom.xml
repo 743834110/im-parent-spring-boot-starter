@@ -21,6 +21,7 @@
     <url>http://www.berby.xyz</url>
     <fastjson.version>1.2.35</fastjson.version>
     <hutool.version>4.1.19</hutool.version>
+    <lombook.version>1.16.20</lombook.version>
   </properties>
 
   <dependencyManagement>
@@ -57,6 +58,13 @@
         <groupId>cn.hutool</groupId>
         <artifactId>hutool-all</artifactId>
         <version>${hutool.version}</version>
+      </dependency>
+
+      <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${lombook.version}</version>
       </dependency>
 
     </dependencies>
@@ -113,6 +121,16 @@
         <version>${spring.boot.version}</version>
         <configuration>
           <classifier>exec</classifier>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.6.1</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
         </configuration>
       </plugin>
     </plugins>

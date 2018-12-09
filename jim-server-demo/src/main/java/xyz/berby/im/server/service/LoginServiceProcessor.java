@@ -9,33 +9,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jim.common.Const;
 import org.jim.common.ImPacket;
 import org.jim.common.ImSessionContext;
 import org.jim.common.ImStatus;
-import org.jim.common.packets.Command;
+import org.jim.common.packets.*;
 import org.jim.common.utils.JsonKit;
 import org.jim.server.command.CommandManager;
 import org.jim.server.command.handler.JoinGroupReqHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.tio.core.ChannelContext;
 import org.jim.common.http.HttpConst;
-import org.jim.common.packets.Group;
-import org.jim.common.packets.LoginReqBody;
-import org.jim.common.packets.LoginRespBody;
-import org.jim.common.packets.User;
 import org.jim.common.session.id.impl.UUIDSessionIdGenerator;
 import org.jim.common.utils.Md5;
 import org.jim.server.command.handler.processor.login.LoginProcessorIntf;
 
 import cn.hutool.core.util.RandomUtil;
-
-import javax.annotation.PostConstruct;
 
 /**
  * @author WChao

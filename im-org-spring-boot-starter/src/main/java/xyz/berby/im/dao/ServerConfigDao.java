@@ -9,7 +9,7 @@ import java.util.List;
  * (ServerConfig)表数据库访问层
  *
  * @author makejava
- * @since 2018-11-03 16:43:37
+ * @since 2018-12-09 11:20:28
  */
  
 public interface ServerConfigDao {

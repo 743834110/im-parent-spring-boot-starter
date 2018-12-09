@@ -30,4 +30,17 @@ public class CustomKit{
         return sendSuccessRespPacket(channelContext, data, Command.COMMAND_HANDSHAKE_RESP);
     }
 
+    /**
+     * 消息格式不正确响应包
+     * @param command
+     * @param channelContext
+     * @return
+     * @throws Exception
+     */
+    public static ImPacket  dataInCorrectRespPacket(Command command, ChannelContext channelContext) throws Exception{
+        RespBody chatDataInCorrectRespPacket = new RespBody(command,ImStatus.C10002);
+        ImPacket respPacket = ImKit.ConvertRespPacket(chatDataInCorrectRespPacket, channelContext);
+        respPacket.setStatus(ImStatus.C10002);
+        return respPacket;
+    }
 }

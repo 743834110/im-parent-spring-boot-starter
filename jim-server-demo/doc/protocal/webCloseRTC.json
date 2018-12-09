@@ -1,0 +1,6 @@
+{
+  "cmd": "命令码(25)int类型",
+  "chatType":"聊天类型int类型(0:未知,1:公聊,2:私聊)",
+  "to": "目标ID",
+  "group_id": "房间id仅在chatType为(1)时需要,String类型"
+}

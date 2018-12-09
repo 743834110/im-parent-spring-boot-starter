@@ -17,6 +17,8 @@
 	.online{width: 15%;height: 100%;float:right;background: #FCFCFC;border:solid 1px #000;box-sizing:border-box;}
 </style>
 	<script type="text/javascript" src="./static/js/date.js"></script>
+	<script type="text/javascript" src="./static/js/adapter.js"></script>
+	<script type="text/javascript" src="./index.js"></script>
 </head>
 <script>
 var socket ;
@@ -38,7 +40,7 @@ function connect(){
 	logDiv = document.getElementById('logs');
 	socket = new WebSocket("wss:"+ip+":"+port);
 	socket.onopen = function(e){
-		
+	    index.login(username, password, socket);
 	};
 	socket.onerror = function(e){
 		logDiv.innerHTML+="<font color='red' size='1'>异常:"+e+"</font><br>";
@@ -407,7 +409,10 @@ function groupHistoryCmd(){
 		<div class="unit">
 			<label >输入内容:</label>
 			<input id="content" style="width:500px;" onkeydown="keyDown(event)"/>
-			<input onclick="javascript:sendGroup()" id="sendGroupBtn"  type="button"  value="群聊" />&nbsp;<input onclick="javascript:send()" id="sendBtn"  type="button"  value="私聊" />
+			<input onclick="javascript:sendGroup()" id="sendGroupBtn"  type="button"  value="群聊" />&nbsp;
+			<input onclick="javascript:send()" id="sendBtn"  type="button"  value="私聊" />
+			<input onclick="index.liveAudio(username)" type="button" value="语音通话">
+			<audio id="myAudio" autoplay></audio>
 		</div>
    </div>
 </body>

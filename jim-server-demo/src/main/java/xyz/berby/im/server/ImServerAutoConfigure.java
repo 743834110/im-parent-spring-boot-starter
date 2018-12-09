@@ -3,7 +3,6 @@
  */
 package xyz.berby.im.server;
 
-import cn.hutool.core.io.resource.ResourceUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.jim.common.Const;
 import org.jim.common.ImConfig;
@@ -16,18 +15,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.DependsOn;
-import org.springframework.jdbc.support.JdbcUtils;
-import org.springframework.util.ResourceUtils;
+import xyz.berby.im.entity.User;
 import xyz.berby.im.server.config.PropertyImConfigBuilder;
 import xyz.berby.im.server.listener.ImDemoGroupListener;
 import org.tio.core.ssl.SslConfig;
 import com.jfinal.kit.PropKit;
+import xyz.berby.im.server.packet.WebRTCBody;
 import xyz.berby.im.server.processor.handshake.CustomWsHandshakeProcessor;
 import xyz.berby.im.server.service.LoginServiceProcessor;
-
-import java.io.InputStream;
-import java.net.URL;
-import java.util.Observer;
 
 /**
  * IM服务端启动类;

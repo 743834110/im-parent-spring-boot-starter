@@ -1,0 +1,12 @@
+
+{
+  "from": "来源ID",
+  "to": "目标ID",
+  "cmd":"命令码(21)int类型",
+  "createTime": "消息创建时间long类型",
+  "chatType":"聊天类型int类型(0:未知,1:公聊,2:私聊)",
+  "group_id":"群组id仅在chatType为(1)时需要,String类型",
+  "candidate":"公网IP地址（客户端接受到就发到目标客户端当中）",
+  "sdp": "会话描述符",
+  "extras" : "扩展字段,JSON对象格式如：{'扩展字段名称':'扩展字段value'}"
+}
