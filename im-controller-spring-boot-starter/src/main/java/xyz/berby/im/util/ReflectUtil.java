@@ -5,8 +5,7 @@ import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.ClassUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.thoughtworks.paranamer.BytecodeReadingParanamer;
-import com.thoughtworks.paranamer.Paranamer;
+import com.thoughtworks.paranamer.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.beans.IntrospectionException;
@@ -30,6 +29,8 @@ import static com.alibaba.fastjson.JSON.parseArray;
  *
  */
 public class ReflectUtil {
+
+    private static Paranamer PARANAMER = new CachingParanamer(new BytecodeReadingParanamer());
 
 
     /**
@@ -55,11 +56,11 @@ public class ReflectUtil {
      * @param genericType  含泛型类型
      * @return object
      */
-    public static Object jsonForParam(Class<?> paramType, Object[] value, Type genericType) {
+    public static Object jsonForParam(Class<?> paramType, Object[] value, ParameterizedType genericType) {
         String[] datas = Convert.convert(String[].class, value);
 
         // 数组对象时:[{}, {}, {}]
-        if (paramType.isArray() && datas.length == 1 && datas[0].startsWith("[")) {
+        if (datas.length == 1 && datas[0].startsWith("[")) {
             Class<?> componentType = paramType.getComponentType();
             String data = datas[0];
 
@@ -70,12 +71,13 @@ public class ReflectUtil {
             }
             // 含泛型处理
             else {
+                Class<?> actualClass = (Class<?>) genericType.getActualTypeArguments()[0];
                 JSONArray array = JSON.parseArray(data);
                 int size = array.size();
                 Object[] objects = new Object[size];
                 for (int i = 0; i < size; i++) {
                     String s = array.getString(i);
-                    objects[i] = JSON.parseObject(s, genericType);
+                    objects[i] = JSON.parseObject(s, actualClass);
                 }
                 return Convert.convert(paramType, objects);
             }
@@ -233,9 +235,8 @@ public class ReflectUtil {
         }
 
         Object[] paramValues = new Object[types.length];
-        Paranamer paranamer = new BytecodeReadingParanamer();
-        String[] parameterNames = paranamer.lookupParameterNames(method, false);
-
+        new AdaptiveParanamer();
+        String[] parameterNames = PARANAMER.lookupParameterNames(method, false);
 
         for (int i = 0; types != null && i < types.length ; i++) {
 
@@ -245,7 +246,7 @@ public class ReflectUtil {
             if (type instanceof ParameterizedType) {
                 genericType = (Class<?>) ((ParameterizedType) type).getActualTypeArguments()[0];
                 paramType = (Class<?>) ((ParameterizedType) type).getRawType();
-                componentType = null;
+                temp = (ParameterizedType) type;
             }
             else if (type  instanceof GenericArrayType) {
                 temp = ((ParameterizedType)((GenericArrayType) type).getGenericComponentType());

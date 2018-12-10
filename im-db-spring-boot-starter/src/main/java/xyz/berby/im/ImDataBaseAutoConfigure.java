@@ -15,7 +15,7 @@ import javax.annotation.PostConstruct;
 
 //@EnableAutoConfiguration(exclude = ImDataBaseAutoConfigure.class)
 @Configuration
-@PropertySource("classpath:application.properties")
+//@PropertySource("classpath:application.properties")
 @ComponentScan(value = {"xyz.berby.im.controller", "xyz.berby.im.service"})
 @MapperScan("xyz.berby.im.dao")
 @AutoConfigureBefore

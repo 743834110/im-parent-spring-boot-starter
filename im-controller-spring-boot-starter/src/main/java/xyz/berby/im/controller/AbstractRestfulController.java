@@ -1,5 +1,7 @@
 package xyz.berby.im.controller;
 
+import org.springframework.web.multipart.MultipartFile;
+import xyz.berby.im.util.AopTargetUtil;
 import xyz.berby.im.util.ApplicationContextHolder;
 import xyz.berby.im.util.ReflectUtil;
 import xyz.berby.im.vo.RespBody;
@@ -35,7 +37,8 @@ abstract class AbstractRestfulController {
      */
     Object getCommandDeal(String serviceName, String operateName
             , HttpServletRequest request
-            , HttpServletResponse response, String string) {
+            , HttpServletResponse response
+            , String string, MultipartFile[] files) throws Exception {
 
         // 先决检验
 
@@ -80,7 +83,8 @@ abstract class AbstractRestfulController {
                 }
             }
             // 开始反射到服务类的方法
-            Object[] paramValues = ReflectUtil.getParamValues(stringMap, method);
+            Method actualMethod = AopTargetUtil.getTarget(service).getClass().getMethod(method.getName(), method.getParameterTypes());
+            Object[] paramValues = ReflectUtil.getParamValues(stringMap, actualMethod);
             if (paramValues == null) {
                 data = method.invoke(service);
             }

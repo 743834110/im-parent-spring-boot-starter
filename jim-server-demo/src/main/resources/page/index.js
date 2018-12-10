@@ -17,7 +17,7 @@ index.login = function (userName, password, socket) {
 /**
  * 语音通话
  */
-index.liveAudio = function (userName) {
+index.liveAudio = function (userName, socket) {
     var toId = "";
     var myAudio = document.getElementById("myAudio");
     if(onSelected){
@@ -37,14 +37,11 @@ index.liveAudio = function (userName) {
 
     // 发送SDP
     webRTC.pc.onnegotiationneeded = function (ev) {
-        console.log(ev);
-        console.log(this);
         var promise = webRTC.pc.createOffer(function (desc) {
-
+            webRTC.pc.setLocalDescription(desc, function () {
+                console.log(webRTC.pc.localDescription)
+            })
         });
-        promise.then(function (value) {
-
-        })
     };
     // 发送公网IP
     webRTC.pc.onicecandidate = function (ev) {
@@ -57,6 +54,7 @@ index.liveAudio = function (userName) {
             "chatType": 2,
             "candidate": ev.candidate
         });
+        socket.send(msg);
     };
 
     navigator.getUserMedia({

@@ -10,6 +10,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import xyz.berby.im.vo.RespBody;
 
 import javax.annotation.PostConstruct;
@@ -42,10 +43,13 @@ public class RestfulController extends AbstractRestfulController{
     public Object getCommonDeal(@PathVariable String service
             , @PathVariable String operate
             , HttpServletRequest httpServletRequest
-            , HttpServletResponse httpServletResponse, @RequestBody(required = false) String string) {
+            , HttpServletResponse httpServletResponse
+            , @RequestBody(required = false) String string) throws Exception {
         httpServletResponse.setContentType("application/json; charset=utf-8");
         long a = System.currentTimeMillis();
-        Object body = super.getCommandDeal(service, operate, httpServletRequest, httpServletResponse, string);
+        Object body = super.getCommandDeal(service, operate
+                , httpServletRequest, httpServletResponse
+                , string, null);
         System.out.println("耗时：" + (System.currentTimeMillis() - a) + "ms");
         return JSON.toJSONString(body);
     }

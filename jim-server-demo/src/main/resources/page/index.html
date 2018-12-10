@@ -411,7 +411,7 @@ function groupHistoryCmd(){
 			<input id="content" style="width:500px;" onkeydown="keyDown(event)"/>
 			<input onclick="javascript:sendGroup()" id="sendGroupBtn"  type="button"  value="群聊" />&nbsp;
 			<input onclick="javascript:send()" id="sendBtn"  type="button"  value="私聊" />
-			<input onclick="index.liveAudio(username)" type="button" value="语音通话">
+			<input onclick="index.liveAudio(username, socket)" type="button" value="语音通话">
 			<audio id="myAudio" autoplay></audio>
 		</div>
    </div>
