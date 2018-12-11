@@ -18,7 +18,6 @@ import lombok.experimental.Accessors;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Accessors(chain = true)
 public class User implements Serializable {
     private static final long serialVersionUID = -38967841098044360L;
     

@@ -4,9 +4,9 @@ import java.util.Date;
 import java.io.Serializable;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
 
 /**
  * (ServerConfig)实体类
@@ -17,7 +17,7 @@ import lombok.experimental.Accessors;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Accessors(chain = true)
+@Builder
 public class ServerConfig implements Serializable {
     private static final long serialVersionUID = 240139665786080851L;
     //配置ID
@@ -38,4 +38,5 @@ public class ServerConfig implements Serializable {
     public ServerConfig(String mappingKey) {
         this.mappingKey = mappingKey;
     }
+
 }

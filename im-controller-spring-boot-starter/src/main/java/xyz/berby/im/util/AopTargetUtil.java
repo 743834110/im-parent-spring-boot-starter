@@ -3,6 +3,8 @@ package xyz.berby.im.util;
 import org.springframework.aop.framework.AdvisedSupport;
 import org.springframework.aop.framework.AopProxy;
 import org.springframework.aop.support.AopUtils;
+import xyz.berby.im.entity.AbstractBean;
+import xyz.berby.im.entity.ServerConfig;
 
 import java.lang.reflect.Field;
 import java.util.Map;

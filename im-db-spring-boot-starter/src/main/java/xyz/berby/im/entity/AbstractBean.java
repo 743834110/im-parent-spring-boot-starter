@@ -8,7 +8,7 @@ import java.util.Map;
  * 抽象bean基类
  * @param <T>
  */
-public abstract class AbstractBean<T> {
+public abstract class AbstractBean<T> extends Object{
 
     /**
      * 关联子bean类

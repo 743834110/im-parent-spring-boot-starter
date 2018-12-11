@@ -14,7 +14,6 @@ import java.io.Serializable;
  * @since 2018-12-11 10:45:37
  */
 @Data
-@Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
 public class Auth implements Serializable {

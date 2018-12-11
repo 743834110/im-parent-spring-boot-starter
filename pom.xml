@@ -21,7 +21,7 @@
     <url>http://www.berby.xyz</url>
     <fastjson.version>1.2.35</fastjson.version>
     <hutool.version>4.1.19</hutool.version>
-    <lombook.version>1.16.20</lombook.version>
+    <lombook.version>1.18.2</lombook.version>
   </properties>
 
   <dependencyManagement>

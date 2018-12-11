@@ -14,7 +14,6 @@ import java.io.Serializable;
  * @since 2018-12-11 11:39:32
  */
 @Data
-@Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrgRole implements Serializable {

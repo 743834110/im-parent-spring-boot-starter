@@ -186,7 +186,7 @@ abstract class AbstractRestfulController {
     private boolean checkAuth(Method method, User user) {
         Annotation annotation = method.getAnnotation(Validate.class);
         if (annotation != null) {
-            return this.authAspect.authValidate(null, (Validate) annotation, user);
+            return this.authAspect.isAllow( (Validate) annotation, user);
         }
 
         return true;

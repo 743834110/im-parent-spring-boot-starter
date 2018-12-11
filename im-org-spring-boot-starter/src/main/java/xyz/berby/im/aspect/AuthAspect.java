@@ -2,12 +2,18 @@ package xyz.berby.im.aspect;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 import xyz.berby.im.annotation.Validate;
+import xyz.berby.im.entity.Auth;
+import xyz.berby.im.entity.OrgRole;
 import xyz.berby.im.entity.User;
+
+import java.util.List;
 
 /**
  * 权限控制切面
@@ -34,6 +40,7 @@ public class AuthAspect {
      * <pre>
      * 由于切入点的限制，本系统的权限检查所用到的权限
      * 参数(user)必要要置于所有参数前或者所有的参数后
+     * 暂不进行权限判断结果的缓存
      * </pre>
      *
      * @param joinPoint 接入点
@@ -41,9 +48,41 @@ public class AuthAspect {
      * @param user      权限实例
      * @return
      */
-    @Before(value = "serve(validate) && (args(user,..) || args(..,user))", argNames = "joinPoint, validate, user")
-    public boolean authValidate(JoinPoint joinPoint, Validate validate, User user) {
-        
+    @Around(value = "serve(validate) && (args(user,..) || args(..,user))", argNames = "joinPoint, validate, user")
+    private Object authValidate(ProceedingJoinPoint joinPoint, Validate validate, User user) throws Throwable {
+        boolean allowed = this.isAllow(validate, user);
+        Object object = null;
+        if (allowed) {
+            object = joinPoint.proceed(joinPoint.getArgs());
+        }
+        return object;
+    }
+
+    public boolean isAllow(Validate validate, User user) {
+        if (user == null) {
+            return false;
+        }
+        // 检查角色, role名称不为空字符串时
+        String role = validate.role();
+        List<OrgRole> orgRoleList = user.getOrgRoleList();
+        if (!role.equals("") && orgRoleList != null) {
+            for (OrgRole orgRole : user.getOrgRoleList()) {
+                if (role.equals(orgRole.getRoleName()))
+                    return true;
+            }
+        }
+
+        // 检查权限
+        String authName = validate.value();
+        List<Auth> authList = user.getAuthList();
+        if (authList != null) {
+            for (Auth auth : user.getAuthList()) {
+                if (authName.equals(auth.getAuthName())) {
+                    return true;
+                }
+            }
+        }
+
         return true;
     }
 }
