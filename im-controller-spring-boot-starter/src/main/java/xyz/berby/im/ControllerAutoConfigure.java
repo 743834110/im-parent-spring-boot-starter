@@ -22,7 +22,6 @@ import java.util.List;
  */
 
 @EnableAutoConfiguration(exclude = ControllerAutoConfigure.class)
-@ComponentScan
 public class ControllerAutoConfigure {
 
     public static void main( String[] args ) {

@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import xyz.berby.im.entity.ServerConfig;
 import xyz.berby.im.service.ServerConfigService;
 
@@ -20,6 +21,7 @@ import java.util.List;
 
 //@EnableAutoConfiguration(exclude = ImOrgAutoConfigure.class)
 @Configuration
+@ComponentScan(value = "xyz.berby.im.aspect")
 public class ImOrgAutoConfigure {
 
     public static void main( String[] args ) {

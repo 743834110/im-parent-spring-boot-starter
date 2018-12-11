@@ -1,6 +1,12 @@
 package xyz.berby.im.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import xyz.berby.im.annotation.Validate;
+import xyz.berby.im.aspect.AuthAspect;
+import xyz.berby.im.entity.User;
 import xyz.berby.im.util.AopTargetUtil;
 import xyz.berby.im.util.ApplicationContextHolder;
 import xyz.berby.im.util.ReflectUtil;
@@ -8,6 +14,8 @@ import xyz.berby.im.vo.RespBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +28,11 @@ import java.util.function.BiFunction;
  */
 abstract class AbstractRestfulController {
 
+    @Autowired
+    private AuthAspect authAspect;
 
+    @Autowired
+    private HttpSession session;
 
     /**
      * 路径到方法的映射
@@ -83,8 +95,26 @@ abstract class AbstractRestfulController {
                 }
             }
             // 开始反射到服务类的方法
-            Method actualMethod = AopTargetUtil.getTarget(service).getClass().getMethod(method.getName(), method.getParameterTypes());
-            Object[] paramValues = ReflectUtil.getParamValues(stringMap, actualMethod);
+            // 穿透代理对象
+            Method actualMethod = null;
+            Object actualObject = AopTargetUtil.getTarget(service);
+            if (actualObject.equals(service)) {
+                actualMethod = method;
+            }
+            else {
+                actualMethod = actualObject.getClass().getMethod(operateName, method.getParameterTypes());
+            }
+            // 暂时假设user实体接入
+            User user = new User();
+
+            // 进行权限的检查
+//            if (!this.checkAuth(actualMethod, user)) {
+//
+//                return null;
+//            }
+
+            Object[] paramValues = ReflectUtil.getParamValues(stringMap, actualMethod, files, user);
+
             if (paramValues == null) {
                 data = method.invoke(service);
             }
@@ -148,4 +178,17 @@ abstract class AbstractRestfulController {
      */
     abstract Map<String, String[]> handleString(String string);
 
+    /**
+     * 权限检查
+     *
+     * @return 返回true表示用户拥有该权限或者该方法不需要进行权限的检查
+     */
+    private boolean checkAuth(Method method, User user) {
+        Annotation annotation = method.getAnnotation(Validate.class);
+        if (annotation != null) {
+            return this.authAspect.authValidate(null, (Validate) annotation, user);
+        }
+
+        return true;
+    }
 }

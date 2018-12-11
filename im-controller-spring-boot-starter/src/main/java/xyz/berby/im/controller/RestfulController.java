@@ -44,16 +44,39 @@ public class RestfulController extends AbstractRestfulController{
             , @PathVariable String operate
             , HttpServletRequest httpServletRequest
             , HttpServletResponse httpServletResponse
-            , @RequestBody(required = false) String string) throws Exception {
+            , @RequestBody(required = false) String string, MultipartFile[] files) throws Exception {
         httpServletResponse.setContentType("application/json; charset=utf-8");
         long a = System.currentTimeMillis();
         Object body = super.getCommandDeal(service, operate
                 , httpServletRequest, httpServletResponse
-                , string, null);
+                , string, files);
         System.out.println("耗时：" + (System.currentTimeMillis() - a) + "ms");
         return JSON.toJSONString(body);
     }
 
+    /**
+     * <pre>
+     *          解析方式二：
+     *         for (String key: object.keySet()) {
+     *             Object value = object.get(key);
+     *             // jsonArray类型处理
+     *             if (value instanceof JSONArray) {
+     *                 JSONArray array = (JSONArray) value;
+     *                 String[] strings = new String[array.size()];
+     *                 for (int i = 0; i < strings.length; i++) {
+     *                     strings[i] = array.getString(i);
+     *                 }
+     *                 map.put(key, strings);
+     *             }
+     *             // JSONObject类型处理
+     *             else if (value instanceof JSONObject) {
+     *                 map.put(key, new String[] {object.getString(key)});
+     *             }
+     *         }
+     * </pre>
+     * @param string 未解析的数据
+     * @return
+     */
     @Override
     Map<String, String[]> handleString(String string) {
         Map<String, String[]> map = new HashMap<>();
@@ -63,23 +86,6 @@ public class RestfulController extends AbstractRestfulController{
             map.put(key, new String[] {object.getString(key)});
         }
 
-        // 解析方式二：
-//        for (String key: object.keySet()) {
-//            Object value = object.get(key);
-//            // jsonArray类型处理
-//            if (value instanceof JSONArray) {
-//                JSONArray array = (JSONArray) value;
-//                String[] strings = new String[array.size()];
-//                for (int i = 0; i < strings.length; i++) {
-//                    strings[i] = array.getString(i);
-//                }
-//                map.put(key, strings);
-//            }
-//            // JSONObject类型处理
-//            else if (value instanceof JSONObject) {
-//                map.put(key, new String[] {object.getString(key)});
-//            }
-//        }
         return map;
     }
 
