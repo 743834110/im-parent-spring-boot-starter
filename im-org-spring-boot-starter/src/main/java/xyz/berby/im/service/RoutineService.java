@@ -1,26 +1,26 @@
 package xyz.berby.im.service;
 
-import xyz.berby.im.entity.ServerConfig;
+import xyz.berby.im.entity.Routine;
 import xyz.berby.im.vo.Pager;
 import java.util.List;
 
 
 
 /**
- * 服务器配置表(ServerConfig)表服务接口
+ * 日常活动表  user_type: 直接是查询字段得到的学生或者老师等着两个身份，用来显示的，身份有为：学生、教师  此处留下user_id字段是为了知道是哪位用户发的消息  end_time和end字段之间的关系。(Routine)表服务接口
  *
  * @author litianfeng
  * @since 2018-12-12 12:32:29
  */
-public interface ServerConfigService {
+public interface RoutineService {
 
     /**
      * 通过ID查询单条数据
      *
-     * @param configId 主键
+     * @param routineId 主键
      * @return 实例对象
      */
-    ServerConfig queryById(String configId);
+    Routine queryById(String routineId);
 
     /**
      * 查询多条数据
@@ -29,7 +29,7 @@ public interface ServerConfigService {
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<ServerConfig> queryAllByLimit(int offset, int limit);
+    List<Routine> queryAllByLimit(int offset, int limit);
 
     /**
      * 
@@ -37,43 +37,43 @@ public interface ServerConfigService {
      * @param pager 分页对象
      * @return 对象列表
      */
-     Pager<ServerConfig> queryByPager(Pager<ServerConfig> pager);
+     Pager<Routine> queryByPager(Pager<Routine> pager);
 
     /**
      * 根据分页对象统计记录条数
      * @param pager 分页对象
      * @return 对象列表
      */
-    Pager<ServerConfig> countByPager(Pager<ServerConfig> pager);    
+    Pager<Routine> countByPager(Pager<Routine> pager);    
     /**
      * 新增数据
      *
-     * @param serverConfig 实例对象
+     * @param routine 实例对象
      * @return 实例对象
      */
-    ServerConfig insert(ServerConfig serverConfig);
+    Routine insert(Routine routine);
 
     /**
      * 修改数据
      *
-     * @param serverConfig 实例对象
+     * @param routine 实例对象
      * @return 实例对象
      */
-    ServerConfig update(ServerConfig serverConfig);
+    Routine update(Routine routine);
 
     /**
      * 通过主键删除数据
      *
-     * @param configId 主键
+     * @param routineId 主键
      * @return 是否成功
      */
-    boolean deleteById(String configId);
+    boolean deleteById(String routineId);
 
     /**
      * 通过主键数组删除数据
-     * @param configIds 主键数组
+     * @param routineIds 主键数组
      * @return 操作结果
      */
-    boolean deleteByIds(String[] configIds);    
+    boolean deleteByIds(String[] routineIds);    
 
 }

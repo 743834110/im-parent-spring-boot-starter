@@ -23,7 +23,7 @@ public class ReflectUtilTest {
     private static ServerConfig serverConfig() {
         ServerConfig serverConfig = new ServerConfig();
         serverConfig.setConfigId("fdfd");
-        serverConfig.setCreatePerson("fdfdfd");
+//        serverConfig.setCreatePerson("fdfdfd");
         return serverConfig;
     }
 

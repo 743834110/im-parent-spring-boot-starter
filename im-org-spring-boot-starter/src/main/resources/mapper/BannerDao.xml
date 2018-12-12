@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.berby.im.dao.BannerDao">
+
+    <resultMap type="xyz.berby.im.entity.Banner" id="BannerMap">
+        <result property="bannerId" column="banner_id" jdbcType="VARCHAR"/>
+        <result property="bannerImageUrl" column="banner_image_url" jdbcType="VARCHAR"/>
+        <result property="bannerTitle" column="banner_title" jdbcType="VARCHAR"/>
+        <result property="routineId" column="routine_id" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="orgId" column="org_id" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BannerMap">
+        select
+          banner_id, banner_image_url, banner_title, routine_id, create_time, org_id
+        from imserver.banner
+        where banner_id = #{bannerId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BannerMap">
+        select
+          banner_id, banner_image_url, banner_title, routine_id, create_time, org_id
+        from imserver.banner
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BannerMap">
+        select
+          banner_id, banner_image_url, banner_title, routine_id, create_time, org_id
+        from imserver.banner
+        <where>
+            <if test="bannerId != null and bannerId != ''">
+                and banner_id = #{bannerId}
+            </if>
+            <if test="bannerImageUrl != null and bannerImageUrl != ''">
+                and banner_image_url = #{bannerImageUrl}
+            </if>
+            <if test="bannerTitle != null and bannerTitle != ''">
+                and banner_title = #{bannerTitle}
+            </if>
+            <if test="routineId != null and routineId != ''">
+                and routine_id = #{routineId}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="orgId != null and orgId != ''">
+                and org_id = #{orgId}
+            </if>
+        </where>
+    </select>
+    
+    <!--通过分页对象作为筛选条件查询-->
+    <select id="queryByPager" resultMap="BannerMap">
+        select
+          banner_id, banner_image_url, banner_title, routine_id, create_time, org_id
+        from imserver.banner
+        <where>
+            <if test = "param != null">
+                <if test="param.bannerId != null and param.bannerId != ''">
+                    and banner_id like concat(#{param.bannerId}, '%')
+                </if>
+                <if test="param.bannerImageUrl != null and param.bannerImageUrl != ''">
+                    and banner_image_url like concat(#{param.bannerImageUrl}, '%')
+                </if>
+                <if test="param.bannerTitle != null and param.bannerTitle != ''">
+                    and banner_title like concat(#{param.bannerTitle}, '%')
+                </if>
+                <if test="param.routineId != null and param.routineId != ''">
+                    and routine_id like concat(#{param.routineId}, '%')
+                </if>
+                <if test="param.createTime != null">
+                    and create_time = #{param.createTime}
+                </if>
+                <if test="param.orgId != null and param.orgId != ''">
+                    and org_id like concat(#{param.orgId}, '%')
+                </if>
+            </if>
+        </where>
+        limit #{offset}, #{limit}
+    </select>
+    
+    <!--通过分页对象作为筛选条件查询记录条数-->
+    <select id="countByPager" resultType="int">
+        select
+          count(*)
+
+        from imserver.banner
+        <where>
+            <if test = "param != null">
+                <if test="param.bannerId != null and param.bannerId != ''">
+                    and banner_id like concat(#{param.bannerId}, '%')
+                </if>
+                <if test="param.bannerImageUrl != null and param.bannerImageUrl != ''">
+                    and banner_image_url like concat(#{param.bannerImageUrl}, '%')
+                </if>
+                <if test="param.bannerTitle != null and param.bannerTitle != ''">
+                    and banner_title like concat(#{param.bannerTitle}, '%')
+                </if>
+                <if test="param.routineId != null and param.routineId != ''">
+                    and routine_id like concat(#{param.routineId}, '%')
+                </if>
+                <if test="param.createTime != null">
+                    and create_time = #{param.createTime}
+                </if>
+                <if test="param.orgId != null and param.orgId != ''">
+                    and org_id like concat(#{param.orgId}, '%')
+                </if>
+            </if>
+        </where>
+    </select>
+
+    
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="bannerId" useGeneratedKeys="true">
+        insert into imserver.banner(banner_image_url, banner_title, routine_id, create_time, org_id)
+        values (#{bannerImageUrl}, #{bannerTitle}, #{routineId}, #{createTime}, #{orgId})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update imserver.banner
+        <set>
+            <if test="bannerImageUrl != null and bannerImageUrl != ''">
+                banner_image_url = #{bannerImageUrl},
+            </if>
+            <if test="bannerTitle != null and bannerTitle != ''">
+                banner_title = #{bannerTitle},
+            </if>
+            <if test="routineId != null and routineId != ''">
+                routine_id = #{routineId},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="orgId != null and orgId != ''">
+                org_id = #{orgId},
+            </if>
+        </set>
+        where banner_id = #{bannerId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from imserver.banner where banner_id = #{bannerId}
+    </delete>
+
+    <!--通过主键数组删除数据-->
+    <delete id="deleteByIds">
+        delete from imserver.banner
+        where banner_id in
+        <foreach collection="array" item="item" open="(" close=")" separator="," index="index">
+            #{item}
+        </foreach>
+    </delete>
+
+</mapper>

@@ -6,16 +6,12 @@
         <result property="configId" column="config_id" jdbcType="VARCHAR"/>
         <result property="mappingKey" column="mapping_key" jdbcType="VARCHAR"/>
         <result property="mappingValue" column="mapping_value" jdbcType="VARCHAR"/>
-        <result property="createPerson" column="create_person" jdbcType="VARCHAR"/>
-        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-        <result property="modifyPerson" column="modify_person" jdbcType="VARCHAR"/>
-        <result property="modifyTime" column="modify_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="ServerConfigMap">
         select
-          config_id, mapping_key, mapping_value, create_person, create_time, modify_person, modify_time
+          config_id, mapping_key, mapping_value
         from imserver.server_config
         where config_id = #{configId}
     </select>
@@ -23,7 +19,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="ServerConfigMap">
         select
-          config_id, mapping_key, mapping_value, create_person, create_time, modify_person, modify_time
+          config_id, mapping_key, mapping_value
         from imserver.server_config
         limit #{offset}, #{limit}
     </select>
@@ -31,7 +27,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="ServerConfigMap">
         select
-          config_id, mapping_key, mapping_value, create_person, create_time, modify_person, modify_time
+          config_id, mapping_key, mapping_value
         from imserver.server_config
         <where>
             <if test="configId != null and configId != ''">
@@ -43,48 +39,24 @@
             <if test="mappingValue != null and mappingValue != ''">
                 and mapping_value = #{mappingValue}
             </if>
-            <if test="createPerson != null and createPerson != ''">
-                and create_person = #{createPerson}
-            </if>
-            <if test="createTime != null">
-                and create_time = #{createTime}
-            </if>
-            <if test="modifyPerson != null and modifyPerson != ''">
-                and modify_person = #{modifyPerson}
-            </if>
-            <if test="modifyTime != null">
-                and modify_time = #{modifyTime}
-            </if>
         </where>
     </select>
     
     <!--通过分页对象作为筛选条件查询-->
     <select id="queryByPager" resultMap="ServerConfigMap">
         select
-          config_id, mapping_key, mapping_value, create_person, create_time, modify_person, modify_time
+          config_id, mapping_key, mapping_value
         from imserver.server_config
         <where>
             <if test = "param != null">
                 <if test="param.configId != null and param.configId != ''">
-                    and config_id like concat('%', concat(#{param.configId}, '%'))
+                    and config_id like concat(#{param.configId}, '%')
                 </if>
                 <if test="param.mappingKey != null and param.mappingKey != ''">
-                    and mapping_key like concat('%', concat(#{param.mappingKey}, '%'))
+                    and mapping_key like concat(#{param.mappingKey}, '%')
                 </if>
                 <if test="param.mappingValue != null and param.mappingValue != ''">
-                    and mapping_value like concat('%', concat(#{param.mappingValue}, '%'))
-                </if>
-                <if test="param.createPerson != null and param.createPerson != ''">
-                    and create_person like concat('%', concat(#{param.createPerson}, '%'))
-                </if>
-                <if test="param.createTime != null">
-                    and create_time = #{param.createTime}
-                </if>
-                <if test="param.modifyPerson != null and param.modifyPerson != ''">
-                    and modify_person like concat('%', concat(#{param.modifyPerson}, '%'))
-                </if>
-                <if test="param.modifyTime != null">
-                    and modify_time = #{param.modifyTime}
+                    and mapping_value like concat(#{param.mappingValue}, '%')
                 </if>
             </if>
         </where>
@@ -100,25 +72,13 @@
         <where>
             <if test = "param != null">
                 <if test="param.configId != null and param.configId != ''">
-                    and config_id like concat('%', concat(#{param.configId}, '%'))
+                    and config_id like concat(#{param.configId}, '%')
                 </if>
                 <if test="param.mappingKey != null and param.mappingKey != ''">
-                    and mapping_key like concat('%', concat(#{param.mappingKey}, '%'))
+                    and mapping_key like concat(#{param.mappingKey}, '%')
                 </if>
                 <if test="param.mappingValue != null and param.mappingValue != ''">
-                    and mapping_value like concat('%', concat(#{param.mappingValue}, '%'))
-                </if>
-                <if test="param.createPerson != null and param.createPerson != ''">
-                    and create_person like concat('%', concat(#{param.createPerson}, '%'))
-                </if>
-                <if test="param.createTime != null">
-                    and create_time = #{param.createTime}
-                </if>
-                <if test="param.modifyPerson != null and param.modifyPerson != ''">
-                    and modify_person like concat('%', concat(#{param.modifyPerson}, '%'))
-                </if>
-                <if test="param.modifyTime != null">
-                    and modify_time = #{param.modifyTime}
+                    and mapping_value like concat(#{param.mappingValue}, '%')
                 </if>
             </if>
         </where>
@@ -128,8 +88,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="configId" useGeneratedKeys="true">
-        insert into imserver.server_config(mapping_key, mapping_value, create_person, create_time, modify_person, modify_time)
-        values (#{mappingKey}, #{mappingValue}, #{createPerson}, #{createTime}, #{modifyPerson}, #{modifyTime})
+        insert into imserver.server_config(mapping_key, mapping_value)
+        values (#{mappingKey}, #{mappingValue})
     </insert>
 
     <!--通过主键修改数据-->
@@ -141,18 +101,6 @@
             </if>
             <if test="mappingValue != null and mappingValue != ''">
                 mapping_value = #{mappingValue},
-            </if>
-            <if test="createPerson != null and createPerson != ''">
-                create_person = #{createPerson},
-            </if>
-            <if test="createTime != null">
-                create_time = #{createTime},
-            </if>
-            <if test="modifyPerson != null and modifyPerson != ''">
-                modify_person = #{modifyPerson},
-            </if>
-            <if test="modifyTime != null">
-                modify_time = #{modifyTime},
             </if>
         </set>
         where config_id = #{configId}

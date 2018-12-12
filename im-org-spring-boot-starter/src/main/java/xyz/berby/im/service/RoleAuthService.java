@@ -1,26 +1,26 @@
 package xyz.berby.im.service;
 
-import xyz.berby.im.entity.ServerConfig;
+import xyz.berby.im.entity.RoleAuth;
 import xyz.berby.im.vo.Pager;
 import java.util.List;
 
 
 
 /**
- * 服务器配置表(ServerConfig)表服务接口
+ * 角色权限表(RoleAuth)表服务接口
  *
  * @author litianfeng
  * @since 2018-12-12 12:32:29
  */
-public interface ServerConfigService {
+public interface RoleAuthService {
 
     /**
      * 通过ID查询单条数据
      *
-     * @param configId 主键
+     * @param roleAuthId 主键
      * @return 实例对象
      */
-    ServerConfig queryById(String configId);
+    RoleAuth queryById(String roleAuthId);
 
     /**
      * 查询多条数据
@@ -29,7 +29,7 @@ public interface ServerConfigService {
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<ServerConfig> queryAllByLimit(int offset, int limit);
+    List<RoleAuth> queryAllByLimit(int offset, int limit);
 
     /**
      * 
@@ -37,43 +37,43 @@ public interface ServerConfigService {
      * @param pager 分页对象
      * @return 对象列表
      */
-     Pager<ServerConfig> queryByPager(Pager<ServerConfig> pager);
+     Pager<RoleAuth> queryByPager(Pager<RoleAuth> pager);
 
     /**
      * 根据分页对象统计记录条数
      * @param pager 分页对象
      * @return 对象列表
      */
-    Pager<ServerConfig> countByPager(Pager<ServerConfig> pager);    
+    Pager<RoleAuth> countByPager(Pager<RoleAuth> pager);    
     /**
      * 新增数据
      *
-     * @param serverConfig 实例对象
+     * @param roleAuth 实例对象
      * @return 实例对象
      */
-    ServerConfig insert(ServerConfig serverConfig);
+    RoleAuth insert(RoleAuth roleAuth);
 
     /**
      * 修改数据
      *
-     * @param serverConfig 实例对象
+     * @param roleAuth 实例对象
      * @return 实例对象
      */
-    ServerConfig update(ServerConfig serverConfig);
+    RoleAuth update(RoleAuth roleAuth);
 
     /**
      * 通过主键删除数据
      *
-     * @param configId 主键
+     * @param roleAuthId 主键
      * @return 是否成功
      */
-    boolean deleteById(String configId);
+    boolean deleteById(String roleAuthId);
 
     /**
      * 通过主键数组删除数据
-     * @param configIds 主键数组
+     * @param roleAuthIds 主键数组
      * @return 操作结果
      */
-    boolean deleteByIds(String[] configIds);    
+    boolean deleteByIds(String[] roleAuthIds);    
 
 }

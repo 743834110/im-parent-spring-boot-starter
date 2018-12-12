@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.berby.im.dao.UserDao">
+
+    <resultMap type="xyz.berby.im.entity.User" id="UserMap">
+        <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+        <result property="userAccount" column="user_account" jdbcType="VARCHAR"/>
+        <result property="userPassword" column="user_password" jdbcType="VARCHAR"/>
+        <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+        <result property="userMobile" column="user_mobile" jdbcType="VARCHAR"/>
+        <result property="userEmail" column="user_email" jdbcType="VARCHAR"/>
+        <result property="userImageUrl" column="user_image_url" jdbcType="VARCHAR"/>
+        <result property="userDescription" column="user_description" jdbcType="VARCHAR"/>
+        <result property="userPasswordChanged" column="user_password_changed" jdbcType="TIMESTAMP"/>
+        <result property="valid" column="valid" jdbcType="VARCHAR"/>
+        <result property="userEnabledDate" column="user_enabled_date" jdbcType="TIMESTAMP"/>
+        <result property="userDisabledDate" column="user_disabled_date" jdbcType="TIMESTAMP"/>
+        <result property="userAccountLocked" column="user_account_locked" jdbcType="VARCHAR"/>
+        <result property="lastLoginDate" column="last_login_date" jdbcType="TIMESTAMP"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="createPerson" column="create_person" jdbcType="VARCHAR"/>
+        <result property="modityTime" column="modity_time" jdbcType="TIMESTAMP"/>
+        <result property="modifyPerson" column="modify_person" jdbcType="VARCHAR"/>
+        <result property="userSex" column="user_sex" jdbcType="VARCHAR"/>
+        <result property="userType" column="user_type" jdbcType="VARCHAR"/>
+        <result property="salt" column="salt" jdbcType="VARCHAR"/>
+        <result property="words" column="words" jdbcType="VARCHAR"/>
+        <result property="userShortMobile" column="user_short_mobile" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="UserMap">
+        select
+          user_id, user_account, user_password, user_name, user_mobile, user_email, user_image_url, user_description, user_password_changed, valid, user_enabled_date, user_disabled_date, user_account_locked, last_login_date, create_time, create_person, modity_time, modify_person, user_sex, user_type, salt, words, user_short_mobile
+        from imserver.user
+        where user_id = #{userId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="UserMap">
+        select
+          user_id, user_account, user_password, user_name, user_mobile, user_email, user_image_url, user_description, user_password_changed, valid, user_enabled_date, user_disabled_date, user_account_locked, last_login_date, create_time, create_person, modity_time, modify_person, user_sex, user_type, salt, words, user_short_mobile
+        from imserver.user
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="UserMap">
+        select
+          user_id, user_account, user_password, user_name, user_mobile, user_email, user_image_url, user_description, user_password_changed, valid, user_enabled_date, user_disabled_date, user_account_locked, last_login_date, create_time, create_person, modity_time, modify_person, user_sex, user_type, salt, words, user_short_mobile
+        from imserver.user
+        <where>
+            <if test="userId != null and userId != ''">
+                and user_id = #{userId}
+            </if>
+            <if test="userAccount != null and userAccount != ''">
+                and user_account = #{userAccount}
+            </if>
+            <if test="userPassword != null and userPassword != ''">
+                and user_password = #{userPassword}
+            </if>
+            <if test="userName != null and userName != ''">
+                and user_name = #{userName}
+            </if>
+            <if test="userMobile != null and userMobile != ''">
+                and user_mobile = #{userMobile}
+            </if>
+            <if test="userEmail != null and userEmail != ''">
+                and user_email = #{userEmail}
+            </if>
+            <if test="userImageUrl != null and userImageUrl != ''">
+                and user_image_url = #{userImageUrl}
+            </if>
+            <if test="userDescription != null and userDescription != ''">
+                and user_description = #{userDescription}
+            </if>
+            <if test="userPasswordChanged != null">
+                and user_password_changed = #{userPasswordChanged}
+            </if>
+            <if test="valid != null and valid != ''">
+                and valid = #{valid}
+            </if>
+            <if test="userEnabledDate != null">
+                and user_enabled_date = #{userEnabledDate}
+            </if>
+            <if test="userDisabledDate != null">
+                and user_disabled_date = #{userDisabledDate}
+            </if>
+            <if test="userAccountLocked != null and userAccountLocked != ''">
+                and user_account_locked = #{userAccountLocked}
+            </if>
+            <if test="lastLoginDate != null">
+                and last_login_date = #{lastLoginDate}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="createPerson != null and createPerson != ''">
+                and create_person = #{createPerson}
+            </if>
+            <if test="modityTime != null">
+                and modity_time = #{modityTime}
+            </if>
+            <if test="modifyPerson != null and modifyPerson != ''">
+                and modify_person = #{modifyPerson}
+            </if>
+            <if test="userSex != null and userSex != ''">
+                and user_sex = #{userSex}
+            </if>
+            <if test="userType != null and userType != ''">
+                and user_type = #{userType}
+            </if>
+            <if test="salt != null and salt != ''">
+                and salt = #{salt}
+            </if>
+            <if test="words != null and words != ''">
+                and words = #{words}
+            </if>
+            <if test="userShortMobile != null and userShortMobile != ''">
+                and user_short_mobile = #{userShortMobile}
+            </if>
+        </where>
+    </select>
+    
+    <!--通过分页对象作为筛选条件查询-->
+    <select id="queryByPager" resultMap="UserMap">
+        select
+          user_id, user_account, user_password, user_name, user_mobile, user_email, user_image_url, user_description, user_password_changed, valid, user_enabled_date, user_disabled_date, user_account_locked, last_login_date, create_time, create_person, modity_time, modify_person, user_sex, user_type, salt, words, user_short_mobile
+        from imserver.user
+        <where>
+            <if test = "param != null">
+                <if test="param.userId != null and param.userId != ''">
+                    and user_id like concat(#{param.userId}, '%')
+                </if>
+                <if test="param.userAccount != null and param.userAccount != ''">
+                    and user_account like concat(#{param.userAccount}, '%')
+                </if>
+                <if test="param.userPassword != null and param.userPassword != ''">
+                    and user_password like concat(#{param.userPassword}, '%')
+                </if>
+                <if test="param.userName != null and param.userName != ''">
+                    and user_name like concat(#{param.userName}, '%')
+                </if>
+                <if test="param.userMobile != null and param.userMobile != ''">
+                    and user_mobile like concat(#{param.userMobile}, '%')
+                </if>
+                <if test="param.userEmail != null and param.userEmail != ''">
+                    and user_email like concat(#{param.userEmail}, '%')
+                </if>
+                <if test="param.userImageUrl != null and param.userImageUrl != ''">
+                    and user_image_url like concat(#{param.userImageUrl}, '%')
+                </if>
+                <if test="param.userDescription != null and param.userDescription != ''">
+                    and user_description like concat(#{param.userDescription}, '%')
+                </if>
+                <if test="param.userPasswordChanged != null">
+                    and user_password_changed = #{param.userPasswordChanged}
+                </if>
+                <if test="param.valid != null and param.valid != ''">
+                    and valid like concat(#{param.valid}, '%')
+                </if>
+                <if test="param.userEnabledDate != null">
+                    and user_enabled_date = #{param.userEnabledDate}
+                </if>
+                <if test="param.userDisabledDate != null">
+                    and user_disabled_date = #{param.userDisabledDate}
+                </if>
+                <if test="param.userAccountLocked != null and param.userAccountLocked != ''">
+                    and user_account_locked like concat(#{param.userAccountLocked}, '%')
+                </if>
+                <if test="param.lastLoginDate != null">
+                    and last_login_date = #{param.lastLoginDate}
+                </if>
+                <if test="param.createTime != null">
+                    and create_time = #{param.createTime}
+                </if>
+                <if test="param.createPerson != null and param.createPerson != ''">
+                    and create_person like concat(#{param.createPerson}, '%')
+                </if>
+                <if test="param.modityTime != null">
+                    and modity_time = #{param.modityTime}
+                </if>
+                <if test="param.modifyPerson != null and param.modifyPerson != ''">
+                    and modify_person like concat(#{param.modifyPerson}, '%')
+                </if>
+                <if test="param.userSex != null and param.userSex != ''">
+                    and user_sex like concat(#{param.userSex}, '%')
+                </if>
+                <if test="param.userType != null and param.userType != ''">
+                    and user_type like concat(#{param.userType}, '%')
+                </if>
+                <if test="param.salt != null and param.salt != ''">
+                    and salt like concat(#{param.salt}, '%')
+                </if>
+                <if test="param.words != null and param.words != ''">
+                    and words like concat(#{param.words}, '%')
+                </if>
+                <if test="param.userShortMobile != null and param.userShortMobile != ''">
+                    and user_short_mobile like concat(#{param.userShortMobile}, '%')
+                </if>
+            </if>
+        </where>
+        limit #{offset}, #{limit}
+    </select>
+    
+    <!--通过分页对象作为筛选条件查询记录条数-->
+    <select id="countByPager" resultType="int">
+        select
+          count(*)
+
+        from imserver.user
+        <where>
+            <if test = "param != null">
+                <if test="param.userId != null and param.userId != ''">
+                    and user_id like concat(#{param.userId}, '%')
+                </if>
+                <if test="param.userAccount != null and param.userAccount != ''">
+                    and user_account like concat(#{param.userAccount}, '%')
+                </if>
+                <if test="param.userPassword != null and param.userPassword != ''">
+                    and user_password like concat(#{param.userPassword}, '%')
+                </if>
+                <if test="param.userName != null and param.userName != ''">
+                    and user_name like concat(#{param.userName}, '%')
+                </if>
+                <if test="param.userMobile != null and param.userMobile != ''">
+                    and user_mobile like concat(#{param.userMobile}, '%')
+                </if>
+                <if test="param.userEmail != null and param.userEmail != ''">
+                    and user_email like concat(#{param.userEmail}, '%')
+                </if>
+                <if test="param.userImageUrl != null and param.userImageUrl != ''">
+                    and user_image_url like concat(#{param.userImageUrl}, '%')
+                </if>
+                <if test="param.userDescription != null and param.userDescription != ''">
+                    and user_description like concat(#{param.userDescription}, '%')
+                </if>
+                <if test="param.userPasswordChanged != null">
+                    and user_password_changed = #{param.userPasswordChanged}
+                </if>
+                <if test="param.valid != null and param.valid != ''">
+                    and valid like concat(#{param.valid}, '%')
+                </if>
+                <if test="param.userEnabledDate != null">
+                    and user_enabled_date = #{param.userEnabledDate}
+                </if>
+                <if test="param.userDisabledDate != null">
+                    and user_disabled_date = #{param.userDisabledDate}
+                </if>
+                <if test="param.userAccountLocked != null and param.userAccountLocked != ''">
+                    and user_account_locked like concat(#{param.userAccountLocked}, '%')
+                </if>
+                <if test="param.lastLoginDate != null">
+                    and last_login_date = #{param.lastLoginDate}
+                </if>
+                <if test="param.createTime != null">
+                    and create_time = #{param.createTime}
+                </if>
+                <if test="param.createPerson != null and param.createPerson != ''">
+                    and create_person like concat(#{param.createPerson}, '%')
+                </if>
+                <if test="param.modityTime != null">
+                    and modity_time = #{param.modityTime}
+                </if>
+                <if test="param.modifyPerson != null and param.modifyPerson != ''">
+                    and modify_person like concat(#{param.modifyPerson}, '%')
+                </if>
+                <if test="param.userSex != null and param.userSex != ''">
+                    and user_sex like concat(#{param.userSex}, '%')
+                </if>
+                <if test="param.userType != null and param.userType != ''">
+                    and user_type like concat(#{param.userType}, '%')
+                </if>
+                <if test="param.salt != null and param.salt != ''">
+                    and salt like concat(#{param.salt}, '%')
+                </if>
+                <if test="param.words != null and param.words != ''">
+                    and words like concat(#{param.words}, '%')
+                </if>
+                <if test="param.userShortMobile != null and param.userShortMobile != ''">
+                    and user_short_mobile like concat(#{param.userShortMobile}, '%')
+                </if>
+            </if>
+        </where>
+    </select>
+
+    
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="userId" useGeneratedKeys="true">
+        insert into imserver.user(user_account, user_password, user_name, user_mobile, user_email, user_image_url, user_description, user_password_changed, valid, user_enabled_date, user_disabled_date, user_account_locked, last_login_date, create_time, create_person, modity_time, modify_person, user_sex, user_type, salt, words, user_short_mobile)
+        values (#{userAccount}, #{userPassword}, #{userName}, #{userMobile}, #{userEmail}, #{userImageUrl}, #{userDescription}, #{userPasswordChanged}, #{valid}, #{userEnabledDate}, #{userDisabledDate}, #{userAccountLocked}, #{lastLoginDate}, #{createTime}, #{createPerson}, #{modityTime}, #{modifyPerson}, #{userSex}, #{userType}, #{salt}, #{words}, #{userShortMobile})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update imserver.user
+        <set>
+            <if test="userAccount != null and userAccount != ''">
+                user_account = #{userAccount},
+            </if>
+            <if test="userPassword != null and userPassword != ''">
+                user_password = #{userPassword},
+            </if>
+            <if test="userName != null and userName != ''">
+                user_name = #{userName},
+            </if>
+            <if test="userMobile != null and userMobile != ''">
+                user_mobile = #{userMobile},
+            </if>
+            <if test="userEmail != null and userEmail != ''">
+                user_email = #{userEmail},
+            </if>
+            <if test="userImageUrl != null and userImageUrl != ''">
+                user_image_url = #{userImageUrl},
+            </if>
+            <if test="userDescription != null and userDescription != ''">
+                user_description = #{userDescription},
+            </if>
+            <if test="userPasswordChanged != null">
+                user_password_changed = #{userPasswordChanged},
+            </if>
+            <if test="valid != null and valid != ''">
+                valid = #{valid},
+            </if>
+            <if test="userEnabledDate != null">
+                user_enabled_date = #{userEnabledDate},
+            </if>
+            <if test="userDisabledDate != null">
+                user_disabled_date = #{userDisabledDate},
+            </if>
+            <if test="userAccountLocked != null and userAccountLocked != ''">
+                user_account_locked = #{userAccountLocked},
+            </if>
+            <if test="lastLoginDate != null">
+                last_login_date = #{lastLoginDate},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="createPerson != null and createPerson != ''">
+                create_person = #{createPerson},
+            </if>
+            <if test="modityTime != null">
+                modity_time = #{modityTime},
+            </if>
+            <if test="modifyPerson != null and modifyPerson != ''">
+                modify_person = #{modifyPerson},
+            </if>
+            <if test="userSex != null and userSex != ''">
+                user_sex = #{userSex},
+            </if>
+            <if test="userType != null and userType != ''">
+                user_type = #{userType},
+            </if>
+            <if test="salt != null and salt != ''">
+                salt = #{salt},
+            </if>
+            <if test="words != null and words != ''">
+                words = #{words},
+            </if>
+            <if test="userShortMobile != null and userShortMobile != ''">
+                user_short_mobile = #{userShortMobile},
+            </if>
+        </set>
+        where user_id = #{userId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from imserver.user where user_id = #{userId}
+    </delete>
+
+    <!--通过主键数组删除数据-->
+    <delete id="deleteByIds">
+        delete from imserver.user
+        where user_id in
+        <foreach collection="array" item="item" open="(" close=")" separator="," index="index">
+            #{item}
+        </foreach>
+    </delete>
+
+</mapper>

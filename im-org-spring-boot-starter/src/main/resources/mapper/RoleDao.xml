@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.berby.im.dao.RoleDao">
+
+    <resultMap type="xyz.berby.im.entity.Role" id="RoleMap">
+        <result property="roleId" column="role_id" jdbcType="VARCHAR"/>
+        <result property="roleName" column="role_name" jdbcType="VARCHAR"/>
+        <result property="roleDescription" column="role_description" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="RoleMap">
+        select
+          role_id, role_name, role_description
+        from imserver.role
+        where role_id = #{roleId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="RoleMap">
+        select
+          role_id, role_name, role_description
+        from imserver.role
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="RoleMap">
+        select
+          role_id, role_name, role_description
+        from imserver.role
+        <where>
+            <if test="roleId != null and roleId != ''">
+                and role_id = #{roleId}
+            </if>
+            <if test="roleName != null and roleName != ''">
+                and role_name = #{roleName}
+            </if>
+            <if test="roleDescription != null and roleDescription != ''">
+                and role_description = #{roleDescription}
+            </if>
+        </where>
+    </select>
+    
+    <!--通过分页对象作为筛选条件查询-->
+    <select id="queryByPager" resultMap="RoleMap">
+        select
+          role_id, role_name, role_description
+        from imserver.role
+        <where>
+            <if test = "param != null">
+                <if test="param.roleId != null and param.roleId != ''">
+                    and role_id like concat(#{param.roleId}, '%')
+                </if>
+                <if test="param.roleName != null and param.roleName != ''">
+                    and role_name like concat(#{param.roleName}, '%')
+                </if>
+                <if test="param.roleDescription != null and param.roleDescription != ''">
+                    and role_description like concat(#{param.roleDescription}, '%')
+                </if>
+            </if>
+        </where>
+        limit #{offset}, #{limit}
+    </select>
+    
+    <!--通过分页对象作为筛选条件查询记录条数-->
+    <select id="countByPager" resultType="int">
+        select
+          count(*)
+
+        from imserver.role
+        <where>
+            <if test = "param != null">
+                <if test="param.roleId != null and param.roleId != ''">
+                    and role_id like concat(#{param.roleId}, '%')
+                </if>
+                <if test="param.roleName != null and param.roleName != ''">
+                    and role_name like concat(#{param.roleName}, '%')
+                </if>
+                <if test="param.roleDescription != null and param.roleDescription != ''">
+                    and role_description like concat(#{param.roleDescription}, '%')
+                </if>
+            </if>
+        </where>
+    </select>
+
+    
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="roleId" useGeneratedKeys="true">
+        insert into imserver.role(role_name, role_description)
+        values (#{roleName}, #{roleDescription})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update imserver.role
+        <set>
+            <if test="roleName != null and roleName != ''">
+                role_name = #{roleName},
+            </if>
+            <if test="roleDescription != null and roleDescription != ''">
+                role_description = #{roleDescription},
+            </if>
+        </set>
+        where role_id = #{roleId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from imserver.role where role_id = #{roleId}
+    </delete>
+
+    <!--通过主键数组删除数据-->
+    <delete id="deleteByIds">
+        delete from imserver.role
+        where role_id in
+        <foreach collection="array" item="item" open="(" close=")" separator="," index="index">
+            #{item}
+        </foreach>
+    </delete>
+
+</mapper>

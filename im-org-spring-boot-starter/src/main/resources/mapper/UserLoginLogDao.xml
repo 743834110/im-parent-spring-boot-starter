@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.berby.im.dao.UserLoginLogDao">
+
+    <resultMap type="xyz.berby.im.entity.UserLoginLog" id="UserLoginLogMap">
+        <result property="loginLogId" column="login_log_id" jdbcType="VARCHAR"/>
+        <result property="userAccount" column="user_account" jdbcType="VARCHAR"/>
+        <result property="sessionId" column="session_id" jdbcType="VARCHAR"/>
+        <result property="logoutTime" column="logout_time" jdbcType="TIMESTAMP"/>
+        <result property="userIp" column="user_ip" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="UserLoginLogMap">
+        select
+          login_log_id, user_account, session_id, logout_time, user_ip
+        from imserver.user_login_log
+        where login_log_id = #{loginLogId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="UserLoginLogMap">
+        select
+          login_log_id, user_account, session_id, logout_time, user_ip
+        from imserver.user_login_log
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="UserLoginLogMap">
+        select
+          login_log_id, user_account, session_id, logout_time, user_ip
+        from imserver.user_login_log
+        <where>
+            <if test="loginLogId != null and loginLogId != ''">
+                and login_log_id = #{loginLogId}
+            </if>
+            <if test="userAccount != null and userAccount != ''">
+                and user_account = #{userAccount}
+            </if>
+            <if test="sessionId != null and sessionId != ''">
+                and session_id = #{sessionId}
+            </if>
+            <if test="logoutTime != null">
+                and logout_time = #{logoutTime}
+            </if>
+            <if test="userIp != null and userIp != ''">
+                and user_ip = #{userIp}
+            </if>
+        </where>
+    </select>
+    
+    <!--通过分页对象作为筛选条件查询-->
+    <select id="queryByPager" resultMap="UserLoginLogMap">
+        select
+          login_log_id, user_account, session_id, logout_time, user_ip
+        from imserver.user_login_log
+        <where>
+            <if test = "param != null">
+                <if test="param.loginLogId != null and param.loginLogId != ''">
+                    and login_log_id like concat(#{param.loginLogId}, '%')
+                </if>
+                <if test="param.userAccount != null and param.userAccount != ''">
+                    and user_account like concat(#{param.userAccount}, '%')
+                </if>
+                <if test="param.sessionId != null and param.sessionId != ''">
+                    and session_id like concat(#{param.sessionId}, '%')
+                </if>
+                <if test="param.logoutTime != null">
+                    and logout_time = #{param.logoutTime}
+                </if>
+                <if test="param.userIp != null and param.userIp != ''">
+                    and user_ip like concat(#{param.userIp}, '%')
+                </if>
+            </if>
+        </where>
+        limit #{offset}, #{limit}
+    </select>
+    
+    <!--通过分页对象作为筛选条件查询记录条数-->
+    <select id="countByPager" resultType="int">
+        select
+          count(*)
+
+        from imserver.user_login_log
+        <where>
+            <if test = "param != null">
+                <if test="param.loginLogId != null and param.loginLogId != ''">
+                    and login_log_id like concat(#{param.loginLogId}, '%')
+                </if>
+                <if test="param.userAccount != null and param.userAccount != ''">
+                    and user_account like concat(#{param.userAccount}, '%')
+                </if>
+                <if test="param.sessionId != null and param.sessionId != ''">
+                    and session_id like concat(#{param.sessionId}, '%')
+                </if>
+                <if test="param.logoutTime != null">
+                    and logout_time = #{param.logoutTime}
+                </if>
+                <if test="param.userIp != null and param.userIp != ''">
+                    and user_ip like concat(#{param.userIp}, '%')
+                </if>
+            </if>
+        </where>
+    </select>
+
+    
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="loginLogId" useGeneratedKeys="true">
+        insert into imserver.user_login_log(user_account, session_id, logout_time, user_ip)
+        values (#{userAccount}, #{sessionId}, #{logoutTime}, #{userIp})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update imserver.user_login_log
+        <set>
+            <if test="userAccount != null and userAccount != ''">
+                user_account = #{userAccount},
+            </if>
+            <if test="sessionId != null and sessionId != ''">
+                session_id = #{sessionId},
+            </if>
+            <if test="logoutTime != null">
+                logout_time = #{logoutTime},
+            </if>
+            <if test="userIp != null and userIp != ''">
+                user_ip = #{userIp},
+            </if>
+        </set>
+        where login_log_id = #{loginLogId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from imserver.user_login_log where login_log_id = #{loginLogId}
+    </delete>
+
+    <!--通过主键数组删除数据-->
+    <delete id="deleteByIds">
+        delete from imserver.user_login_log
+        where login_log_id in
+        <foreach collection="array" item="item" open="(" close=")" separator="," index="index">
+            #{item}
+        </foreach>
+    </delete>
+
+</mapper>

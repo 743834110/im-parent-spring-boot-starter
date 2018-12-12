@@ -1,42 +1,35 @@
 package xyz.berby.im.entity;
 
-import java.util.Date;
 import java.io.Serializable;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 /**
- * (ServerConfig)实体类
+ * 服务器配置表(ServerConfig)实体类
  *
- * @author makejava
- * @since 2018-12-09 11:05:38
+ * @author litianfeng
+ * @since 2018-12-12 12:32:29
  */
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class ServerConfig implements Serializable {
-    private static final long serialVersionUID = 240139665786080851L;
-    //配置ID
-    private String configId;
-    //配置key
+    private static final long serialVersionUID = -53733490302619222L;
+        private String configId;
+    /**
+     *键名
+     */
     private String mappingKey;
-    //配置value
+    /**
+     *键值
+     */
     private String mappingValue;
-    
-    private String createPerson;
-    
-    private Date createTime;
-    
-    private String modifyPerson;
-    
-    private Date modifyTime;
 
     public ServerConfig(String mappingKey) {
         this.mappingKey = mappingKey;
     }
-
 }

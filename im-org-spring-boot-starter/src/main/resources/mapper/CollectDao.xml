@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.berby.im.dao.CollectDao">
+
+    <resultMap type="xyz.berby.im.entity.Collect" id="CollectMap">
+        <result property="collectionId" column="collection_id" jdbcType="VARCHAR"/>
+        <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="collectionType" column="collection_type" jdbcType="VARCHAR"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="CollectMap">
+        select
+          collection_id, user_id, create_time, collection_type, content
+        from imserver.collect
+        where collection_id = #{collectionId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="CollectMap">
+        select
+          collection_id, user_id, create_time, collection_type, content
+        from imserver.collect
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="CollectMap">
+        select
+          collection_id, user_id, create_time, collection_type, content
+        from imserver.collect
+        <where>
+            <if test="collectionId != null and collectionId != ''">
+                and collection_id = #{collectionId}
+            </if>
+            <if test="userId != null and userId != ''">
+                and user_id = #{userId}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="collectionType != null and collectionType != ''">
+                and collection_type = #{collectionType}
+            </if>
+            <if test="content != null and content != ''">
+                and content = #{content}
+            </if>
+        </where>
+    </select>
+    
+    <!--通过分页对象作为筛选条件查询-->
+    <select id="queryByPager" resultMap="CollectMap">
+        select
+          collection_id, user_id, create_time, collection_type, content
+        from imserver.collect
+        <where>
+            <if test = "param != null">
+                <if test="param.collectionId != null and param.collectionId != ''">
+                    and collection_id like concat(#{param.collectionId}, '%')
+                </if>
+                <if test="param.userId != null and param.userId != ''">
+                    and user_id like concat(#{param.userId}, '%')
+                </if>
+                <if test="param.createTime != null">
+                    and create_time = #{param.createTime}
+                </if>
+                <if test="param.collectionType != null and param.collectionType != ''">
+                    and collection_type like concat(#{param.collectionType}, '%')
+                </if>
+                <if test="param.content != null and param.content != ''">
+                    and content like concat(#{param.content}, '%')
+                </if>
+            </if>
+        </where>
+        limit #{offset}, #{limit}
+    </select>
+    
+    <!--通过分页对象作为筛选条件查询记录条数-->
+    <select id="countByPager" resultType="int">
+        select
+          count(*)
+
+        from imserver.collect
+        <where>
+            <if test = "param != null">
+                <if test="param.collectionId != null and param.collectionId != ''">
+                    and collection_id like concat(#{param.collectionId}, '%')
+                </if>
+                <if test="param.userId != null and param.userId != ''">
+                    and user_id like concat(#{param.userId}, '%')
+                </if>
+                <if test="param.createTime != null">
+                    and create_time = #{param.createTime}
+                </if>
+                <if test="param.collectionType != null and param.collectionType != ''">
+                    and collection_type like concat(#{param.collectionType}, '%')
+                </if>
+                <if test="param.content != null and param.content != ''">
+                    and content like concat(#{param.content}, '%')
+                </if>
+            </if>
+        </where>
+    </select>
+
+    
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="collectionId" useGeneratedKeys="true">
+        insert into imserver.collect(user_id, create_time, collection_type, content)
+        values (#{userId}, #{createTime}, #{collectionType}, #{content})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update imserver.collect
+        <set>
+            <if test="userId != null and userId != ''">
+                user_id = #{userId},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="collectionType != null and collectionType != ''">
+                collection_type = #{collectionType},
+            </if>
+            <if test="content != null and content != ''">
+                content = #{content},
+            </if>
+        </set>
+        where collection_id = #{collectionId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from imserver.collect where collection_id = #{collectionId}
+    </delete>
+
+    <!--通过主键数组删除数据-->
+    <delete id="deleteByIds">
+        delete from imserver.collect
+        where collection_id in
+        <foreach collection="array" item="item" open="(" close=")" separator="," index="index">
+            #{item}
+        </foreach>
+    </delete>
+
+</mapper>

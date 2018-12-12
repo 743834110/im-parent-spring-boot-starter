@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.berby.im.dao.MessageDao">
+
+    <resultMap type="xyz.berby.im.entity.Message" id="MessageMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="from" column="from" jdbcType="VARCHAR"/>
+        <result property="to" column="to" jdbcType="VARCHAR"/>
+        <result property="cmd" column="cmd" jdbcType="NUMERIC"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="chatType" column="chat_type" jdbcType="NUMERIC"/>
+        <result property="groupId" column="group_id" jdbcType="VARCHAR"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="recall" column="recall" jdbcType="VARCHAR"/>
+        <result property="userIds" column="user_ids" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="MessageMap">
+        select
+          id, from, to, cmd, create_time, chat_type, group_id, content, recall, user_ids
+        from imserver.message
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="MessageMap">
+        select
+          id, from, to, cmd, create_time, chat_type, group_id, content, recall, user_ids
+        from imserver.message
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="MessageMap">
+        select
+          id, from, to, cmd, create_time, chat_type, group_id, content, recall, user_ids
+        from imserver.message
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="from != null and from != ''">
+                and from = #{from}
+            </if>
+            <if test="to != null and to != ''">
+                and to = #{to}
+            </if>
+            <if test="cmd != null">
+                and cmd = #{cmd}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="chatType != null">
+                and chat_type = #{chatType}
+            </if>
+            <if test="groupId != null and groupId != ''">
+                and group_id = #{groupId}
+            </if>
+            <if test="content != null and content != ''">
+                and content = #{content}
+            </if>
+            <if test="recall != null and recall != ''">
+                and recall = #{recall}
+            </if>
+            <if test="userIds != null and userIds != ''">
+                and user_ids = #{userIds}
+            </if>
+        </where>
+    </select>
+    
+    <!--通过分页对象作为筛选条件查询-->
+    <select id="queryByPager" resultMap="MessageMap">
+        select
+          id, from, to, cmd, create_time, chat_type, group_id, content, recall, user_ids
+        from imserver.message
+        <where>
+            <if test = "param != null">
+                <if test="param.id != null and param.id != ''">
+                    and id like concat(#{param.id}, '%')
+                </if>
+                <if test="param.from != null and param.from != ''">
+                    and from like concat(#{param.from}, '%')
+                </if>
+                <if test="param.to != null and param.to != ''">
+                    and to like concat(#{param.to}, '%')
+                </if>
+                <if test="param.cmd != null">
+                    and cmd = #{param.cmd}
+                </if>
+                <if test="param.createTime != null">
+                    and create_time = #{param.createTime}
+                </if>
+                <if test="param.chatType != null">
+                    and chat_type = #{param.chatType}
+                </if>
+                <if test="param.groupId != null and param.groupId != ''">
+                    and group_id like concat(#{param.groupId}, '%')
+                </if>
+                <if test="param.content != null and param.content != ''">
+                    and content like concat(#{param.content}, '%')
+                </if>
+                <if test="param.recall != null and param.recall != ''">
+                    and recall like concat(#{param.recall}, '%')
+                </if>
+                <if test="param.userIds != null and param.userIds != ''">
+                    and user_ids like concat(#{param.userIds}, '%')
+                </if>
+            </if>
+        </where>
+        limit #{offset}, #{limit}
+    </select>
+    
+    <!--通过分页对象作为筛选条件查询记录条数-->
+    <select id="countByPager" resultType="int">
+        select
+          count(*)
+
+        from imserver.message
+        <where>
+            <if test = "param != null">
+                <if test="param.id != null and param.id != ''">
+                    and id like concat(#{param.id}, '%')
+                </if>
+                <if test="param.from != null and param.from != ''">
+                    and from like concat(#{param.from}, '%')
+                </if>
+                <if test="param.to != null and param.to != ''">
+                    and to like concat(#{param.to}, '%')
+                </if>
+                <if test="param.cmd != null">
+                    and cmd = #{param.cmd}
+                </if>
+                <if test="param.createTime != null">
+                    and create_time = #{param.createTime}
+                </if>
+                <if test="param.chatType != null">
+                    and chat_type = #{param.chatType}
+                </if>
+                <if test="param.groupId != null and param.groupId != ''">
+                    and group_id like concat(#{param.groupId}, '%')
+                </if>
+                <if test="param.content != null and param.content != ''">
+                    and content like concat(#{param.content}, '%')
+                </if>
+                <if test="param.recall != null and param.recall != ''">
+                    and recall like concat(#{param.recall}, '%')
+                </if>
+                <if test="param.userIds != null and param.userIds != ''">
+                    and user_ids like concat(#{param.userIds}, '%')
+                </if>
+            </if>
+        </where>
+    </select>
+
+    
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into imserver.message(from, to, cmd, create_time, chat_type, group_id, content, recall, user_ids)
+        values (#{from}, #{to}, #{cmd}, #{createTime}, #{chatType}, #{groupId}, #{content}, #{recall}, #{userIds})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update imserver.message
+        <set>
+            <if test="from != null and from != ''">
+                from = #{from},
+            </if>
+            <if test="to != null and to != ''">
+                to = #{to},
+            </if>
+            <if test="cmd != null">
+                cmd = #{cmd},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="chatType != null">
+                chat_type = #{chatType},
+            </if>
+            <if test="groupId != null and groupId != ''">
+                group_id = #{groupId},
+            </if>
+            <if test="content != null and content != ''">
+                content = #{content},
+            </if>
+            <if test="recall != null and recall != ''">
+                recall = #{recall},
+            </if>
+            <if test="userIds != null and userIds != ''">
+                user_ids = #{userIds},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from imserver.message where id = #{id}
+    </delete>
+
+    <!--通过主键数组删除数据-->
+    <delete id="deleteByIds">
+        delete from imserver.message
+        where id in
+        <foreach collection="array" item="item" open="(" close=")" separator="," index="index">
+            #{item}
+        </foreach>
+    </delete>
+
+</mapper>

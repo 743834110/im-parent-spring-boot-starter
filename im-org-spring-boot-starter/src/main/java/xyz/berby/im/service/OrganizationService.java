@@ -1,26 +1,26 @@
 package xyz.berby.im.service;
 
-import xyz.berby.im.entity.ServerConfig;
+import xyz.berby.im.entity.Organization;
 import xyz.berby.im.vo.Pager;
 import java.util.List;
 
 
 
 /**
- * 服务器配置表(ServerConfig)表服务接口
+ * 部门表 org_type: 社团 机构 班级 pro_type 专业类型(Organization)表服务接口
  *
  * @author litianfeng
  * @since 2018-12-12 12:32:29
  */
-public interface ServerConfigService {
+public interface OrganizationService {
 
     /**
      * 通过ID查询单条数据
      *
-     * @param configId 主键
+     * @param orgId 主键
      * @return 实例对象
      */
-    ServerConfig queryById(String configId);
+    Organization queryById(String orgId);
 
     /**
      * 查询多条数据
@@ -29,7 +29,7 @@ public interface ServerConfigService {
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<ServerConfig> queryAllByLimit(int offset, int limit);
+    List<Organization> queryAllByLimit(int offset, int limit);
 
     /**
      * 
@@ -37,43 +37,43 @@ public interface ServerConfigService {
      * @param pager 分页对象
      * @return 对象列表
      */
-     Pager<ServerConfig> queryByPager(Pager<ServerConfig> pager);
+     Pager<Organization> queryByPager(Pager<Organization> pager);
 
     /**
      * 根据分页对象统计记录条数
      * @param pager 分页对象
      * @return 对象列表
      */
-    Pager<ServerConfig> countByPager(Pager<ServerConfig> pager);    
+    Pager<Organization> countByPager(Pager<Organization> pager);    
     /**
      * 新增数据
      *
-     * @param serverConfig 实例对象
+     * @param organization 实例对象
      * @return 实例对象
      */
-    ServerConfig insert(ServerConfig serverConfig);
+    Organization insert(Organization organization);
 
     /**
      * 修改数据
      *
-     * @param serverConfig 实例对象
+     * @param organization 实例对象
      * @return 实例对象
      */
-    ServerConfig update(ServerConfig serverConfig);
+    Organization update(Organization organization);
 
     /**
      * 通过主键删除数据
      *
-     * @param configId 主键
+     * @param orgId 主键
      * @return 是否成功
      */
-    boolean deleteById(String configId);
+    boolean deleteById(String orgId);
 
     /**
      * 通过主键数组删除数据
-     * @param configIds 主键数组
+     * @param orgIds 主键数组
      * @return 操作结果
      */
-    boolean deleteByIds(String[] configIds);    
+    boolean deleteByIds(String[] orgIds);    
 
 }

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.berby.im.dao.DictionaryDao">
+
+    <resultMap type="xyz.berby.im.entity.Dictionary" id="DictionaryMap">
+        <result property="dictionaryId" column="dictionary_id" jdbcType="VARCHAR"/>
+        <result property="codeItemId" column="code_item_id" jdbcType="VARCHAR"/>
+        <result property="codeId" column="code_id" jdbcType="VARCHAR"/>
+        <result property="codeName" column="code_name" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="createPerson" column="create_person" jdbcType="VARCHAR"/>
+        <result property="modifyTime" column="modify_time" jdbcType="TIMESTAMP"/>
+        <result property="modifyPerson" column="modify_person" jdbcType="VARCHAR"/>
+        <result property="parentCodeId" column="parent_code_id" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="DictionaryMap">
+        select
+          dictionary_id, code_item_id, code_id, code_name, create_time, create_person, modify_time, modify_person, parent_code_id
+        from imserver.dictionary
+        where dictionary_id = #{dictionaryId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="DictionaryMap">
+        select
+          dictionary_id, code_item_id, code_id, code_name, create_time, create_person, modify_time, modify_person, parent_code_id
+        from imserver.dictionary
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="DictionaryMap">
+        select
+          dictionary_id, code_item_id, code_id, code_name, create_time, create_person, modify_time, modify_person, parent_code_id
+        from imserver.dictionary
+        <where>
+            <if test="dictionaryId != null and dictionaryId != ''">
+                and dictionary_id = #{dictionaryId}
+            </if>
+            <if test="codeItemId != null and codeItemId != ''">
+                and code_item_id = #{codeItemId}
+            </if>
+            <if test="codeId != null and codeId != ''">
+                and code_id = #{codeId}
+            </if>
+            <if test="codeName != null and codeName != ''">
+                and code_name = #{codeName}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="createPerson != null and createPerson != ''">
+                and create_person = #{createPerson}
+            </if>
+            <if test="modifyTime != null">
+                and modify_time = #{modifyTime}
+            </if>
+            <if test="modifyPerson != null and modifyPerson != ''">
+                and modify_person = #{modifyPerson}
+            </if>
+            <if test="parentCodeId != null and parentCodeId != ''">
+                and parent_code_id = #{parentCodeId}
+            </if>
+        </where>
+    </select>
+    
+    <!--通过分页对象作为筛选条件查询-->
+    <select id="queryByPager" resultMap="DictionaryMap">
+        select
+          dictionary_id, code_item_id, code_id, code_name, create_time, create_person, modify_time, modify_person, parent_code_id
+        from imserver.dictionary
+        <where>
+            <if test = "param != null">
+                <if test="param.dictionaryId != null and param.dictionaryId != ''">
+                    and dictionary_id like concat(#{param.dictionaryId}, '%')
+                </if>
+                <if test="param.codeItemId != null and param.codeItemId != ''">
+                    and code_item_id like concat(#{param.codeItemId}, '%')
+                </if>
+                <if test="param.codeId != null and param.codeId != ''">
+                    and code_id like concat(#{param.codeId}, '%')
+                </if>
+                <if test="param.codeName != null and param.codeName != ''">
+                    and code_name like concat(#{param.codeName}, '%')
+                </if>
+                <if test="param.createTime != null">
+                    and create_time = #{param.createTime}
+                </if>
+                <if test="param.createPerson != null and param.createPerson != ''">
+                    and create_person like concat(#{param.createPerson}, '%')
+                </if>
+                <if test="param.modifyTime != null">
+                    and modify_time = #{param.modifyTime}
+                </if>
+                <if test="param.modifyPerson != null and param.modifyPerson != ''">
+                    and modify_person like concat(#{param.modifyPerson}, '%')
+                </if>
+                <if test="param.parentCodeId != null and param.parentCodeId != ''">
+                    and parent_code_id like concat(#{param.parentCodeId}, '%')
+                </if>
+            </if>
+        </where>
+        limit #{offset}, #{limit}
+    </select>
+    
+    <!--通过分页对象作为筛选条件查询记录条数-->
+    <select id="countByPager" resultType="int">
+        select
+          count(*)
+
+        from imserver.dictionary
+        <where>
+            <if test = "param != null">
+                <if test="param.dictionaryId != null and param.dictionaryId != ''">
+                    and dictionary_id like concat(#{param.dictionaryId}, '%')
+                </if>
+                <if test="param.codeItemId != null and param.codeItemId != ''">
+                    and code_item_id like concat(#{param.codeItemId}, '%')
+                </if>
+                <if test="param.codeId != null and param.codeId != ''">
+                    and code_id like concat(#{param.codeId}, '%')
+                </if>
+                <if test="param.codeName != null and param.codeName != ''">
+                    and code_name like concat(#{param.codeName}, '%')
+                </if>
+                <if test="param.createTime != null">
+                    and create_time = #{param.createTime}
+                </if>
+                <if test="param.createPerson != null and param.createPerson != ''">
+                    and create_person like concat(#{param.createPerson}, '%')
+                </if>
+                <if test="param.modifyTime != null">
+                    and modify_time = #{param.modifyTime}
+                </if>
+                <if test="param.modifyPerson != null and param.modifyPerson != ''">
+                    and modify_person like concat(#{param.modifyPerson}, '%')
+                </if>
+                <if test="param.parentCodeId != null and param.parentCodeId != ''">
+                    and parent_code_id like concat(#{param.parentCodeId}, '%')
+                </if>
+            </if>
+        </where>
+    </select>
+
+    
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="dictionaryId" useGeneratedKeys="true">
+        insert into imserver.dictionary(code_item_id, code_id, code_name, create_time, create_person, modify_time, modify_person, parent_code_id)
+        values (#{codeItemId}, #{codeId}, #{codeName}, #{createTime}, #{createPerson}, #{modifyTime}, #{modifyPerson}, #{parentCodeId})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update imserver.dictionary
+        <set>
+            <if test="codeItemId != null and codeItemId != ''">
+                code_item_id = #{codeItemId},
+            </if>
+            <if test="codeId != null and codeId != ''">
+                code_id = #{codeId},
+            </if>
+            <if test="codeName != null and codeName != ''">
+                code_name = #{codeName},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="createPerson != null and createPerson != ''">
+                create_person = #{createPerson},
+            </if>
+            <if test="modifyTime != null">
+                modify_time = #{modifyTime},
+            </if>
+            <if test="modifyPerson != null and modifyPerson != ''">
+                modify_person = #{modifyPerson},
+            </if>
+            <if test="parentCodeId != null and parentCodeId != ''">
+                parent_code_id = #{parentCodeId},
+            </if>
+        </set>
+        where dictionary_id = #{dictionaryId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from imserver.dictionary where dictionary_id = #{dictionaryId}
+    </delete>
+
+    <!--通过主键数组删除数据-->
+    <delete id="deleteByIds">
+        delete from imserver.dictionary
+        where dictionary_id in
+        <foreach collection="array" item="item" open="(" close=")" separator="," index="index">
+            #{item}
+        </foreach>
+    </delete>
+
+</mapper>

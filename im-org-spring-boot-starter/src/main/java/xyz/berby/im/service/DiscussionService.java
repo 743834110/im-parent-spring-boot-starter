@@ -1,26 +1,26 @@
 package xyz.berby.im.service;
 
-import xyz.berby.im.entity.ServerConfig;
+import xyz.berby.im.entity.Discussion;
 import xyz.berby.im.vo.Pager;
 import java.util.List;
 
 
 
 /**
- * 服务器配置表(ServerConfig)表服务接口
+ * (Discussion)表服务接口
  *
  * @author litianfeng
  * @since 2018-12-12 12:32:29
  */
-public interface ServerConfigService {
+public interface DiscussionService {
 
     /**
      * 通过ID查询单条数据
      *
-     * @param configId 主键
+     * @param discussionId 主键
      * @return 实例对象
      */
-    ServerConfig queryById(String configId);
+    Discussion queryById(String discussionId);
 
     /**
      * 查询多条数据
@@ -29,7 +29,7 @@ public interface ServerConfigService {
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<ServerConfig> queryAllByLimit(int offset, int limit);
+    List<Discussion> queryAllByLimit(int offset, int limit);
 
     /**
      * 
@@ -37,43 +37,43 @@ public interface ServerConfigService {
      * @param pager 分页对象
      * @return 对象列表
      */
-     Pager<ServerConfig> queryByPager(Pager<ServerConfig> pager);
+     Pager<Discussion> queryByPager(Pager<Discussion> pager);
 
     /**
      * 根据分页对象统计记录条数
      * @param pager 分页对象
      * @return 对象列表
      */
-    Pager<ServerConfig> countByPager(Pager<ServerConfig> pager);    
+    Pager<Discussion> countByPager(Pager<Discussion> pager);    
     /**
      * 新增数据
      *
-     * @param serverConfig 实例对象
+     * @param discussion 实例对象
      * @return 实例对象
      */
-    ServerConfig insert(ServerConfig serverConfig);
+    Discussion insert(Discussion discussion);
 
     /**
      * 修改数据
      *
-     * @param serverConfig 实例对象
+     * @param discussion 实例对象
      * @return 实例对象
      */
-    ServerConfig update(ServerConfig serverConfig);
+    Discussion update(Discussion discussion);
 
     /**
      * 通过主键删除数据
      *
-     * @param configId 主键
+     * @param discussionId 主键
      * @return 是否成功
      */
-    boolean deleteById(String configId);
+    boolean deleteById(String discussionId);
 
     /**
      * 通过主键数组删除数据
-     * @param configIds 主键数组
+     * @param discussionIds 主键数组
      * @return 操作结果
      */
-    boolean deleteByIds(String[] configIds);    
+    boolean deleteByIds(String[] discussionIds);    
 
 }

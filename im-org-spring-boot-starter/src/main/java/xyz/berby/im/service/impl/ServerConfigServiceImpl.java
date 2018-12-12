@@ -1,8 +1,8 @@
 package xyz.berby.im.service.impl;
 
 import org.springframework.transaction.annotation.Transactional;
-import xyz.berby.im.dao.ServerConfigDao;
 import xyz.berby.im.entity.ServerConfig;
+import xyz.berby.im.dao.ServerConfigDao;
 import xyz.berby.im.service.ServerConfigService;
 import xyz.berby.im.vo.Pager;
 import org.springframework.stereotype.Service;
@@ -11,10 +11,10 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * (ServerConfig)表服务实现类
+ * 服务器配置表(ServerConfig)表服务实现类
  *
- * @author makejava
- * @since 2018-11-03 16:43:36
+ * @author litianfeng
+ * @since 2018-12-12 12:39:18
  */
 @Service("serverConfigService")
 @Transactional
@@ -68,7 +68,6 @@ public class ServerConfigServiceImpl implements ServerConfigService {
         pager.setSize(size);
         return pager;
     }
-
     /**
      * 新增数据
      *
