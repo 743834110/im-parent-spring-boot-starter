@@ -12,15 +12,15 @@ import lombok.NoArgsConstructor;
 /**
  * 用户表  user_type 学生 教师(User)实体类
  *
- * @author litianfeng
- * @since 2018-12-12 12:32:29
+ * @author makejava
+ * @since 2019-03-03 10:31:16
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User implements Serializable {
-    private static final long serialVersionUID = -30262997431668153L;
+public class User extends AbstractUser<Auth, Role> implements Serializable {
+    private static final long serialVersionUID = 158265149695907059L;
         private String userId;
     /**
      *用户账号
@@ -85,7 +85,7 @@ public class User implements Serializable {
     /**
      *修改时间
      */
-    private Date modityTime;
+    private Date modifyTime;
     /**
      *修改人
      */
@@ -110,10 +110,10 @@ public class User implements Serializable {
      *校园短号
      */
     private String userShortMobile;
-
+    
     private List<Auth> authList;
 
-    private List<OrgRole> orgRoleList;
+    private List<Role> roleList;
 
 
 }

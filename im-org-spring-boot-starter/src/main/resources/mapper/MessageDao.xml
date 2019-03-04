@@ -13,12 +13,16 @@
         <result property="content" column="content" jdbcType="VARCHAR"/>
         <result property="recall" column="recall" jdbcType="VARCHAR"/>
         <result property="userIds" column="user_ids" jdbcType="VARCHAR"/>
+        <result property="fromName" column="from_name" jdbcType="VARCHAR"/>
+        <result property="groupName" column="group_name" jdbcType="VARCHAR"/>
+        <result property="fromAvatar" column="from_avatar" jdbcType="VARCHAR"/>
+        <result property="groupAvatar" column="group_avatar" jdbcType="VARCHAR"/>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="MessageMap">
         select
-          id, from, to, cmd, create_time, chat_type, group_id, content, recall, user_ids
+          id, from, to, cmd, create_time, chat_type, group_id, content, recall, user_ids, from_name, group_name, from_avatar, group_avatar
         from imserver.message
         where id = #{id}
     </select>
@@ -26,7 +30,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="MessageMap">
         select
-          id, from, to, cmd, create_time, chat_type, group_id, content, recall, user_ids
+          id, from, to, cmd, create_time, chat_type, group_id, content, recall, user_ids, from_name, group_name, from_avatar, group_avatar
         from imserver.message
         limit #{offset}, #{limit}
     </select>
@@ -34,7 +38,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="MessageMap">
         select
-          id, from, to, cmd, create_time, chat_type, group_id, content, recall, user_ids
+          id, from, to, cmd, create_time, chat_type, group_id, content, recall, user_ids, from_name, group_name, from_avatar, group_avatar
         from imserver.message
         <where>
             <if test="id != null and id != ''">
@@ -67,13 +71,25 @@
             <if test="userIds != null and userIds != ''">
                 and user_ids = #{userIds}
             </if>
+            <if test="fromName != null and fromName != ''">
+                and from_name = #{fromName}
+            </if>
+            <if test="groupName != null and groupName != ''">
+                and group_name = #{groupName}
+            </if>
+            <if test="fromAvatar != null and fromAvatar != ''">
+                and from_avatar = #{fromAvatar}
+            </if>
+            <if test="groupAvatar != null and groupAvatar != ''">
+                and group_avatar = #{groupAvatar}
+            </if>
         </where>
     </select>
     
     <!--通过分页对象作为筛选条件查询-->
     <select id="queryByPager" resultMap="MessageMap">
         select
-          id, from, to, cmd, create_time, chat_type, group_id, content, recall, user_ids
+          id, from, to, cmd, create_time, chat_type, group_id, content, recall, user_ids, from_name, group_name, from_avatar, group_avatar
         from imserver.message
         <where>
             <if test = "param != null">
@@ -106,6 +122,18 @@
                 </if>
                 <if test="param.userIds != null and param.userIds != ''">
                     and user_ids like concat(#{param.userIds}, '%')
+                </if>
+                <if test="param.fromName != null and param.fromName != ''">
+                    and from_name like concat(#{param.fromName}, '%')
+                </if>
+                <if test="param.groupName != null and param.groupName != ''">
+                    and group_name like concat(#{param.groupName}, '%')
+                </if>
+                <if test="param.fromAvatar != null and param.fromAvatar != ''">
+                    and from_avatar like concat(#{param.fromAvatar}, '%')
+                </if>
+                <if test="param.groupAvatar != null and param.groupAvatar != ''">
+                    and group_avatar like concat(#{param.groupAvatar}, '%')
                 </if>
             </if>
         </where>
@@ -150,6 +178,18 @@
                 <if test="param.userIds != null and param.userIds != ''">
                     and user_ids like concat(#{param.userIds}, '%')
                 </if>
+                <if test="param.fromName != null and param.fromName != ''">
+                    and from_name like concat(#{param.fromName}, '%')
+                </if>
+                <if test="param.groupName != null and param.groupName != ''">
+                    and group_name like concat(#{param.groupName}, '%')
+                </if>
+                <if test="param.fromAvatar != null and param.fromAvatar != ''">
+                    and from_avatar like concat(#{param.fromAvatar}, '%')
+                </if>
+                <if test="param.groupAvatar != null and param.groupAvatar != ''">
+                    and group_avatar like concat(#{param.groupAvatar}, '%')
+                </if>
             </if>
         </where>
     </select>
@@ -158,8 +198,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into imserver.message(from, to, cmd, create_time, chat_type, group_id, content, recall, user_ids)
-        values (#{from}, #{to}, #{cmd}, #{createTime}, #{chatType}, #{groupId}, #{content}, #{recall}, #{userIds})
+        insert into imserver.message(from, to, cmd, create_time, chat_type, group_id, content, recall, user_ids, from_name, group_name, from_avatar, group_avatar)
+        values (#{from}, #{to}, #{cmd}, #{createTime}, #{chatType}, #{groupId}, #{content}, #{recall}, #{userIds}, #{fromName}, #{groupName}, #{fromAvatar}, #{groupAvatar})
     </insert>
 
     <!--通过主键修改数据-->
@@ -192,6 +232,18 @@
             </if>
             <if test="userIds != null and userIds != ''">
                 user_ids = #{userIds},
+            </if>
+            <if test="fromName != null and fromName != ''">
+                from_name = #{fromName},
+            </if>
+            <if test="groupName != null and groupName != ''">
+                group_name = #{groupName},
+            </if>
+            <if test="fromAvatar != null and fromAvatar != ''">
+                from_avatar = #{fromAvatar},
+            </if>
+            <if test="groupAvatar != null and groupAvatar != ''">
+                group_avatar = #{groupAvatar},
             </if>
         </set>
         where id = #{id}

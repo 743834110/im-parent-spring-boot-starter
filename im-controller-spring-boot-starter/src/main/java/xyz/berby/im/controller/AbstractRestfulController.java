@@ -1,12 +1,10 @@
 package xyz.berby.im.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import xyz.berby.im.annotation.Validate;
 import xyz.berby.im.aspect.AuthAspect;
-import xyz.berby.im.entity.User;
+import xyz.berby.im.entity.AbstractUser;
 import xyz.berby.im.util.AopTargetUtil;
 import xyz.berby.im.util.ApplicationContextHolder;
 import xyz.berby.im.util.ReflectUtil;
@@ -20,7 +18,6 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.function.BiFunction;
 
 /**
  * 抽象控制类
@@ -105,7 +102,7 @@ abstract class AbstractRestfulController {
                 actualMethod = actualObject.getClass().getMethod(operateName, method.getParameterTypes());
             }
             // 暂时假设user实体接入
-            User user = new User();
+            AbstractUser user = null;
 
             // 进行权限的检查
 //            if (!this.checkAuth(actualMethod, user)) {
@@ -183,7 +180,7 @@ abstract class AbstractRestfulController {
      *
      * @return 返回true表示用户拥有该权限或者该方法不需要进行权限的检查
      */
-    private boolean checkAuth(Method method, User user) {
+    private boolean checkAuth(Method method, AbstractUser user) {
         Annotation annotation = method.getAnnotation(Validate.class);
         if (annotation != null) {
             return this.authAspect.isAllow( (Validate) annotation, user);

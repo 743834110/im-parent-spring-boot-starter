@@ -11,15 +11,15 @@ import lombok.NoArgsConstructor;
 /**
  * 文件表(File)实体类
  *
- * @author litianfeng
- * @since 2018-12-12 12:32:29
+ * @author makejava
+ * @since 2019-03-03 10:31:09
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class File implements Serializable {
-    private static final long serialVersionUID = 912304959188690027L;
+    private static final long serialVersionUID = 720424574628317503L;
         private String fileId;
     /**
      *原文件名

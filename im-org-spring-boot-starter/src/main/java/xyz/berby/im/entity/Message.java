@@ -11,15 +11,15 @@ import lombok.NoArgsConstructor;
 /**
  * 聊天信息表(Message)实体类
  *
- * @author litianfeng
- * @since 2018-12-12 12:32:29
+ * @author makejava
+ * @since 2019-03-03 10:31:10
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Message implements Serializable {
-    private static final long serialVersionUID = -10726450306645010L;
+    private static final long serialVersionUID = -49752379389739398L;
     /**
      *消息ID
      */
@@ -60,6 +60,13 @@ public class Message implements Serializable {
      *未读消息的用户ID
      */
     private String userIds;
+    /**
+     *发送者名称
+     */
+    private String fromName;
+        private String groupName;
+        private String fromAvatar;
+        private String groupAvatar;
 
 
 }

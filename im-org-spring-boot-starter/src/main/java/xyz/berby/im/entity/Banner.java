@@ -11,15 +11,15 @@ import lombok.NoArgsConstructor;
 /**
  * 横幅表(Banner)实体类
  *
- * @author litianfeng
- * @since 2018-12-12 12:32:29
+ * @author makejava
+ * @since 2019-03-03 10:31:01
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Banner implements Serializable {
-    private static final long serialVersionUID = -11662712967990758L;
+    private static final long serialVersionUID = 240592623274186215L;
         private String bannerId;
     /**
      *图像地址

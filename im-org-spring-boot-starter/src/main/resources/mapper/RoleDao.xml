@@ -6,12 +6,16 @@
         <result property="roleId" column="role_id" jdbcType="VARCHAR"/>
         <result property="roleName" column="role_name" jdbcType="VARCHAR"/>
         <result property="roleDescription" column="role_description" jdbcType="VARCHAR"/>
+        <result property="roleType" column="role_type" jdbcType="VARCHAR"/>
+        <result property="roleNumber" column="role_number" jdbcType="NUMERIC"/>
+        <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+        <result property="orgId" column="org_id" jdbcType="VARCHAR"/>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="RoleMap">
         select
-          role_id, role_name, role_description
+          role_id, role_name, role_description, role_type, role_number, user_id, org_id
         from imserver.role
         where role_id = #{roleId}
     </select>
@@ -19,7 +23,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="RoleMap">
         select
-          role_id, role_name, role_description
+          role_id, role_name, role_description, role_type, role_number, user_id, org_id
         from imserver.role
         limit #{offset}, #{limit}
     </select>
@@ -27,7 +31,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="RoleMap">
         select
-          role_id, role_name, role_description
+          role_id, role_name, role_description, role_type, role_number, user_id, org_id
         from imserver.role
         <where>
             <if test="roleId != null and roleId != ''">
@@ -39,13 +43,25 @@
             <if test="roleDescription != null and roleDescription != ''">
                 and role_description = #{roleDescription}
             </if>
+            <if test="roleType != null and roleType != ''">
+                and role_type = #{roleType}
+            </if>
+            <if test="roleNumber != null">
+                and role_number = #{roleNumber}
+            </if>
+            <if test="userId != null and userId != ''">
+                and user_id = #{userId}
+            </if>
+            <if test="orgId != null and orgId != ''">
+                and org_id = #{orgId}
+            </if>
         </where>
     </select>
     
     <!--通过分页对象作为筛选条件查询-->
     <select id="queryByPager" resultMap="RoleMap">
         select
-          role_id, role_name, role_description
+          role_id, role_name, role_description, role_type, role_number, user_id, org_id
         from imserver.role
         <where>
             <if test = "param != null">
@@ -57,6 +73,18 @@
                 </if>
                 <if test="param.roleDescription != null and param.roleDescription != ''">
                     and role_description like concat(#{param.roleDescription}, '%')
+                </if>
+                <if test="param.roleType != null and param.roleType != ''">
+                    and role_type like concat(#{param.roleType}, '%')
+                </if>
+                <if test="param.roleNumber != null">
+                    and role_number = #{param.roleNumber}
+                </if>
+                <if test="param.userId != null and param.userId != ''">
+                    and user_id like concat(#{param.userId}, '%')
+                </if>
+                <if test="param.orgId != null and param.orgId != ''">
+                    and org_id like concat(#{param.orgId}, '%')
                 </if>
             </if>
         </where>
@@ -80,6 +108,18 @@
                 <if test="param.roleDescription != null and param.roleDescription != ''">
                     and role_description like concat(#{param.roleDescription}, '%')
                 </if>
+                <if test="param.roleType != null and param.roleType != ''">
+                    and role_type like concat(#{param.roleType}, '%')
+                </if>
+                <if test="param.roleNumber != null">
+                    and role_number = #{param.roleNumber}
+                </if>
+                <if test="param.userId != null and param.userId != ''">
+                    and user_id like concat(#{param.userId}, '%')
+                </if>
+                <if test="param.orgId != null and param.orgId != ''">
+                    and org_id like concat(#{param.orgId}, '%')
+                </if>
             </if>
         </where>
     </select>
@@ -88,8 +128,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="roleId" useGeneratedKeys="true">
-        insert into imserver.role(role_name, role_description)
-        values (#{roleName}, #{roleDescription})
+        insert into imserver.role(role_name, role_description, role_type, role_number, user_id, org_id)
+        values (#{roleName}, #{roleDescription}, #{roleType}, #{roleNumber}, #{userId}, #{orgId})
     </insert>
 
     <!--通过主键修改数据-->
@@ -101,6 +141,18 @@
             </if>
             <if test="roleDescription != null and roleDescription != ''">
                 role_description = #{roleDescription},
+            </if>
+            <if test="roleType != null and roleType != ''">
+                role_type = #{roleType},
+            </if>
+            <if test="roleNumber != null">
+                role_number = #{roleNumber},
+            </if>
+            <if test="userId != null and userId != ''">
+                user_id = #{userId},
+            </if>
+            <if test="orgId != null and orgId != ''">
+                org_id = #{orgId},
             </if>
         </set>
         where role_id = #{roleId}

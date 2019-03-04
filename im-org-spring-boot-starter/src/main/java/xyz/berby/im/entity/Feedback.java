@@ -11,15 +11,15 @@ import lombok.NoArgsConstructor;
 /**
  * (Feedback)实体类
  *
- * @author litianfeng
- * @since 2018-12-12 12:32:29
+ * @author makejava
+ * @since 2019-03-03 10:31:07
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Feedback implements Serializable {
-    private static final long serialVersionUID = -28358676818300722L;
+    private static final long serialVersionUID = -48214677205999854L;
         private String feedbackId;
     /**
      *反馈内容

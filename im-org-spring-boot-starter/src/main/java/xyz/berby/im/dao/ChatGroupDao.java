@@ -8,8 +8,8 @@ import java.util.List;
 /**
  * 工作群表(ChatGroup)表数据库访问层
  *
- * @author litianfeng
- * @since 2018-12-12 12:32:29
+ * @author makejava
+ * @since 2019-03-03 10:31:03
  */
  
 public interface ChatGroupDao {
@@ -17,10 +17,10 @@ public interface ChatGroupDao {
     /**
      * 通过ID查询单条数据
      *
-     * @param chatGroupId 主键
+     * @param groupId 主键
      * @return 实例对象
      */
-    ChatGroup queryById(String chatGroupId);
+    ChatGroup queryById(String groupId);
 
     /**
      * 查询指定行数据
@@ -74,15 +74,15 @@ public interface ChatGroupDao {
     /**
      * 通过主键删除数据
      *
-     * @param chatGroupId 主键
+     * @param groupId 主键
      * @return 影响行数
      */
-    int deleteById(String chatGroupId);
+    int deleteById(String groupId);
     
     /**
      * 通过主键数组删除数据
-     * @param chatGroupIds 主键数组
+     * @param groupIds 主键数组
      * @return 影响样数
      */
-    int deleteByIds(String[] chatGroupIds);
+    int deleteByIds(String[] groupIds);
 }

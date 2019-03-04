@@ -11,15 +11,15 @@ import lombok.NoArgsConstructor;
 /**
  * 部门表 org_type: 社团 机构 班级 pro_type 专业类型(Organization)实体类
  *
- * @author litianfeng
- * @since 2018-12-12 12:32:29
+ * @author makejava
+ * @since 2019-03-03 10:31:11
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Organization implements Serializable {
-    private static final long serialVersionUID = -75073217435993331L;
+    private static final long serialVersionUID = 808579266282727109L;
         private String orgId;
     /**
      *父级节点ID
@@ -48,7 +48,7 @@ public class Organization implements Serializable {
     /**
      *组织公告
      */
-    private String orgAnnouce;
+    private String orgAnnounce;
     /**
      *是否有效
      */
@@ -61,6 +61,12 @@ public class Organization implements Serializable {
      *创建时间
      */
     private Date createTime;
+    /**
+     *年级
+     */
+    private String grade;
+        private String shortName;
+        private String associateType;
 
 
 }

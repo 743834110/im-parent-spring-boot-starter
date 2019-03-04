@@ -1,8 +1,8 @@
 package xyz.berby.im.service.impl;
 
 import org.springframework.transaction.annotation.Transactional;
-import xyz.berby.im.entity.User;
 import xyz.berby.im.dao.UserDao;
+import xyz.berby.im.entity.User;
 import xyz.berby.im.service.UserService;
 import xyz.berby.im.vo.Pager;
 import org.springframework.stereotype.Service;
@@ -13,8 +13,8 @@ import java.util.List;
 /**
  * 用户表  user_type 学生 教师(User)表服务实现类
  *
- * @author litianfeng
- * @since 2018-12-12 12:39:18
+ * @author makejava
+ * @since 2019-03-03 10:31:16
  */
 @Service("userService")
 @Transactional

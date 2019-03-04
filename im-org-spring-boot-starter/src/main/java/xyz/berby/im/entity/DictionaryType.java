@@ -11,15 +11,15 @@ import lombok.NoArgsConstructor;
 /**
  * 字典类型表(DictionaryType)实体类
  *
- * @author litianfeng
- * @since 2018-12-12 12:32:29
+ * @author makejava
+ * @since 2019-03-03 10:31:05
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class DictionaryType implements Serializable {
-    private static final long serialVersionUID = 813083392960767483L;
+    private static final long serialVersionUID = -56486656847193696L;
         private String codeItemId;
     /**
      *分类名称

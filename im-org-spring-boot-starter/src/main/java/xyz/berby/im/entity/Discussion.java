@@ -11,15 +11,15 @@ import lombok.NoArgsConstructor;
 /**
  * (Discussion)实体类
  *
- * @author litianfeng
- * @since 2018-12-12 12:32:29
+ * @author makejava
+ * @since 2019-03-03 10:31:06
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Discussion implements Serializable {
-    private static final long serialVersionUID = -63884088248283468L;
+    private static final long serialVersionUID = 257852369666453879L;
         private String discussionId;
     /**
      *评论内容

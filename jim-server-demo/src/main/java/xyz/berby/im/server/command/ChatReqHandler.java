@@ -72,6 +72,7 @@ public class ChatReqHandler extends org.jim.server.command.handler.ChatReqHandle
             msgQueueRunnable.getExecutor().execute(msgQueueRunnable);
         }
 
+
         return chatService.send(packet.getSynSeq(), chatBody, imConfig, channelContext);
     }
 }

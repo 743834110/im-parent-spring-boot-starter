@@ -10,15 +10,15 @@ import lombok.NoArgsConstructor;
 /**
  * 操作权限表(Auth)实体类
  *
- * @author litianfeng
- * @since 2018-12-12 12:32:29
+ * @author makejava
+ * @since 2019-03-03 10:30:58
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Auth implements Serializable {
-    private static final long serialVersionUID = -96143373525853332L;
+public class Auth extends AbstractAuth implements Serializable {
+    private static final long serialVersionUID = 377881601925341070L;
     /**
      *权限ID
      */
@@ -40,6 +40,14 @@ public class Auth implements Serializable {
      *服务端的API服务权限
      */
     private String apiUrl;
+    /**
+     *是否为叶子节点
+     */
+    private String leaf;
+    /**
+     *是否可用
+     */
+    private String available;
 
 
 }

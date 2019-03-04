@@ -10,16 +10,19 @@
         <result property="orgDescription" column="org_description" jdbcType="VARCHAR"/>
         <result property="orgName" column="org_name" jdbcType="VARCHAR"/>
         <result property="orgImageUrl" column="org_image_url" jdbcType="VARCHAR"/>
-        <result property="orgAnnouce" column="org_annouce" jdbcType="VARCHAR"/>
+        <result property="orgAnnounce" column="org_announce" jdbcType="VARCHAR"/>
         <result property="valid" column="valid" jdbcType="VARCHAR"/>
         <result property="userId" column="user_id" jdbcType="VARCHAR"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="grade" column="grade" jdbcType="VARCHAR"/>
+        <result property="shortName" column="short_name" jdbcType="VARCHAR"/>
+        <result property="associateType" column="associate_type" jdbcType="VARCHAR"/>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="OrganizationMap">
         select
-          org_id, parent_id, org_type, pro_type, org_description, org_name, org_image_url, org_annouce, valid, user_id, create_time
+          org_id, parent_id, org_type, pro_type, org_description, org_name, org_image_url, org_announce, valid, user_id, create_time, grade, short_name, associate_type
         from imserver.organization
         where org_id = #{orgId}
     </select>
@@ -27,7 +30,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="OrganizationMap">
         select
-          org_id, parent_id, org_type, pro_type, org_description, org_name, org_image_url, org_annouce, valid, user_id, create_time
+          org_id, parent_id, org_type, pro_type, org_description, org_name, org_image_url, org_announce, valid, user_id, create_time, grade, short_name, associate_type
         from imserver.organization
         limit #{offset}, #{limit}
     </select>
@@ -35,7 +38,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="OrganizationMap">
         select
-          org_id, parent_id, org_type, pro_type, org_description, org_name, org_image_url, org_annouce, valid, user_id, create_time
+          org_id, parent_id, org_type, pro_type, org_description, org_name, org_image_url, org_announce, valid, user_id, create_time, grade, short_name, associate_type
         from imserver.organization
         <where>
             <if test="orgId != null and orgId != ''">
@@ -59,8 +62,8 @@
             <if test="orgImageUrl != null and orgImageUrl != ''">
                 and org_image_url = #{orgImageUrl}
             </if>
-            <if test="orgAnnouce != null and orgAnnouce != ''">
-                and org_annouce = #{orgAnnouce}
+            <if test="orgAnnounce != null and orgAnnounce != ''">
+                and org_announce = #{orgAnnounce}
             </if>
             <if test="valid != null and valid != ''">
                 and valid = #{valid}
@@ -71,13 +74,22 @@
             <if test="createTime != null">
                 and create_time = #{createTime}
             </if>
+            <if test="grade != null and grade != ''">
+                and grade = #{grade}
+            </if>
+            <if test="shortName != null and shortName != ''">
+                and short_name = #{shortName}
+            </if>
+            <if test="associateType != null and associateType != ''">
+                and associate_type = #{associateType}
+            </if>
         </where>
     </select>
     
     <!--通过分页对象作为筛选条件查询-->
     <select id="queryByPager" resultMap="OrganizationMap">
         select
-          org_id, parent_id, org_type, pro_type, org_description, org_name, org_image_url, org_annouce, valid, user_id, create_time
+          org_id, parent_id, org_type, pro_type, org_description, org_name, org_image_url, org_announce, valid, user_id, create_time, grade, short_name, associate_type
         from imserver.organization
         <where>
             <if test = "param != null">
@@ -102,8 +114,8 @@
                 <if test="param.orgImageUrl != null and param.orgImageUrl != ''">
                     and org_image_url like concat(#{param.orgImageUrl}, '%')
                 </if>
-                <if test="param.orgAnnouce != null and param.orgAnnouce != ''">
-                    and org_annouce like concat(#{param.orgAnnouce}, '%')
+                <if test="param.orgAnnounce != null and param.orgAnnounce != ''">
+                    and org_announce like concat(#{param.orgAnnounce}, '%')
                 </if>
                 <if test="param.valid != null and param.valid != ''">
                     and valid like concat(#{param.valid}, '%')
@@ -113,6 +125,15 @@
                 </if>
                 <if test="param.createTime != null">
                     and create_time = #{param.createTime}
+                </if>
+                <if test="param.grade != null and param.grade != ''">
+                    and grade like concat(#{param.grade}, '%')
+                </if>
+                <if test="param.shortName != null and param.shortName != ''">
+                    and short_name like concat(#{param.shortName}, '%')
+                </if>
+                <if test="param.associateType != null and param.associateType != ''">
+                    and associate_type like concat(#{param.associateType}, '%')
                 </if>
             </if>
         </where>
@@ -148,8 +169,8 @@
                 <if test="param.orgImageUrl != null and param.orgImageUrl != ''">
                     and org_image_url like concat(#{param.orgImageUrl}, '%')
                 </if>
-                <if test="param.orgAnnouce != null and param.orgAnnouce != ''">
-                    and org_annouce like concat(#{param.orgAnnouce}, '%')
+                <if test="param.orgAnnounce != null and param.orgAnnounce != ''">
+                    and org_announce like concat(#{param.orgAnnounce}, '%')
                 </if>
                 <if test="param.valid != null and param.valid != ''">
                     and valid like concat(#{param.valid}, '%')
@@ -160,6 +181,15 @@
                 <if test="param.createTime != null">
                     and create_time = #{param.createTime}
                 </if>
+                <if test="param.grade != null and param.grade != ''">
+                    and grade like concat(#{param.grade}, '%')
+                </if>
+                <if test="param.shortName != null and param.shortName != ''">
+                    and short_name like concat(#{param.shortName}, '%')
+                </if>
+                <if test="param.associateType != null and param.associateType != ''">
+                    and associate_type like concat(#{param.associateType}, '%')
+                </if>
             </if>
         </where>
     </select>
@@ -168,8 +198,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="orgId" useGeneratedKeys="true">
-        insert into imserver.organization(parent_id, org_type, pro_type, org_description, org_name, org_image_url, org_annouce, valid, user_id, create_time)
-        values (#{parentId}, #{orgType}, #{proType}, #{orgDescription}, #{orgName}, #{orgImageUrl}, #{orgAnnouce}, #{valid}, #{userId}, #{createTime})
+        insert into imserver.organization(parent_id, org_type, pro_type, org_description, org_name, org_image_url, org_announce, valid, user_id, create_time, grade, short_name, associate_type)
+        values (#{parentId}, #{orgType}, #{proType}, #{orgDescription}, #{orgName}, #{orgImageUrl}, #{orgAnnounce}, #{valid}, #{userId}, #{createTime}, #{grade}, #{shortName}, #{associateType})
     </insert>
 
     <!--通过主键修改数据-->
@@ -194,8 +224,8 @@
             <if test="orgImageUrl != null and orgImageUrl != ''">
                 org_image_url = #{orgImageUrl},
             </if>
-            <if test="orgAnnouce != null and orgAnnouce != ''">
-                org_annouce = #{orgAnnouce},
+            <if test="orgAnnounce != null and orgAnnounce != ''">
+                org_announce = #{orgAnnounce},
             </if>
             <if test="valid != null and valid != ''">
                 valid = #{valid},
@@ -205,6 +235,15 @@
             </if>
             <if test="createTime != null">
                 create_time = #{createTime},
+            </if>
+            <if test="grade != null and grade != ''">
+                grade = #{grade},
+            </if>
+            <if test="shortName != null and shortName != ''">
+                short_name = #{shortName},
+            </if>
+            <if test="associateType != null and associateType != ''">
+                associate_type = #{associateType},
             </if>
         </set>
         where org_id = #{orgId}

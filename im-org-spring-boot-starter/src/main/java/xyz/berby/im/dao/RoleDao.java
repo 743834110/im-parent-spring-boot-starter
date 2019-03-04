@@ -6,10 +6,10 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * 角色表(Role)表数据库访问层
+ * 角色表： role_type用于区分班学生社团和机构的角色(Role)表数据库访问层
  *
- * @author litianfeng
- * @since 2018-12-12 12:32:29
+ * @author makejava
+ * @since 2019-03-03 10:31:12
  */
  
 public interface RoleDao {

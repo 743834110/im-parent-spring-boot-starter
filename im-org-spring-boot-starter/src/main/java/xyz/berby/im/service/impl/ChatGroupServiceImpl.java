@@ -13,8 +13,8 @@ import java.util.List;
 /**
  * 工作群表(ChatGroup)表服务实现类
  *
- * @author litianfeng
- * @since 2018-12-12 12:39:18
+ * @author makejava
+ * @since 2019-03-03 10:31:03
  */
 @Service("chatGroupService")
 @Transactional
@@ -25,12 +25,12 @@ public class ChatGroupServiceImpl implements ChatGroupService {
     /**
      * 通过ID查询单条数据
      *
-     * @param chatGroupId 主键
+     * @param groupId 主键
      * @return 实例对象
      */
     @Override
-    public ChatGroup queryById(String chatGroupId) {
-        return this.chatGroupDao.queryById(chatGroupId);
+    public ChatGroup queryById(String groupId) {
+        return this.chatGroupDao.queryById(groupId);
     }
 
     /**
@@ -89,27 +89,27 @@ public class ChatGroupServiceImpl implements ChatGroupService {
     @Override
     public ChatGroup update(ChatGroup chatGroup) {
         this.chatGroupDao.update(chatGroup);
-        return this.queryById(chatGroup.getChatGroupId());
+        return this.queryById(chatGroup.getGroupId());
     }
 
     /**
      * 通过主键删除数据
      *
-     * @param chatGroupId 主键
+     * @param groupId 主键
      * @return 是否成功
      */
     @Override
-    public boolean deleteById(String chatGroupId) {
-        return this.chatGroupDao.deleteById(chatGroupId) > 0;
+    public boolean deleteById(String groupId) {
+        return this.chatGroupDao.deleteById(groupId) > 0;
     }
     
     /**
      * 通过主键数组删除数据
-     * @param chatGroupIds 主键数组
+     * @param groupIds 主键数组
      * @return 操作结果
      */
      @Override
-    public boolean deleteByIds(String[] chatGroupIds) {
-        return this.chatGroupDao.deleteByIds(chatGroupIds) == chatGroupIds.length;
+    public boolean deleteByIds(String[] groupIds) {
+        return this.chatGroupDao.deleteByIds(groupIds) == groupIds.length;
     }
 }

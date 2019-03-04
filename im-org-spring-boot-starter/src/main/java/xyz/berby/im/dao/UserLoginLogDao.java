@@ -8,8 +8,8 @@ import java.util.List;
 /**
  * 用户登录日志表(UserLoginLog)表数据库访问层
  *
- * @author litianfeng
- * @since 2018-12-12 12:32:29
+ * @author makejava
+ * @since 2019-03-03 10:31:18
  */
  
 public interface UserLoginLogDao {

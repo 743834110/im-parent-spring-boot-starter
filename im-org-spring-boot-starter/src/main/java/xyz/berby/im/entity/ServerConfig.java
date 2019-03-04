@@ -10,26 +10,24 @@ import lombok.NoArgsConstructor;
 /**
  * 服务器配置表(ServerConfig)实体类
  *
- * @author litianfeng
- * @since 2018-12-12 12:32:29
+ * @author makejava
+ * @since 2019-03-03 10:31:15
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class ServerConfig implements Serializable {
-    private static final long serialVersionUID = -53733490302619222L;
+    private static final long serialVersionUID = 275812333109648042L;
         private String configId;
     /**
-     *键名
+     *配置key
      */
     private String mappingKey;
     /**
-     *键值
+     *配置value
      */
     private String mappingValue;
 
-    public ServerConfig(String mappingKey) {
-        this.mappingKey = mappingKey;
-    }
+
 }

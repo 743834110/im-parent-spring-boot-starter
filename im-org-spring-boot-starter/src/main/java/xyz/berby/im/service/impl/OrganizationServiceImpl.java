@@ -13,8 +13,8 @@ import java.util.List;
 /**
  * 部门表 org_type: 社团 机构 班级 pro_type 专业类型(Organization)表服务实现类
  *
- * @author litianfeng
- * @since 2018-12-12 12:39:18
+ * @author makejava
+ * @since 2019-03-03 10:31:11
  */
 @Service("organizationService")
 @Transactional

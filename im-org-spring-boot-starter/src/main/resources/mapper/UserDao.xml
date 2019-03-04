@@ -19,7 +19,7 @@
         <result property="lastLoginDate" column="last_login_date" jdbcType="TIMESTAMP"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
         <result property="createPerson" column="create_person" jdbcType="VARCHAR"/>
-        <result property="modityTime" column="modity_time" jdbcType="TIMESTAMP"/>
+        <result property="modifyTime" column="modify_time" jdbcType="TIMESTAMP"/>
         <result property="modifyPerson" column="modify_person" jdbcType="VARCHAR"/>
         <result property="userSex" column="user_sex" jdbcType="VARCHAR"/>
         <result property="userType" column="user_type" jdbcType="VARCHAR"/>
@@ -31,7 +31,7 @@
     <!--查询单个-->
     <select id="queryById" resultMap="UserMap">
         select
-          user_id, user_account, user_password, user_name, user_mobile, user_email, user_image_url, user_description, user_password_changed, valid, user_enabled_date, user_disabled_date, user_account_locked, last_login_date, create_time, create_person, modity_time, modify_person, user_sex, user_type, salt, words, user_short_mobile
+          user_id, user_account, user_password, user_name, user_mobile, user_email, user_image_url, user_description, user_password_changed, valid, user_enabled_date, user_disabled_date, user_account_locked, last_login_date, create_time, create_person, modify_time, modify_person, user_sex, user_type, salt, words, user_short_mobile
         from imserver.user
         where user_id = #{userId}
     </select>
@@ -39,7 +39,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="UserMap">
         select
-          user_id, user_account, user_password, user_name, user_mobile, user_email, user_image_url, user_description, user_password_changed, valid, user_enabled_date, user_disabled_date, user_account_locked, last_login_date, create_time, create_person, modity_time, modify_person, user_sex, user_type, salt, words, user_short_mobile
+          user_id, user_account, user_password, user_name, user_mobile, user_email, user_image_url, user_description, user_password_changed, valid, user_enabled_date, user_disabled_date, user_account_locked, last_login_date, create_time, create_person, modify_time, modify_person, user_sex, user_type, salt, words, user_short_mobile
         from imserver.user
         limit #{offset}, #{limit}
     </select>
@@ -47,7 +47,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="UserMap">
         select
-          user_id, user_account, user_password, user_name, user_mobile, user_email, user_image_url, user_description, user_password_changed, valid, user_enabled_date, user_disabled_date, user_account_locked, last_login_date, create_time, create_person, modity_time, modify_person, user_sex, user_type, salt, words, user_short_mobile
+          user_id, user_account, user_password, user_name, user_mobile, user_email, user_image_url, user_description, user_password_changed, valid, user_enabled_date, user_disabled_date, user_account_locked, last_login_date, create_time, create_person, modify_time, modify_person, user_sex, user_type, salt, words, user_short_mobile
         from imserver.user
         <where>
             <if test="userId != null and userId != ''">
@@ -98,8 +98,8 @@
             <if test="createPerson != null and createPerson != ''">
                 and create_person = #{createPerson}
             </if>
-            <if test="modityTime != null">
-                and modity_time = #{modityTime}
+            <if test="modifyTime != null">
+                and modify_time = #{modifyTime}
             </if>
             <if test="modifyPerson != null and modifyPerson != ''">
                 and modify_person = #{modifyPerson}
@@ -125,7 +125,7 @@
     <!--通过分页对象作为筛选条件查询-->
     <select id="queryByPager" resultMap="UserMap">
         select
-          user_id, user_account, user_password, user_name, user_mobile, user_email, user_image_url, user_description, user_password_changed, valid, user_enabled_date, user_disabled_date, user_account_locked, last_login_date, create_time, create_person, modity_time, modify_person, user_sex, user_type, salt, words, user_short_mobile
+          user_id, user_account, user_password, user_name, user_mobile, user_email, user_image_url, user_description, user_password_changed, valid, user_enabled_date, user_disabled_date, user_account_locked, last_login_date, create_time, create_person, modify_time, modify_person, user_sex, user_type, salt, words, user_short_mobile
         from imserver.user
         <where>
             <if test = "param != null">
@@ -177,8 +177,8 @@
                 <if test="param.createPerson != null and param.createPerson != ''">
                     and create_person like concat(#{param.createPerson}, '%')
                 </if>
-                <if test="param.modityTime != null">
-                    and modity_time = #{param.modityTime}
+                <if test="param.modifyTime != null">
+                    and modify_time = #{param.modifyTime}
                 </if>
                 <if test="param.modifyPerson != null and param.modifyPerson != ''">
                     and modify_person like concat(#{param.modifyPerson}, '%')
@@ -259,8 +259,8 @@
                 <if test="param.createPerson != null and param.createPerson != ''">
                     and create_person like concat(#{param.createPerson}, '%')
                 </if>
-                <if test="param.modityTime != null">
-                    and modity_time = #{param.modityTime}
+                <if test="param.modifyTime != null">
+                    and modify_time = #{param.modifyTime}
                 </if>
                 <if test="param.modifyPerson != null and param.modifyPerson != ''">
                     and modify_person like concat(#{param.modifyPerson}, '%')
@@ -288,8 +288,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="userId" useGeneratedKeys="true">
-        insert into imserver.user(user_account, user_password, user_name, user_mobile, user_email, user_image_url, user_description, user_password_changed, valid, user_enabled_date, user_disabled_date, user_account_locked, last_login_date, create_time, create_person, modity_time, modify_person, user_sex, user_type, salt, words, user_short_mobile)
-        values (#{userAccount}, #{userPassword}, #{userName}, #{userMobile}, #{userEmail}, #{userImageUrl}, #{userDescription}, #{userPasswordChanged}, #{valid}, #{userEnabledDate}, #{userDisabledDate}, #{userAccountLocked}, #{lastLoginDate}, #{createTime}, #{createPerson}, #{modityTime}, #{modifyPerson}, #{userSex}, #{userType}, #{salt}, #{words}, #{userShortMobile})
+        insert into imserver.user(user_account, user_password, user_name, user_mobile, user_email, user_image_url, user_description, user_password_changed, valid, user_enabled_date, user_disabled_date, user_account_locked, last_login_date, create_time, create_person, modify_person, user_sex, user_type)
+        values (#{userAccount}, #{userPassword}, #{userName}, #{userMobile}, #{userEmail}, #{userImageUrl}, #{userDescription}, #{userPasswordChanged}, #{valid}, #{userEnabledDate}, #{userDisabledDate}, #{userAccountLocked}, #{lastLoginDate}, #{createTime}, #{createPerson}, #{modifyPerson}, #{userSex}, #{userType})
     </insert>
 
     <!--通过主键修改数据-->
@@ -341,9 +341,6 @@
             <if test="createPerson != null and createPerson != ''">
                 create_person = #{createPerson},
             </if>
-            <if test="modityTime != null">
-                modity_time = #{modityTime},
-            </if>
             <if test="modifyPerson != null and modifyPerson != ''">
                 modify_person = #{modifyPerson},
             </if>
@@ -352,15 +349,6 @@
             </if>
             <if test="userType != null and userType != ''">
                 user_type = #{userType},
-            </if>
-            <if test="salt != null and salt != ''">
-                salt = #{salt},
-            </if>
-            <if test="words != null and words != ''">
-                words = #{words},
-            </if>
-            <if test="userShortMobile != null and userShortMobile != ''">
-                user_short_mobile = #{userShortMobile},
             </if>
         </set>
         where user_id = #{userId}

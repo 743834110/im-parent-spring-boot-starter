@@ -11,15 +11,15 @@ import lombok.NoArgsConstructor;
 /**
  * 用户登录日志表(UserLoginLog)实体类
  *
- * @author litianfeng
- * @since 2018-12-12 12:32:29
+ * @author makejava
+ * @since 2019-03-03 10:31:17
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserLoginLog implements Serializable {
-    private static final long serialVersionUID = 596678271329138704L;
+    private static final long serialVersionUID = 164311801713785385L;
         private String loginLogId;
     /**
      *登录账号
@@ -37,6 +37,7 @@ public class UserLoginLog implements Serializable {
      *IP地址
      */
     private String userIp;
+        private String token;
 
 
 }

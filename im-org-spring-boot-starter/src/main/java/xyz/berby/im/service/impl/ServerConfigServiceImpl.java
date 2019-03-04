@@ -13,8 +13,8 @@ import java.util.List;
 /**
  * 服务器配置表(ServerConfig)表服务实现类
  *
- * @author litianfeng
- * @since 2018-12-12 12:39:18
+ * @author makejava
+ * @since 2019-03-03 10:31:15
  */
 @Service("serverConfigService")
 @Transactional

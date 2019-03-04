@@ -10,16 +10,16 @@ import lombok.NoArgsConstructor;
 /**
  * 工作群表(ChatGroup)实体类
  *
- * @author litianfeng
- * @since 2018-12-12 12:32:29
+ * @author makejava
+ * @since 2019-03-03 10:31:03
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class ChatGroup implements Serializable {
-    private static final long serialVersionUID = 981253950508680438L;
-        private String chatGroupId;
+    private static final long serialVersionUID = -82124317759365546L;
+        private String groupId;
     /**
      *创建组织ID
      */
@@ -31,7 +31,8 @@ public class ChatGroup implements Serializable {
     /**
      *群组名称
      */
-    private String chatGroupName;
+    private String name;
+        private String avatar;
 
 
 }

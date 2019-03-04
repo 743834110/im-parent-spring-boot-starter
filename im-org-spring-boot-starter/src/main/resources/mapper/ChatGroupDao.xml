@@ -3,24 +3,25 @@
 <mapper namespace="xyz.berby.im.dao.ChatGroupDao">
 
     <resultMap type="xyz.berby.im.entity.ChatGroup" id="ChatGroupMap">
-        <result property="chatGroupId" column="chat_group_id" jdbcType="VARCHAR"/>
+        <result property="groupId" column="group_id" jdbcType="VARCHAR"/>
         <result property="orgId" column="org_id" jdbcType="VARCHAR"/>
         <result property="userId" column="user_id" jdbcType="VARCHAR"/>
-        <result property="chatGroupName" column="chat_group_name" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="ChatGroupMap">
         select
-          chat_group_id, org_id, user_id, chat_group_name
+          group_id, org_id, user_id, name, avatar
         from imserver.chat_group
-        where chat_group_id = #{chatGroupId}
+        where group_id = #{groupId}
     </select>
 
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="ChatGroupMap">
         select
-          chat_group_id, org_id, user_id, chat_group_name
+          group_id, org_id, user_id, name, avatar
         from imserver.chat_group
         limit #{offset}, #{limit}
     </select>
@@ -28,11 +29,11 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="ChatGroupMap">
         select
-          chat_group_id, org_id, user_id, chat_group_name
+          group_id, org_id, user_id, name, avatar
         from imserver.chat_group
         <where>
-            <if test="chatGroupId != null and chatGroupId != ''">
-                and chat_group_id = #{chatGroupId}
+            <if test="groupId != null and groupId != ''">
+                and group_id = #{groupId}
             </if>
             <if test="orgId != null and orgId != ''">
                 and org_id = #{orgId}
@@ -40,8 +41,11 @@
             <if test="userId != null and userId != ''">
                 and user_id = #{userId}
             </if>
-            <if test="chatGroupName != null and chatGroupName != ''">
-                and chat_group_name = #{chatGroupName}
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="avatar != null and avatar != ''">
+                and avatar = #{avatar}
             </if>
         </where>
     </select>
@@ -49,12 +53,12 @@
     <!--通过分页对象作为筛选条件查询-->
     <select id="queryByPager" resultMap="ChatGroupMap">
         select
-          chat_group_id, org_id, user_id, chat_group_name
+          group_id, org_id, user_id, name, avatar
         from imserver.chat_group
         <where>
             <if test = "param != null">
-                <if test="param.chatGroupId != null and param.chatGroupId != ''">
-                    and chat_group_id like concat(#{param.chatGroupId}, '%')
+                <if test="param.groupId != null and param.groupId != ''">
+                    and group_id like concat(#{param.groupId}, '%')
                 </if>
                 <if test="param.orgId != null and param.orgId != ''">
                     and org_id like concat(#{param.orgId}, '%')
@@ -62,8 +66,11 @@
                 <if test="param.userId != null and param.userId != ''">
                     and user_id like concat(#{param.userId}, '%')
                 </if>
-                <if test="param.chatGroupName != null and param.chatGroupName != ''">
-                    and chat_group_name like concat(#{param.chatGroupName}, '%')
+                <if test="param.name != null and param.name != ''">
+                    and name like concat(#{param.name}, '%')
+                </if>
+                <if test="param.avatar != null and param.avatar != ''">
+                    and avatar like concat(#{param.avatar}, '%')
                 </if>
             </if>
         </where>
@@ -78,8 +85,8 @@
         from imserver.chat_group
         <where>
             <if test = "param != null">
-                <if test="param.chatGroupId != null and param.chatGroupId != ''">
-                    and chat_group_id like concat(#{param.chatGroupId}, '%')
+                <if test="param.groupId != null and param.groupId != ''">
+                    and group_id like concat(#{param.groupId}, '%')
                 </if>
                 <if test="param.orgId != null and param.orgId != ''">
                     and org_id like concat(#{param.orgId}, '%')
@@ -87,8 +94,11 @@
                 <if test="param.userId != null and param.userId != ''">
                     and user_id like concat(#{param.userId}, '%')
                 </if>
-                <if test="param.chatGroupName != null and param.chatGroupName != ''">
-                    and chat_group_name like concat(#{param.chatGroupName}, '%')
+                <if test="param.name != null and param.name != ''">
+                    and name like concat(#{param.name}, '%')
+                </if>
+                <if test="param.avatar != null and param.avatar != ''">
+                    and avatar like concat(#{param.avatar}, '%')
                 </if>
             </if>
         </where>
@@ -97,9 +107,9 @@
     
 
     <!--新增所有列-->
-    <insert id="insert" keyProperty="chatGroupId" useGeneratedKeys="true">
-        insert into imserver.chat_group(org_id, user_id, chat_group_name)
-        values (#{orgId}, #{userId}, #{chatGroupName})
+    <insert id="insert" keyProperty="groupId" useGeneratedKeys="true">
+        insert into imserver.chat_group(org_id, user_id, name, avatar)
+        values (#{orgId}, #{userId}, #{name}, #{avatar})
     </insert>
 
     <!--通过主键修改数据-->
@@ -112,22 +122,25 @@
             <if test="userId != null and userId != ''">
                 user_id = #{userId},
             </if>
-            <if test="chatGroupName != null and chatGroupName != ''">
-                chat_group_name = #{chatGroupName},
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="avatar != null and avatar != ''">
+                avatar = #{avatar},
             </if>
         </set>
-        where chat_group_id = #{chatGroupId}
+        where group_id = #{groupId}
     </update>
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from imserver.chat_group where chat_group_id = #{chatGroupId}
+        delete from imserver.chat_group where group_id = #{groupId}
     </delete>
 
     <!--通过主键数组删除数据-->
     <delete id="deleteByIds">
         delete from imserver.chat_group
-        where chat_group_id in
+        where group_id in
         <foreach collection="array" item="item" open="(" close=")" separator="," index="index">
             #{item}
         </foreach>

@@ -13,8 +13,8 @@ import java.util.List;
 /**
  * 操作权限表(Auth)表服务实现类
  *
- * @author litianfeng
- * @since 2018-12-12 12:39:18
+ * @author makejava
+ * @since 2019-03-03 10:30:59
  */
 @Service("authService")
 @Transactional

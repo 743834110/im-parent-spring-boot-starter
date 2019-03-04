@@ -1,17 +1,15 @@
 package xyz.berby.im.aspect;
 
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 import xyz.berby.im.annotation.Validate;
-import xyz.berby.im.entity.Auth;
-import xyz.berby.im.entity.OrgRole;
-import xyz.berby.im.entity.User;
+import xyz.berby.im.entity.AbstractAuth;
+import xyz.berby.im.entity.AbstractRole;
+import xyz.berby.im.entity.AbstractUser;
 
 import java.util.List;
 
@@ -49,7 +47,7 @@ public class AuthAspect {
      * @return
      */
     @Around(value = "serve(validate) && (args(user,..) || args(..,user))", argNames = "joinPoint, validate, user")
-    private Object authValidate(ProceedingJoinPoint joinPoint, Validate validate, User user) throws Throwable {
+    private Object authValidate(ProceedingJoinPoint joinPoint, Validate validate, AbstractUser user) throws Throwable {
         boolean allowed = this.isAllow(validate, user);
         Object object = null;
         if (allowed) {
@@ -58,15 +56,15 @@ public class AuthAspect {
         return object;
     }
 
-    public boolean isAllow(Validate validate, User user) {
+    public boolean isAllow(Validate validate, AbstractUser<AbstractAuth, AbstractRole> user) {
         if (user == null) {
             return false;
         }
         // 检查角色, role名称不为空字符串时
         String role = validate.role();
-        List<OrgRole> orgRoleList = user.getOrgRoleList();
+        List<AbstractRole> orgRoleList = user.getRoleList();
         if (!role.equals("") && orgRoleList != null) {
-            for (OrgRole orgRole : user.getOrgRoleList()) {
+            for (AbstractRole orgRole : user.getRoleList()) {
                 if (role.equals(orgRole.getRoleName()))
                     return true;
             }
@@ -74,9 +72,9 @@ public class AuthAspect {
 
         // 检查权限
         String authName = validate.value();
-        List<Auth> authList = user.getAuthList();
+        List<AbstractAuth> authList = user.getAuthList();
         if (authList != null) {
-            for (Auth auth : user.getAuthList()) {
+            for (AbstractAuth auth : user.getAuthList()) {
                 if (authName.equals(auth.getAuthName())) {
                     return true;
                 }

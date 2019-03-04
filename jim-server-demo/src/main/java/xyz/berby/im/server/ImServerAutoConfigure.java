@@ -15,12 +15,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.DependsOn;
-import xyz.berby.im.entity.User;
 import xyz.berby.im.server.config.PropertyImConfigBuilder;
 import xyz.berby.im.server.listener.ImDemoGroupListener;
 import org.tio.core.ssl.SslConfig;
 import com.jfinal.kit.PropKit;
-import xyz.berby.im.server.packet.WebRTCBody;
 import xyz.berby.im.server.processor.handshake.CustomWsHandshakeProcessor;
 import xyz.berby.im.server.service.LoginServiceProcessor;
 

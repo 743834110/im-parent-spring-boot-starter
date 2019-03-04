@@ -11,15 +11,15 @@ import lombok.NoArgsConstructor;
 /**
  * 收藏表  collection_type: 简单文本 文件 访问内容(Collect)实体类
  *
- * @author litianfeng
- * @since 2018-12-12 12:32:29
+ * @author makejava
+ * @since 2019-03-03 10:31:04
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Collect implements Serializable {
-    private static final long serialVersionUID = 573597920708103503L;
+    private static final long serialVersionUID = -57449659084526921L;
         private String collectionId;
     /**
      *用户ID

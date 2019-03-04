@@ -9,18 +9,18 @@ import java.util.List;
 /**
  * 工作群表(ChatGroup)表服务接口
  *
- * @author litianfeng
- * @since 2018-12-12 12:32:29
+ * @author makejava
+ * @since 2019-03-03 10:31:03
  */
 public interface ChatGroupService {
 
     /**
      * 通过ID查询单条数据
      *
-     * @param chatGroupId 主键
+     * @param groupId 主键
      * @return 实例对象
      */
-    ChatGroup queryById(String chatGroupId);
+    ChatGroup queryById(String groupId);
 
     /**
      * 查询多条数据
@@ -64,16 +64,16 @@ public interface ChatGroupService {
     /**
      * 通过主键删除数据
      *
-     * @param chatGroupId 主键
+     * @param groupId 主键
      * @return 是否成功
      */
-    boolean deleteById(String chatGroupId);
+    boolean deleteById(String groupId);
 
     /**
      * 通过主键数组删除数据
-     * @param chatGroupIds 主键数组
+     * @param groupIds 主键数组
      * @return 操作结果
      */
-    boolean deleteByIds(String[] chatGroupIds);    
+    boolean deleteByIds(String[] groupIds);    
 
 }

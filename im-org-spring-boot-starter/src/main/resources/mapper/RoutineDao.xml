@@ -13,12 +13,15 @@
         <result property="orgId" column="org_id" jdbcType="VARCHAR"/>
         <result property="endTime" column="end_time" jdbcType="TIMESTAMP"/>
         <result property="end" column="end" jdbcType="VARCHAR"/>
+        <result property="grade" column="grade" jdbcType="VARCHAR"/>
+        <result property="visibility" column="visibility" jdbcType="VARCHAR"/>
+        <result property="title" column="title" jdbcType="VARCHAR"/>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="RoutineMap">
         select
-          routine_id, user_id, user_name, routine_type, content, create_time, user_type, org_id, end_time, end
+          routine_id, user_id, user_name, routine_type, content, create_time, user_type, org_id, end_time, end, grade, visibility, title
         from imserver.routine
         where routine_id = #{routineId}
     </select>
@@ -26,7 +29,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="RoutineMap">
         select
-          routine_id, user_id, user_name, routine_type, content, create_time, user_type, org_id, end_time, end
+          routine_id, user_id, user_name, routine_type, content, create_time, user_type, org_id, end_time, end, grade, visibility, title
         from imserver.routine
         limit #{offset}, #{limit}
     </select>
@@ -34,7 +37,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="RoutineMap">
         select
-          routine_id, user_id, user_name, routine_type, content, create_time, user_type, org_id, end_time, end
+          routine_id, user_id, user_name, routine_type, content, create_time, user_type, org_id, end_time, end, grade, visibility, title
         from imserver.routine
         <where>
             <if test="routineId != null and routineId != ''">
@@ -67,13 +70,22 @@
             <if test="end != null and end != ''">
                 and end = #{end}
             </if>
+            <if test="grade != null and grade != ''">
+                and grade = #{grade}
+            </if>
+            <if test="visibility != null and visibility != ''">
+                and visibility = #{visibility}
+            </if>
+            <if test="title != null and title != ''">
+                and title = #{title}
+            </if>
         </where>
     </select>
     
     <!--通过分页对象作为筛选条件查询-->
     <select id="queryByPager" resultMap="RoutineMap">
         select
-          routine_id, user_id, user_name, routine_type, content, create_time, user_type, org_id, end_time, end
+          routine_id, user_id, user_name, routine_type, content, create_time, user_type, org_id, end_time, end, grade, visibility, title
         from imserver.routine
         <where>
             <if test = "param != null">
@@ -106,6 +118,15 @@
                 </if>
                 <if test="param.end != null and param.end != ''">
                     and end like concat(#{param.end}, '%')
+                </if>
+                <if test="param.grade != null and param.grade != ''">
+                    and grade like concat(#{param.grade}, '%')
+                </if>
+                <if test="param.visibility != null and param.visibility != ''">
+                    and visibility like concat(#{param.visibility}, '%')
+                </if>
+                <if test="param.title != null and param.title != ''">
+                    and title like concat(#{param.title}, '%')
                 </if>
             </if>
         </where>
@@ -150,6 +171,15 @@
                 <if test="param.end != null and param.end != ''">
                     and end like concat(#{param.end}, '%')
                 </if>
+                <if test="param.grade != null and param.grade != ''">
+                    and grade like concat(#{param.grade}, '%')
+                </if>
+                <if test="param.visibility != null and param.visibility != ''">
+                    and visibility like concat(#{param.visibility}, '%')
+                </if>
+                <if test="param.title != null and param.title != ''">
+                    and title like concat(#{param.title}, '%')
+                </if>
             </if>
         </where>
     </select>
@@ -158,8 +188,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="routineId" useGeneratedKeys="true">
-        insert into imserver.routine(user_id, user_name, routine_type, content, create_time, user_type, org_id, end_time, end)
-        values (#{userId}, #{userName}, #{routineType}, #{content}, #{createTime}, #{userType}, #{orgId}, #{endTime}, #{end})
+        insert into imserver.routine(user_id, user_name, routine_type, content, create_time, user_type, org_id, end_time, end, grade, visibility, title)
+        values (#{userId}, #{userName}, #{routineType}, #{content}, #{createTime}, #{userType}, #{orgId}, #{endTime}, #{end}, #{grade}, #{visibility}, #{title})
     </insert>
 
     <!--通过主键修改数据-->
@@ -192,6 +222,15 @@
             </if>
             <if test="end != null and end != ''">
                 end = #{end},
+            </if>
+            <if test="grade != null and grade != ''">
+                grade = #{grade},
+            </if>
+            <if test="visibility != null and visibility != ''">
+                visibility = #{visibility},
+            </if>
+            <if test="title != null and title != ''">
+                title = #{title},
             </if>
         </set>
         where routine_id = #{routineId}

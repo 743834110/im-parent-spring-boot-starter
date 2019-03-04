@@ -13,8 +13,8 @@ import java.util.List;
 /**
  * 收藏表  collection_type: 简单文本 文件 访问内容(Collect)表服务实现类
  *
- * @author litianfeng
- * @since 2018-12-12 12:39:18
+ * @author makejava
+ * @since 2019-03-03 10:31:04
  */
 @Service("collectService")
 @Transactional

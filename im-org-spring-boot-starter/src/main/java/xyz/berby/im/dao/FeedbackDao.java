@@ -8,8 +8,8 @@ import java.util.List;
 /**
  * (Feedback)表数据库访问层
  *
- * @author litianfeng
- * @since 2018-12-12 12:32:29
+ * @author makejava
+ * @since 2019-03-03 10:31:08
  */
  
 public interface FeedbackDao {

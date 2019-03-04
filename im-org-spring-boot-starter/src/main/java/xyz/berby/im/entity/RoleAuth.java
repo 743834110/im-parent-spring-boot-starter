@@ -10,15 +10,15 @@ import lombok.NoArgsConstructor;
 /**
  * 角色权限表(RoleAuth)实体类
  *
- * @author litianfeng
- * @since 2018-12-12 12:32:29
+ * @author makejava
+ * @since 2019-03-03 10:31:13
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class RoleAuth implements Serializable {
-    private static final long serialVersionUID = 352321509799368923L;
+    private static final long serialVersionUID = 394322417347233313L;
         private String roleAuthId;
     /**
      *角色ID

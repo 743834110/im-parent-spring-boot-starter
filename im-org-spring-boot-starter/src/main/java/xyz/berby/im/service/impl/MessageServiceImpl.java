@@ -13,8 +13,8 @@ import java.util.List;
 /**
  * 聊天信息表(Message)表服务实现类
  *
- * @author litianfeng
- * @since 2018-12-12 12:39:18
+ * @author makejava
+ * @since 2019-03-03 10:31:10
  */
 @Service("messageService")
 @Transactional

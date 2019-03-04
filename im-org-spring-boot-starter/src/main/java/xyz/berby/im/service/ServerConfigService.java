@@ -9,8 +9,8 @@ import java.util.List;
 /**
  * 服务器配置表(ServerConfig)表服务接口
  *
- * @author litianfeng
- * @since 2018-12-12 12:32:29
+ * @author makejava
+ * @since 2019-03-03 10:31:16
  */
 public interface ServerConfigService {
 

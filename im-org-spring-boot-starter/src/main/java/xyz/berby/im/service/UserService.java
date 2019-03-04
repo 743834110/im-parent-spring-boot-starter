@@ -9,8 +9,8 @@ import java.util.List;
 /**
  * 用户表  user_type 学生 教师(User)表服务接口
  *
- * @author litianfeng
- * @since 2018-12-12 12:32:29
+ * @author makejava
+ * @since 2019-03-03 10:31:17
  */
 public interface UserService {
 

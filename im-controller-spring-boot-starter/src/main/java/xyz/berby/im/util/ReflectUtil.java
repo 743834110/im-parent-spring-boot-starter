@@ -7,7 +7,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.thoughtworks.paranamer.*;
 import org.springframework.web.multipart.MultipartFile;
-import xyz.berby.im.entity.User;
+import xyz.berby.im.entity.AbstractUser;
 
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
@@ -223,7 +223,7 @@ public class ReflectUtil {
      * @return
      */
     public static Object[] getParamValues(Map<String, String[]> params
-            , Method method, MultipartFile[] files, User user) throws IllegalAccessException, InstantiationException, IntrospectionException, InvocationTargetException {
+            , Method method, MultipartFile[] files, AbstractUser user) throws IllegalAccessException, InstantiationException, IntrospectionException, InvocationTargetException {
         Type[] types = method.getGenericParameterTypes();
         Class<?>[] paramTypes = method.getParameterTypes();
         // 某字段泛型类型
@@ -265,7 +265,7 @@ public class ReflectUtil {
             // 从传输过来的map中获取对象方法字段中的值
             Object[] value = params.get(parameterNames[i]);
 
-            if (paramType.isAssignableFrom(User.class)) {
+            if (paramType.isAssignableFrom(AbstractUser.class)) {
                 paramValues[i] = user;
             }
             else if (paramType.isAssignableFrom(MultipartFile.class)) {
