@@ -2,10 +2,7 @@ package xyz.berby.im.entity;
 
 import java.io.Serializable;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /**
  * 操作权限表(Auth)实体类

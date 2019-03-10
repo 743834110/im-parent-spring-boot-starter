@@ -3,7 +3,10 @@ package xyz.berby.im;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.core.annotation.Order;
 import xyz.berby.im.util.ApplicationContextHolder;
 
 /**
@@ -12,6 +15,8 @@ import xyz.berby.im.util.ApplicationContextHolder;
  */
 
 @EnableAutoConfiguration(exclude = ControllerAutoConfigure.class)
+@ComponentScan({"xyz.berby.im.aspect", "xyz.berby.im.property"})
+@EnableConfigurationProperties
 public class ControllerAutoConfigure {
 
     @Autowired
@@ -19,6 +24,7 @@ public class ControllerAutoConfigure {
         ApplicationContextHolder contextHolder = new ApplicationContextHolder();
         contextHolder.setApplicationContext(applicationContext);
     }
+
 
     public static void main( String[] args ) {
 

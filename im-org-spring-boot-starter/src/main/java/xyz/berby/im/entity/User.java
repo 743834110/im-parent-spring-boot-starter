@@ -4,6 +4,7 @@ import java.util.Date;
 import java.io.Serializable;
 import java.util.List;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Builder;
@@ -29,6 +30,7 @@ public class User extends AbstractUser<Auth, Role> implements Serializable {
     /**
      *用户密码
      */
+    @JSONField(serialize = false)
     private String userPassword;
     /**
      *用户名称
@@ -110,7 +112,11 @@ public class User extends AbstractUser<Auth, Role> implements Serializable {
      *校园短号
      */
     private String userShortMobile;
-    
+    /**
+     * 角色编号
+     */
+    private String roleId;
+
     private List<Auth> authList;
 
     private List<Role> roleList;

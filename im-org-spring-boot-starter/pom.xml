@@ -26,6 +26,12 @@
 
     <dependencies>
 
+        <!--hutool-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
+
         <!--junit-->
         <dependency>
             <groupId>junit</groupId>

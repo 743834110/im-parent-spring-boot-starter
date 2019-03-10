@@ -2,14 +2,20 @@ package xyz.berby.im.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
+import xyz.berby.im.annotation.Decrypt;
 import xyz.berby.im.annotation.Validate;
 import xyz.berby.im.aspect.AuthAspect;
+import xyz.berby.im.constant.Constant;
 import xyz.berby.im.entity.AbstractUser;
+import xyz.berby.im.property.DefaultSettingProperty;
+import xyz.berby.im.security.Security;
 import xyz.berby.im.util.AopTargetUtil;
 import xyz.berby.im.util.ApplicationContextHolder;
 import xyz.berby.im.util.ReflectUtil;
 import xyz.berby.im.vo.RespBody;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -31,6 +37,12 @@ abstract class AbstractRestfulController {
     @Autowired
     private HttpSession session;
 
+    @Autowired
+    private DefaultSettingProperty defaultSetting;
+
+    @Autowired
+    private Security security;
+
     /**
      * 路径到方法的映射
      */
@@ -49,7 +61,11 @@ abstract class AbstractRestfulController {
             , HttpServletResponse response
             , String string, MultipartFile[] files) throws Exception {
 
-        // 先决检验
+        // 解决跨域问题
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        response.addHeader("Access-Control-Allow-Headers", "origin, content-type, accept, x-requested-with, sid, mycustom, smuser");
+        response.addHeader("Access-Control-Max-Age", "1800");//30 min
 
         //
         Object service = null;
@@ -78,6 +94,24 @@ abstract class AbstractRestfulController {
 
         Object data = null;
         try {
+            // 开始反射到服务类的方法
+            // 穿透代理对象
+            Method actualMethod = null;
+            Object actualObject = AopTargetUtil.getTarget(service);
+            if (actualObject.equals(service)) {
+                actualMethod = method;
+            }
+            else {
+                actualMethod = actualObject.getClass().getMethod(operateName, method.getParameterTypes());
+            }
+            // 暂时假设user实体接入
+            AbstractUser user = null;
+            // 检查信息是否需要进行解密操作
+            String securityMode = this.defaultSetting.getSecurityMode();
+            if (actualMethod.isAnnotationPresent(Decrypt.class)) {
+                string = this.security.decryptMessage(string);
+            }
+
             // 处理消息体提交的数据
             Map<String, String[]> stringMap = null;
             if (string != null) {
@@ -91,24 +125,6 @@ abstract class AbstractRestfulController {
                     stringMap.put(entry.getKey(), entry.getValue());
                 }
             }
-            // 开始反射到服务类的方法
-            // 穿透代理对象
-            Method actualMethod = null;
-            Object actualObject = AopTargetUtil.getTarget(service);
-            if (actualObject.equals(service)) {
-                actualMethod = method;
-            }
-            else {
-                actualMethod = actualObject.getClass().getMethod(operateName, method.getParameterTypes());
-            }
-            // 暂时假设user实体接入
-            AbstractUser user = null;
-
-            // 进行权限的检查
-//            if (!this.checkAuth(actualMethod, user)) {
-//
-//                return null;
-//            }
 
             Object[] paramValues = ReflectUtil.getParamValues(stringMap, actualMethod, files, user);
 
@@ -119,8 +135,25 @@ abstract class AbstractRestfulController {
                 data = method.invoke(service, paramValues);
             }
 
+            // 按照约定高于配置的原则，如果方法名为login时session则将保存该运行结果
+            // logout则消除数据
+            String loginMethodName = actualMethod.getName();
+            String sessionId;
+            switch (loginMethodName) {
+                case Constant.LOGIN_METHOD_NAME:
+                    sessionId = this.session.getId();
+                    this.session.setAttribute(sessionId, data);
+                    break;
+                case Constant.LOGOUT_METHOD_NAME:
+                    sessionId = this.session.getId();
+                    this.session.removeAttribute(sessionId);
+                    break;
+                default:
+            }
+
+
         } catch (Exception e) {
-            String message = e.getMessage();
+            String message = e.getCause().getMessage();
             if (message == null || message.equals("")) {
                 message = "参数异常";
             }
@@ -175,6 +208,8 @@ abstract class AbstractRestfulController {
      */
     abstract Map<String, String[]> handleString(String string);
 
+
+
     /**
      * 权限检查
      *
@@ -188,4 +223,6 @@ abstract class AbstractRestfulController {
 
         return true;
     }
+
+
 }

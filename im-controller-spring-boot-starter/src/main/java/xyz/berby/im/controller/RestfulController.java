@@ -33,19 +33,19 @@ public class RestfulController extends AbstractRestfulController{
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
-    @RequestMapping(value = "/te", method = {RequestMethod.POST, RequestMethod.GET})
+    @RequestMapping(value = "/te", method = {RequestMethod.POST})
     public Object handleHttpRequest(HttpServletRequest httpServletRequest) {
         httpServletRequest.getParameterMap();
         return "fdfdfdfdfffd";
     }
 
-    @RequestMapping("/{service}/{operate}")
+    @RequestMapping(value = "/{service}/{operate}"
+            , produces = "application/json; charset=utf-8")
     public Object getCommonDeal(@PathVariable String service
             , @PathVariable String operate
             , HttpServletRequest httpServletRequest
             , HttpServletResponse httpServletResponse
             , @RequestBody(required = false) String string, MultipartFile[] files) throws Exception {
-        httpServletResponse.setContentType("application/json; charset=utf-8");
         long a = System.currentTimeMillis();
         Object body = super.getCommandDeal(service, operate
                 , httpServletRequest, httpServletResponse

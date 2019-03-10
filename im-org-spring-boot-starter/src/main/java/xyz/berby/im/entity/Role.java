@@ -44,6 +44,10 @@ public class Role extends AbstractRole implements Serializable {
      *创建组织编号
      */
     private String orgId;
+    /**
+     * 角色所属平台
+     */
+    private String platform;
 
 
 }

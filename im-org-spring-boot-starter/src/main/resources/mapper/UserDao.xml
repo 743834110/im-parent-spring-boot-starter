@@ -26,12 +26,13 @@
         <result property="salt" column="salt" jdbcType="VARCHAR"/>
         <result property="words" column="words" jdbcType="VARCHAR"/>
         <result property="userShortMobile" column="user_short_mobile" jdbcType="VARCHAR"/>
+        <result property="roleId" column="role_id" jdbcType="VARCHAR"/>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="UserMap">
         select
-          user_id, user_account, user_password, user_name, user_mobile, user_email, user_image_url, user_description, user_password_changed, valid, user_enabled_date, user_disabled_date, user_account_locked, last_login_date, create_time, create_person, modify_time, modify_person, user_sex, user_type, salt, words, user_short_mobile
+          user_id, user_account, user_password, user_name, user_mobile, user_email, user_image_url, user_description, user_password_changed, valid, user_enabled_date, user_disabled_date, user_account_locked, last_login_date, create_time, create_person, modify_time, modify_person, user_sex, user_type, salt, words, user_short_mobile, role_id
         from imserver.user
         where user_id = #{userId}
     </select>
@@ -39,7 +40,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="UserMap">
         select
-          user_id, user_account, user_password, user_name, user_mobile, user_email, user_image_url, user_description, user_password_changed, valid, user_enabled_date, user_disabled_date, user_account_locked, last_login_date, create_time, create_person, modify_time, modify_person, user_sex, user_type, salt, words, user_short_mobile
+          user_id, user_account, user_password, user_name, user_mobile, user_email, user_image_url, user_description, user_password_changed, valid, user_enabled_date, user_disabled_date, user_account_locked, last_login_date, create_time, create_person, modify_time, modify_person, user_sex, user_type, salt, words, user_short_mobile, role_id
         from imserver.user
         limit #{offset}, #{limit}
     </select>
@@ -47,7 +48,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="UserMap">
         select
-          user_id, user_account, user_password, user_name, user_mobile, user_email, user_image_url, user_description, user_password_changed, valid, user_enabled_date, user_disabled_date, user_account_locked, last_login_date, create_time, create_person, modify_time, modify_person, user_sex, user_type, salt, words, user_short_mobile
+          user_id, user_account, user_password, user_name, user_mobile, user_email, user_image_url, user_description, user_password_changed, valid, user_enabled_date, user_disabled_date, user_account_locked, last_login_date, create_time, create_person, modify_time, modify_person, user_sex, user_type, salt, words, user_short_mobile, role_id
         from imserver.user
         <where>
             <if test="userId != null and userId != ''">
@@ -119,13 +120,16 @@
             <if test="userShortMobile != null and userShortMobile != ''">
                 and user_short_mobile = #{userShortMobile}
             </if>
+            <if test="roleId != null and roleId != ''">
+                and role_id = #{roleId}
+            </if>
         </where>
     </select>
     
     <!--通过分页对象作为筛选条件查询-->
     <select id="queryByPager" resultMap="UserMap">
         select
-          user_id, user_account, user_password, user_name, user_mobile, user_email, user_image_url, user_description, user_password_changed, valid, user_enabled_date, user_disabled_date, user_account_locked, last_login_date, create_time, create_person, modify_time, modify_person, user_sex, user_type, salt, words, user_short_mobile
+          user_id, user_account, user_password, user_name, user_mobile, user_email, user_image_url, user_description, user_password_changed, valid, user_enabled_date, user_disabled_date, user_account_locked, last_login_date, create_time, create_person, modify_time, modify_person, user_sex, user_type, salt, words, user_short_mobile, role_id
         from imserver.user
         <where>
             <if test = "param != null">
@@ -197,6 +201,9 @@
                 </if>
                 <if test="param.userShortMobile != null and param.userShortMobile != ''">
                     and user_short_mobile like concat(#{param.userShortMobile}, '%')
+                </if>
+                <if test="param.roleId != null and param.roleId != ''">
+                    and role_id like concat(#{param.roleId}, '%')
                 </if>
             </if>
         </where>
@@ -280,6 +287,9 @@
                 <if test="param.userShortMobile != null and param.userShortMobile != ''">
                     and user_short_mobile like concat(#{param.userShortMobile}, '%')
                 </if>
+                <if test="param.roleId != null and param.roleId != ''">
+                    and role_id like concat(#{param.roleId}, '%')
+                </if>
             </if>
         </where>
     </select>
@@ -288,8 +298,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="userId" useGeneratedKeys="true">
-        insert into imserver.user(user_account, user_password, user_name, user_mobile, user_email, user_image_url, user_description, user_password_changed, valid, user_enabled_date, user_disabled_date, user_account_locked, last_login_date, create_time, create_person, modify_person, user_sex, user_type)
-        values (#{userAccount}, #{userPassword}, #{userName}, #{userMobile}, #{userEmail}, #{userImageUrl}, #{userDescription}, #{userPasswordChanged}, #{valid}, #{userEnabledDate}, #{userDisabledDate}, #{userAccountLocked}, #{lastLoginDate}, #{createTime}, #{createPerson}, #{modifyPerson}, #{userSex}, #{userType})
+        insert into imserver.user(user_account, user_password, user_name, user_mobile, user_email, user_image_url, user_description, user_password_changed, valid, user_enabled_date, user_disabled_date, user_account_locked, last_login_date, create_time, create_person, modify_time, modify_person, user_sex, user_type, salt, words, user_short_mobile, role_id)
+        values (#{userAccount}, #{userPassword}, #{userName}, #{userMobile}, #{userEmail}, #{userImageUrl}, #{userDescription}, #{userPasswordChanged}, #{valid}, #{userEnabledDate}, #{userDisabledDate}, #{userAccountLocked}, #{lastLoginDate}, #{createTime}, #{createPerson}, #{modifyTime}, #{modifyPerson}, #{userSex}, #{userType}, #{salt}, #{words}, #{userShortMobile}, #{roleId})
     </insert>
 
     <!--通过主键修改数据-->
@@ -341,6 +351,9 @@
             <if test="createPerson != null and createPerson != ''">
                 create_person = #{createPerson},
             </if>
+            <if test="modifyTime != null">
+                modify_time = #{modifyTime},
+            </if>
             <if test="modifyPerson != null and modifyPerson != ''">
                 modify_person = #{modifyPerson},
             </if>
@@ -349,6 +362,18 @@
             </if>
             <if test="userType != null and userType != ''">
                 user_type = #{userType},
+            </if>
+            <if test="salt != null and salt != ''">
+                salt = #{salt},
+            </if>
+            <if test="words != null and words != ''">
+                words = #{words},
+            </if>
+            <if test="userShortMobile != null and userShortMobile != ''">
+                user_short_mobile = #{userShortMobile},
+            </if>
+            <if test="roleId != null and roleId != ''">
+                role_id = #{roleId},
             </if>
         </set>
         where user_id = #{userId}
