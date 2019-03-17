@@ -63,7 +63,9 @@ public class QueryOrgServiceImpl implements QueryOrgService {
             throw new RuntimeException("用户或密码不能为空");
         }
         queryUser.setUserAccount(user.getUserAccount());
-        User queriedUser = this.userDao.queryAll(queryUser).get(0);
+        List<User> userList = this.userDao.queryAll(queryUser);
+
+        User queriedUser = userList == null || userList.size() == 0? null: userList.get(0);
         // 判断用户是否存在
         if (queriedUser == null)
             throw new RuntimeException("用户或密码错误");

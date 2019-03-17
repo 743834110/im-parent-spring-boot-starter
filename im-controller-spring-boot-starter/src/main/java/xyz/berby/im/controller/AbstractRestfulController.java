@@ -1,12 +1,14 @@
 package xyz.berby.im.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.multipart.MultipartFile;
 import xyz.berby.im.annotation.Decrypt;
 import xyz.berby.im.annotation.Validate;
 import xyz.berby.im.aspect.AuthAspect;
 import xyz.berby.im.constant.Constant;
 import xyz.berby.im.entity.AbstractUser;
+import xyz.berby.im.exception.HttpException;
 import xyz.berby.im.property.DefaultSettingProperty;
 import xyz.berby.im.security.Security;
 import xyz.berby.im.util.AopTargetUtil;
@@ -151,14 +153,17 @@ abstract class AbstractRestfulController {
                 default:
             }
 
+        } catch (HttpException e) {
+
+            return new RespBody(e.getStatus(), e.getMessage(), response);
 
         } catch (Exception e) {
             String message = e.getCause().getMessage();
             if (message == null || message.equals("")) {
-                message = "参数异常";
+                message = "运行时参数异常";
             }
             e.printStackTrace();
-            return new RespBody(400, message, response);
+            return new RespBody(500, message, response);
         }
 
 

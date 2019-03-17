@@ -16,7 +16,7 @@ public class RespBody {
     /**
      * http状态码
      */
-    private int code;
+    private int status;
     /**
      * 响应消息
      */
@@ -29,34 +29,36 @@ public class RespBody {
 
     public RespBody(Object data, HttpServletResponse response) {
         this.data = data;
-        this.code = HttpStatus.OK.value();
+        this.status = HttpStatus.OK.value();
         if (response != null) {
-            response.setStatus(this.code);
+            response.setStatus(this.status);
         }
     }
 
     public RespBody(String message, HttpServletResponse response) {
         this.message = message;
-        this.code = HttpStatus.NOT_FOUND.value();
+        this.status = HttpStatus.NOT_FOUND.value();
         if (response != null) {
-            response.setStatus(this.code);
+            response.setStatus(this.status);
         }
     }
 
-    public RespBody(int code, String message, HttpServletResponse response) {
+    public RespBody(int status, String message, HttpServletResponse response) {
         this.message = message;
-        this.code = code;
+        this.status = status;
         if (response != null) {
-            response.setStatus(this.code);
+            response.setStatus(this.status);
         }
     }
 
-    public RespBody(int code, HttpServletResponse response) {
-        this.code = code;
+    public RespBody(int status, HttpServletResponse response) {
+        this.status = status;
         if (response != null) {
-            response.setStatus(code);
+            response.setStatus(status);
         }
     }
+
+
 
 
 
@@ -66,8 +68,8 @@ public class RespBody {
         return data;
     }
 
-    public int getCode() {
-        return code;
+    public int getStatus() {
+        return status;
     }
 
     public String getMessage() {
@@ -77,7 +79,7 @@ public class RespBody {
     @Override
     public String toString() {
         return "RespBody{" +
-                "code=" + code +
+                "status=" + status +
                 ", message='" + message + '\'' +
                 ", data=" + data +
                 '}';
