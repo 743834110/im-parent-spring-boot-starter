@@ -1,5 +1,6 @@
 package xyz.berby.im.service.impl;
 
+import cn.hutool.core.util.IdUtil;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.berby.im.dao.UserDao;
 import xyz.berby.im.entity.User;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * 用户表  user_type 学生 教师(User)表服务实现类
@@ -76,6 +78,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User insert(User user) {
+        user.setUserId(IdUtil.fastSimpleUUID());
         this.userDao.insert(user);
         return user;
     }

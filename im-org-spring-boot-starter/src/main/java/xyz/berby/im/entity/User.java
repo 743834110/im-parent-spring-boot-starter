@@ -59,7 +59,7 @@ public class User extends AbstractUser<Auth, Role> implements Serializable {
     /**
      *是否有效
      */
-    private String valid;
+    private String valid = "Y";
     /**
      *启用日期
      */
