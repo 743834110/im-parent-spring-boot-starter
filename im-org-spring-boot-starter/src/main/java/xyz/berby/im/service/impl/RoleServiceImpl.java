@@ -6,7 +6,7 @@ import xyz.berby.im.dao.RoleDao;
 import xyz.berby.im.service.RoleService;
 import xyz.berby.im.vo.Pager;
 import org.springframework.stereotype.Service;
-
+import cn.hutool.core.util.IdUtil;
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
  * 角色表： role_type用于区分班学生社团和机构的角色(Role)表服务实现类
  *
  * @author makejava
- * @since 2019-03-03 10:31:12
+ * @since 2019-03-20 22:21:00
  */
 @Service("roleService")
 @Transactional
@@ -76,6 +76,7 @@ public class RoleServiceImpl implements RoleService {
      */
     @Override
     public Role insert(Role role) {
+        role.setRoleId(IdUtil.fastSimpleUUID());
         this.roleDao.insert(role);
         return role;
     }

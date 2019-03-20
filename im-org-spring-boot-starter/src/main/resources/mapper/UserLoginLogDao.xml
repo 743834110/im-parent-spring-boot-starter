@@ -116,10 +116,10 @@
 
     
 
-    <!--新增所有列-->
+    <!--新增所有列，如果不想在代码层管理ID的生成，则可以将fullColumn改为otherColumn,之后再根据需要改逻辑-->
     <insert id="insert" keyProperty="loginLogId" useGeneratedKeys="true">
-        insert into imserver.user_login_log(user_account, session_id, logout_time, user_ip, token)
-        values (#{userAccount}, #{sessionId}, #{logoutTime}, #{userIp}, #{token})
+        insert into imserver.user_login_log(login_log_id, user_account, session_id, logout_time, user_ip, token)
+        values (#{loginLogId}, #{userAccount}, #{sessionId}, #{logoutTime}, #{userIp}, #{token})
     </insert>
 
     <!--通过主键修改数据-->

@@ -106,10 +106,10 @@
 
     
 
-    <!--新增所有列-->
+    <!--新增所有列，如果不想在代码层管理ID的生成，则可以将fullColumn改为otherColumn,之后再根据需要改逻辑-->
     <insert id="insert" keyProperty="userOrgRoleId" useGeneratedKeys="true">
-        insert into imserver.user_org_role(org_id, role_id, role_name, org_name)
-        values (#{orgId}, #{roleId}, #{roleName}, #{orgName})
+        insert into imserver.user_org_role(user_org_role_id, org_id, role_id, role_name, org_name)
+        values (#{userOrgRoleId}, #{orgId}, #{roleId}, #{roleName}, #{orgName})
     </insert>
 
     <!--通过主键修改数据-->

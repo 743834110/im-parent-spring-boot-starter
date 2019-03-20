@@ -6,7 +6,7 @@ import xyz.berby.im.dao.WorkGroupMemberDao;
 import xyz.berby.im.service.WorkGroupMemberService;
 import xyz.berby.im.vo.Pager;
 import org.springframework.stereotype.Service;
-
+import cn.hutool.core.util.IdUtil;
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
  * 工作群成员表(WorkGroupMember)表服务实现类
  *
  * @author makejava
- * @since 2019-03-03 10:31:20
+ * @since 2019-03-20 22:21:02
  */
 @Service("workGroupMemberService")
 @Transactional
@@ -76,6 +76,7 @@ public class WorkGroupMemberServiceImpl implements WorkGroupMemberService {
      */
     @Override
     public WorkGroupMember insert(WorkGroupMember workGroupMember) {
+        workGroupMember.setMemberId(IdUtil.fastSimpleUUID());
         this.workGroupMemberDao.insert(workGroupMember);
         return workGroupMember;
     }

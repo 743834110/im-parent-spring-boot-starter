@@ -6,7 +6,7 @@ import xyz.berby.im.dao.FeedbackDao;
 import xyz.berby.im.service.FeedbackService;
 import xyz.berby.im.vo.Pager;
 import org.springframework.stereotype.Service;
-
+import cn.hutool.core.util.IdUtil;
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
  * (Feedback)表服务实现类
  *
  * @author makejava
- * @since 2019-03-03 10:31:08
+ * @since 2019-03-20 22:20:59
  */
 @Service("feedbackService")
 @Transactional
@@ -76,6 +76,7 @@ public class FeedbackServiceImpl implements FeedbackService {
      */
     @Override
     public Feedback insert(Feedback feedback) {
+        feedback.setFeedbackId(IdUtil.fastSimpleUUID());
         this.feedbackDao.insert(feedback);
         return feedback;
     }

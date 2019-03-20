@@ -116,10 +116,10 @@
 
     
 
-    <!--新增所有列-->
+    <!--新增所有列，如果不想在代码层管理ID的生成，则可以将fullColumn改为otherColumn,之后再根据需要改逻辑-->
     <insert id="insert" keyProperty="bannerId" useGeneratedKeys="true">
-        insert into imserver.banner(banner_image_url, banner_title, routine_id, create_time, org_id)
-        values (#{bannerImageUrl}, #{bannerTitle}, #{routineId}, #{createTime}, #{orgId})
+        insert into imserver.banner(banner_id, banner_image_url, banner_title, routine_id, create_time, org_id)
+        values (#{bannerId}, #{bannerImageUrl}, #{bannerTitle}, #{routineId}, #{createTime}, #{orgId})
     </insert>
 
     <!--通过主键修改数据-->

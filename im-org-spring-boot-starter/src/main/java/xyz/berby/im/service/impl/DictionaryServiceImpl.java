@@ -6,7 +6,7 @@ import xyz.berby.im.dao.DictionaryDao;
 import xyz.berby.im.service.DictionaryService;
 import xyz.berby.im.vo.Pager;
 import org.springframework.stereotype.Service;
-
+import cn.hutool.core.util.IdUtil;
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
  * 字典表(Dictionary)表服务实现类
  *
  * @author makejava
- * @since 2019-03-03 10:31:05
+ * @since 2019-03-20 22:20:58
  */
 @Service("dictionaryService")
 @Transactional
@@ -76,6 +76,7 @@ public class DictionaryServiceImpl implements DictionaryService {
      */
     @Override
     public Dictionary insert(Dictionary dictionary) {
+        dictionary.setDictionaryId(IdUtil.fastSimpleUUID());
         this.dictionaryDao.insert(dictionary);
         return dictionary;
     }

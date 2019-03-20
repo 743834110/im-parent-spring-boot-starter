@@ -6,7 +6,7 @@ import xyz.berby.im.dao.BannerDao;
 import xyz.berby.im.service.BannerService;
 import xyz.berby.im.vo.Pager;
 import org.springframework.stereotype.Service;
-
+import cn.hutool.core.util.IdUtil;
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
  * 横幅表(Banner)表服务实现类
  *
  * @author makejava
- * @since 2019-03-03 10:31:01
+ * @since 2019-03-20 22:20:58
  */
 @Service("bannerService")
 @Transactional
@@ -76,6 +76,7 @@ public class BannerServiceImpl implements BannerService {
      */
     @Override
     public Banner insert(Banner banner) {
+        banner.setBannerId(IdUtil.fastSimpleUUID());
         this.bannerDao.insert(banner);
         return banner;
     }

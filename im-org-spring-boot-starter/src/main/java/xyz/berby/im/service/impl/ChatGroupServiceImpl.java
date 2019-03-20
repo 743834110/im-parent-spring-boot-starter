@@ -6,7 +6,7 @@ import xyz.berby.im.dao.ChatGroupDao;
 import xyz.berby.im.service.ChatGroupService;
 import xyz.berby.im.vo.Pager;
 import org.springframework.stereotype.Service;
-
+import cn.hutool.core.util.IdUtil;
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
  * 工作群表(ChatGroup)表服务实现类
  *
  * @author makejava
- * @since 2019-03-03 10:31:03
+ * @since 2019-03-20 22:20:58
  */
 @Service("chatGroupService")
 @Transactional
@@ -76,6 +76,7 @@ public class ChatGroupServiceImpl implements ChatGroupService {
      */
     @Override
     public ChatGroup insert(ChatGroup chatGroup) {
+        chatGroup.setGroupId(IdUtil.fastSimpleUUID());
         this.chatGroupDao.insert(chatGroup);
         return chatGroup;
     }

@@ -106,10 +106,10 @@
 
     
 
-    <!--新增所有列-->
+    <!--新增所有列，如果不想在代码层管理ID的生成，则可以将fullColumn改为otherColumn,之后再根据需要改逻辑-->
     <insert id="insert" keyProperty="memberId" useGeneratedKeys="true">
-        insert into imserver.work_group_member(user_id, user_account, chat_group_id, user_name)
-        values (#{userId}, #{userAccount}, #{chatGroupId}, #{userName})
+        insert into imserver.work_group_member(member_id, user_id, user_account, chat_group_id, user_name)
+        values (#{memberId}, #{userId}, #{userAccount}, #{chatGroupId}, #{userName})
     </insert>
 
     <!--通过主键修改数据-->

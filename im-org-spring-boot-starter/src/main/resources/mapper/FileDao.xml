@@ -156,10 +156,10 @@
 
     
 
-    <!--新增所有列-->
+    <!--新增所有列，如果不想在代码层管理ID的生成，则可以将fullColumn改为otherColumn,之后再根据需要改逻辑-->
     <insert id="insert" keyProperty="fileId" useGeneratedKeys="true">
-        insert into imserver.file(origin_name, file_size, create_time, busi_id, comp_id, mime_type, user_id, valid, file_path)
-        values (#{originName}, #{fileSize}, #{createTime}, #{busiId}, #{compId}, #{mimeType}, #{userId}, #{valid}, #{filePath})
+        insert into imserver.file(file_id, origin_name, file_size, create_time, busi_id, comp_id, mime_type, user_id, valid, file_path)
+        values (#{fileId}, #{originName}, #{fileSize}, #{createTime}, #{busiId}, #{compId}, #{mimeType}, #{userId}, #{valid}, #{filePath})
     </insert>
 
     <!--通过主键修改数据-->

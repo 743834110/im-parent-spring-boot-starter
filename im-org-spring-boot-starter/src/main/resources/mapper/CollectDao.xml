@@ -106,10 +106,10 @@
 
     
 
-    <!--新增所有列-->
+    <!--新增所有列，如果不想在代码层管理ID的生成，则可以将fullColumn改为otherColumn,之后再根据需要改逻辑-->
     <insert id="insert" keyProperty="collectionId" useGeneratedKeys="true">
-        insert into imserver.collect(user_id, create_time, collection_type, content)
-        values (#{userId}, #{createTime}, #{collectionType}, #{content})
+        insert into imserver.collect(collection_id, user_id, create_time, collection_type, content)
+        values (#{collectionId}, #{userId}, #{createTime}, #{collectionType}, #{content})
     </insert>
 
     <!--通过主键修改数据-->

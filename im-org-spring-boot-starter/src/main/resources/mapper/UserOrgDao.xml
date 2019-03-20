@@ -166,10 +166,10 @@
 
     
 
-    <!--新增所有列-->
+    <!--新增所有列，如果不想在代码层管理ID的生成，则可以将fullColumn改为otherColumn,之后再根据需要改逻辑-->
     <insert id="insert" keyProperty="userOrgId" useGeneratedKeys="true">
-        insert into imserver.user_org(user_id, org_id, user_name, role_id, parent_org_id, org_type, grade, org_name, user_image_url, short_name)
-        values (#{userId}, #{orgId}, #{userName}, #{roleId}, #{parentOrgId}, #{orgType}, #{grade}, #{orgName}, #{userImageUrl}, #{shortName})
+        insert into imserver.user_org(user_org_id, user_id, org_id, user_name, role_id, parent_org_id, org_type, grade, org_name, user_image_url, short_name)
+        values (#{userOrgId}, #{userId}, #{orgId}, #{userName}, #{roleId}, #{parentOrgId}, #{orgType}, #{grade}, #{orgName}, #{userImageUrl}, #{shortName})
     </insert>
 
     <!--通过主键修改数据-->

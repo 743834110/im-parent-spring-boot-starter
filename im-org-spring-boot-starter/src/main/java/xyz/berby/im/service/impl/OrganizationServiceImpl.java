@@ -6,7 +6,7 @@ import xyz.berby.im.dao.OrganizationDao;
 import xyz.berby.im.service.OrganizationService;
 import xyz.berby.im.vo.Pager;
 import org.springframework.stereotype.Service;
-
+import cn.hutool.core.util.IdUtil;
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
  * 部门表 org_type: 社团 机构 班级 pro_type 专业类型(Organization)表服务实现类
  *
  * @author makejava
- * @since 2019-03-03 10:31:11
+ * @since 2019-03-20 22:20:59
  */
 @Service("organizationService")
 @Transactional
@@ -76,6 +76,7 @@ public class OrganizationServiceImpl implements OrganizationService {
      */
     @Override
     public Organization insert(Organization organization) {
+        organization.setOrgId(IdUtil.fastSimpleUUID());
         this.organizationDao.insert(organization);
         return organization;
     }

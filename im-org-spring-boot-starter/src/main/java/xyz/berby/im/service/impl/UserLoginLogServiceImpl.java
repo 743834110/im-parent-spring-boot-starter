@@ -6,7 +6,7 @@ import xyz.berby.im.dao.UserLoginLogDao;
 import xyz.berby.im.service.UserLoginLogService;
 import xyz.berby.im.vo.Pager;
 import org.springframework.stereotype.Service;
-
+import cn.hutool.core.util.IdUtil;
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
  * 用户登录日志表(UserLoginLog)表服务实现类
  *
  * @author makejava
- * @since 2019-03-03 10:31:18
+ * @since 2019-03-20 22:21:01
  */
 @Service("userLoginLogService")
 @Transactional
@@ -76,6 +76,7 @@ public class UserLoginLogServiceImpl implements UserLoginLogService {
      */
     @Override
     public UserLoginLog insert(UserLoginLog userLoginLog) {
+        userLoginLog.setLoginLogId(IdUtil.fastSimpleUUID());
         this.userLoginLogDao.insert(userLoginLog);
         return userLoginLog;
     }

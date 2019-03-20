@@ -186,10 +186,10 @@
 
     
 
-    <!--新增所有列-->
+    <!--新增所有列，如果不想在代码层管理ID的生成，则可以将fullColumn改为otherColumn,之后再根据需要改逻辑-->
     <insert id="insert" keyProperty="routineId" useGeneratedKeys="true">
-        insert into imserver.routine(user_id, user_name, routine_type, content, create_time, user_type, org_id, end_time, end, grade, visibility, title)
-        values (#{userId}, #{userName}, #{routineType}, #{content}, #{createTime}, #{userType}, #{orgId}, #{endTime}, #{end}, #{grade}, #{visibility}, #{title})
+        insert into imserver.routine(routine_id, user_id, user_name, routine_type, content, create_time, user_type, org_id, end_time, end, grade, visibility, title)
+        values (#{routineId}, #{userId}, #{userName}, #{routineType}, #{content}, #{createTime}, #{userType}, #{orgId}, #{endTime}, #{end}, #{grade}, #{visibility}, #{title})
     </insert>
 
     <!--通过主键修改数据-->

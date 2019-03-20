@@ -86,10 +86,10 @@
 
     
 
-    <!--新增所有列-->
+    <!--新增所有列，如果不想在代码层管理ID的生成，则可以将fullColumn改为otherColumn,之后再根据需要改逻辑-->
     <insert id="insert" keyProperty="configId" useGeneratedKeys="true">
-        insert into imserver.server_config(mapping_key, mapping_value)
-        values (#{mappingKey}, #{mappingValue})
+        insert into imserver.server_config(config_id, mapping_key, mapping_value)
+        values (#{configId}, #{mappingKey}, #{mappingValue})
     </insert>
 
     <!--通过主键修改数据-->

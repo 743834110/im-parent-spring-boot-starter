@@ -146,10 +146,10 @@
 
     
 
-    <!--新增所有列-->
+    <!--新增所有列，如果不想在代码层管理ID的生成，则可以将fullColumn改为otherColumn,之后再根据需要改逻辑-->
     <insert id="insert" keyProperty="feedbackId" useGeneratedKeys="true">
-        insert into imserver.feedback(content, org_id, read, create_time, read_time, user_id, image_url_one, image_url_two)
-        values (#{content}, #{orgId}, #{read}, #{createTime}, #{readTime}, #{userId}, #{imageUrlOne}, #{imageUrlTwo})
+        insert into imserver.feedback(feedback_id, content, org_id, read, create_time, read_time, user_id, image_url_one, image_url_two)
+        values (#{feedbackId}, #{content}, #{orgId}, #{read}, #{createTime}, #{readTime}, #{userId}, #{imageUrlOne}, #{imageUrlTwo})
     </insert>
 
     <!--通过主键修改数据-->

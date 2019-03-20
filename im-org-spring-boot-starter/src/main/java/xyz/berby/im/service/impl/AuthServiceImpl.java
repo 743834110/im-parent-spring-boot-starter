@@ -6,7 +6,7 @@ import xyz.berby.im.dao.AuthDao;
 import xyz.berby.im.service.AuthService;
 import xyz.berby.im.vo.Pager;
 import org.springframework.stereotype.Service;
-
+import cn.hutool.core.util.IdUtil;
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
  * 操作权限表(Auth)表服务实现类
  *
  * @author makejava
- * @since 2019-03-03 10:30:59
+ * @since 2019-03-20 22:20:57
  */
 @Service("authService")
 @Transactional
@@ -76,6 +76,7 @@ public class AuthServiceImpl implements AuthService {
      */
     @Override
     public Auth insert(Auth auth) {
+        auth.setAuthId(IdUtil.fastSimpleUUID());
         this.authDao.insert(auth);
         return auth;
     }

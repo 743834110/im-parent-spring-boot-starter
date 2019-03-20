@@ -6,7 +6,7 @@ import xyz.berby.im.dao.UserOrgRoleDao;
 import xyz.berby.im.service.UserOrgRoleService;
 import xyz.berby.im.vo.Pager;
 import org.springframework.stereotype.Service;
-
+import cn.hutool.core.util.IdUtil;
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
  * 用户部门角色表(UserOrgRole)表服务实现类
  *
  * @author makejava
- * @since 2019-03-10 19:16:26
+ * @since 2019-03-20 22:21:01
  */
 @Service("userOrgRoleService")
 @Transactional
@@ -76,6 +76,7 @@ public class UserOrgRoleServiceImpl implements UserOrgRoleService {
      */
     @Override
     public UserOrgRole insert(UserOrgRole userOrgRole) {
+        userOrgRole.setUserOrgRoleId(IdUtil.fastSimpleUUID());
         this.userOrgRoleDao.insert(userOrgRole);
         return userOrgRole;
     }

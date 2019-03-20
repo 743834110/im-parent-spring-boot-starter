@@ -6,7 +6,7 @@ import xyz.berby.im.dao.RoutineDao;
 import xyz.berby.im.service.RoutineService;
 import xyz.berby.im.vo.Pager;
 import org.springframework.stereotype.Service;
-
+import cn.hutool.core.util.IdUtil;
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
  * 日常活动表  user_type: 直接是查询字段得到的学生或者老师等着两个身份，用来显示的，身份有为：学生、教师  此处留下user_id字段是为了知道是哪位用户发的消息  end_time和end字段之间的关系。(Routine)表服务实现类
  *
  * @author makejava
- * @since 2019-03-03 10:31:14
+ * @since 2019-03-20 22:21:00
  */
 @Service("routineService")
 @Transactional
@@ -76,6 +76,7 @@ public class RoutineServiceImpl implements RoutineService {
      */
     @Override
     public Routine insert(Routine routine) {
+        routine.setRoutineId(IdUtil.fastSimpleUUID());
         this.routineDao.insert(routine);
         return routine;
     }

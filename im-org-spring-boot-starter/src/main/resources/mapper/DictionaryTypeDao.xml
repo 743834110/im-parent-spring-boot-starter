@@ -126,10 +126,10 @@
 
     
 
-    <!--新增所有列-->
+    <!--新增所有列，如果不想在代码层管理ID的生成，则可以将fullColumn改为otherColumn,之后再根据需要改逻辑-->
     <insert id="insert" keyProperty="codeItemId" useGeneratedKeys="true">
-        insert into imserver.dictionary_type(code_item_name, parent_id, create_time, create_person, modify_person, modify_time)
-        values (#{codeItemName}, #{parentId}, #{createTime}, #{createPerson}, #{modifyPerson}, #{modifyTime})
+        insert into imserver.dictionary_type(code_item_id, code_item_name, parent_id, create_time, create_person, modify_person, modify_time)
+        values (#{codeItemId}, #{codeItemName}, #{parentId}, #{createTime}, #{createPerson}, #{modifyPerson}, #{modifyTime})
     </insert>
 
     <!--通过主键修改数据-->

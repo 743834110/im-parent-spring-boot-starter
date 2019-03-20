@@ -126,10 +126,10 @@
 
     
 
-    <!--新增所有列-->
+    <!--新增所有列，如果不想在代码层管理ID的生成，则可以将fullColumn改为otherColumn,之后再根据需要改逻辑-->
     <insert id="insert" keyProperty="discussionId" useGeneratedKeys="true">
-        insert into imserver.discussion(content, parent_id, create_time, routine_id, user_id, routine_user_id)
-        values (#{content}, #{parentId}, #{createTime}, #{routineId}, #{userId}, #{routineUserId})
+        insert into imserver.discussion(discussion_id, content, parent_id, create_time, routine_id, user_id, routine_user_id)
+        values (#{discussionId}, #{content}, #{parentId}, #{createTime}, #{routineId}, #{userId}, #{routineUserId})
     </insert>
 
     <!--通过主键修改数据-->
