@@ -52,7 +52,7 @@ public class RoutineServiceImpl implements RoutineService {
      * @return 对象列表
      */
      public Pager<Routine> queryByPager(Pager<Routine> pager) {
-        pager = this.countByPager(pager);                
+         pager = this.countByPager(pager);                
         List<Routine> result = routineDao.queryByPager(pager);
         pager.setResult(result);
         return pager;

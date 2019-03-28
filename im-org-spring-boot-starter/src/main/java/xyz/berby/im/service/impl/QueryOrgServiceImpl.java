@@ -49,8 +49,9 @@ public class QueryOrgServiceImpl implements QueryOrgService {
     }
 
 
+
     /**
-     * 登录业务流程(已解密,使用sha1文本摘要算法)：
+     * app端登录业务流程(已解密,使用sha1文本摘要算法)：
      * 1. 从服务器当中获取该登录用户的盐值
      * 2. 对用户密码进行加密操作后和数据库进行比对,知道成功为至
      * 3. 查询用户相关权限和角色，对用户系统操作权限进行管理

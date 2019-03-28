@@ -12,6 +12,9 @@ import xyz.berby.im.entity.AbstractUser;
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -109,7 +112,7 @@ public class ReflectUtil {
      * 过来的可能时serverConfig 或者 Pager<ServerConfig>
      * @return
      */
-    public static Object dynamicNewInstance(Class<?> paramType, Class<?> genericType, Map<String, String[]> params) throws IllegalAccessException, InstantiationException, IntrospectionException, InvocationTargetException {
+    public static Object dynamicNewInstance(Class<?> paramType, Class<?> genericType, Map<String, String[]> params) throws IllegalAccessException, InstantiationException, IntrospectionException, InvocationTargetException, ParseException {
         Object target = paramType.newInstance();
         Object genericTarget = null;
         // 字段名称到对象映射类
@@ -197,7 +200,7 @@ public class ReflectUtil {
      * @throws IllegalAccessException
      */
     public static void invokeMethodWithPropertyDescriptor(Map<String, PropertyDescriptor> descriptorMap
-            , String paramName, Object target, String[] paramValue) throws InvocationTargetException, IllegalAccessException {
+            , String paramName, Object target, String[] paramValue) throws InvocationTargetException, IllegalAccessException, ParseException {
         PropertyDescriptor descriptor = descriptorMap.get(paramName);
         if (descriptor == null) {
             return;
@@ -213,6 +216,12 @@ public class ReflectUtil {
         if (clazz.isArray()) {
             method.invoke(target, Convert.convert(clazz, paramValue));
         }
+        // 修改日期格式转换的问题
+        else if (clazz.isAssignableFrom(Date.class)) {
+            Date date = new Date();
+            date.setTime(Long.parseLong(paramValue[0]));
+            method.invoke(target, date);
+        }
         else {
             method.invoke(target, Convert.convert(clazz, paramValue[0]));
         }
@@ -223,7 +232,7 @@ public class ReflectUtil {
      * @return
      */
     public static Object[] getParamValues(Map<String, String[]> params
-            , Method method, MultipartFile[] files, AbstractUser user) throws IllegalAccessException, InstantiationException, IntrospectionException, InvocationTargetException {
+            , Method method, MultipartFile[] files, AbstractUser user) throws IllegalAccessException, InstantiationException, IntrospectionException, InvocationTargetException, ParseException {
         Type[] types = method.getGenericParameterTypes();
         Class<?>[] paramTypes = method.getParameterTypes();
         // 某字段泛型类型
@@ -237,7 +246,6 @@ public class ReflectUtil {
         }
 
         Object[] paramValues = new Object[types.length];
-        new AdaptiveParanamer();
         String[] parameterNames = PARANAMER.lookupParameterNames(method, false);
 
         for (int i = 0; types != null && i < types.length ; i++) {
@@ -265,7 +273,8 @@ public class ReflectUtil {
             // 从传输过来的map中获取对象方法字段中的值
             Object[] value = params.get(parameterNames[i]);
             // 当用户对象和paramType是AbstractUser的子类时。
-            if (paramType.getSuperclass().isAssignableFrom(AbstractUser.class) && user != null) {
+            Class<?> superClass = paramType.getSuperclass();
+            if (user != null && superClass != null && superClass.isAssignableFrom(AbstractUser.class)) {
                 paramValues[i] = user;
             }
             else if (paramType.isAssignableFrom(MultipartFile.class)) {

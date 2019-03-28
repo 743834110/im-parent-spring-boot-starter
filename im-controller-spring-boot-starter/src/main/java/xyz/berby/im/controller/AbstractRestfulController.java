@@ -52,6 +52,10 @@ abstract class AbstractRestfulController {
 
     /**
      *  通用处理方法
+     *  response.addHeader("Access-Control-Allow-Origin", "*");
+     *  response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+     *  response.addHeader("Access-Control-Allow-Headers", "origin, content-type, accept, x-requested-with, sid, mycustom, smuser");
+     *  response.addHeader("Access-Control-Max-Age", "1800");//30 min
      * @param serviceName 服务名
      * @param operateName 操作
      * @param request 请求对象
@@ -64,12 +68,11 @@ abstract class AbstractRestfulController {
             , String string, MultipartFile[] files) throws Exception {
 
         // 解决跨域问题
-        response.addHeader("Access-Control-Allow-Origin", "*");
-        response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-        response.addHeader("Access-Control-Allow-Headers", "origin, content-type, accept, x-requested-with, sid, mycustom, smuser");
-        response.addHeader("Access-Control-Max-Age", "1800");//30 min
 
-        //
+        // 明确请求端：admin|app|web|plain(即是统一处理所有端的请求)
+        String requestHeader = request.getHeader("user-agent");
+
+
         Object service = null;
         try {
             service = ApplicationContextHolder.getBean(serviceName);

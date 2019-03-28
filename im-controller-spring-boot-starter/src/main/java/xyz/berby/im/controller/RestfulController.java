@@ -39,8 +39,11 @@ public class RestfulController extends AbstractRestfulController{
         return "fdfdfdfdfffd";
     }
 
-    @RequestMapping(value = "/{service}/{operate}"
-            , produces = "application/json; charset=utf-8")
+    @RequestMapping(
+            value = "/{service}/{operate}",
+            produces = "application/json; charset=utf-8"
+    )
+    @CrossOrigin(origins = {"localhost:3000", "*"})
     public Object getCommonDeal(@PathVariable String service
             , @PathVariable String operate
             , HttpServletRequest httpServletRequest

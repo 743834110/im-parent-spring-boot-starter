@@ -30,4 +30,7 @@ public class ServerConfig implements Serializable {
     private String mappingValue;
 
 
+    public ServerConfig(String mappingKey) {
+        this.mappingKey = mappingKey;
+    }
 }

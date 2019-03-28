@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import xyz.berby.im.util.ApplicationContextHolder;
 
@@ -14,7 +15,7 @@ import xyz.berby.im.util.ApplicationContextHolder;
  *
  */
 
-@EnableAutoConfiguration(exclude = ControllerAutoConfigure.class)
+@Configuration
 @ComponentScan({"xyz.berby.im.aspect", "xyz.berby.im.property"})
 @EnableConfigurationProperties
 public class ControllerAutoConfigure {

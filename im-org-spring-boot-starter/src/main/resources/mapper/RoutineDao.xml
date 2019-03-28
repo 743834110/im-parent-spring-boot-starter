@@ -16,12 +16,13 @@
         <result property="grade" column="grade" jdbcType="VARCHAR"/>
         <result property="visibility" column="visibility" jdbcType="VARCHAR"/>
         <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="orgName" column="org_name" jdbcType="VARCHAR"/>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="RoutineMap">
         select
-          routine_id, user_id, user_name, routine_type, content, create_time, user_type, org_id, end_time, end, grade, visibility, title
+          routine_id, user_id, user_name, routine_type, content, create_time, user_type, org_id, end_time, end, grade, visibility, title, org_name
         from imserver.routine
         where routine_id = #{routineId}
     </select>
@@ -29,7 +30,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="RoutineMap">
         select
-          routine_id, user_id, user_name, routine_type, content, create_time, user_type, org_id, end_time, end, grade, visibility, title
+          routine_id, user_id, user_name, routine_type, content, create_time, user_type, org_id, end_time, end, grade, visibility, title, org_name
         from imserver.routine
         limit #{offset}, #{limit}
     </select>
@@ -37,7 +38,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="RoutineMap">
         select
-          routine_id, user_id, user_name, routine_type, content, create_time, user_type, org_id, end_time, end, grade, visibility, title
+          routine_id, user_id, user_name, routine_type, content, create_time, user_type, org_id, end_time, end, grade, visibility, title, org_name
         from imserver.routine
         <where>
             <if test="routineId != null and routineId != ''">
@@ -79,13 +80,16 @@
             <if test="title != null and title != ''">
                 and title = #{title}
             </if>
+            <if test="orgName != null and orgName != ''">
+                and org_name = #{orgName}
+            </if>
         </where>
     </select>
     
     <!--通过分页对象作为筛选条件查询-->
     <select id="queryByPager" resultMap="RoutineMap">
         select
-          routine_id, user_id, user_name, routine_type, content, create_time, user_type, org_id, end_time, end, grade, visibility, title
+          routine_id, user_id, user_name, routine_type, content, create_time, user_type, org_id, end_time, end, grade, visibility, title, org_name
         from imserver.routine
         <where>
             <if test = "param != null">
@@ -128,8 +132,120 @@
                 <if test="param.title != null and param.title != ''">
                     and title like concat(#{param.title}, '%')
                 </if>
+                <if test="param.orgName != null and param.orgName != ''">
+                    and org_name like concat(#{param.orgName}, '%')
+                </if>
             </if>
         </where>
+        <if test="sorter != null">
+            order by
+            <trim prefixOverrides=",">
+                <choose>
+                    <when test="sorter.userId == 'asc'">
+                        , user_id asc
+                    </when>
+                    <when test="sorter.userId == 'desc'">
+                        , user_id desc
+                    </when>
+                </choose>
+                <choose>
+                    <when test="sorter.userName == 'asc'">
+                        , user_name asc
+                    </when>
+                    <when test="sorter.userName == 'desc'">
+                        , user_name desc
+                    </when>
+                </choose>
+                <choose>
+                    <when test="sorter.routineType == 'asc'">
+                        , routine_type asc
+                    </when>
+                    <when test="sorter.routineType == 'desc'">
+                        , routine_type desc
+                    </when>
+                </choose>
+                <choose>
+                    <when test="sorter.content == 'asc'">
+                        , content asc
+                    </when>
+                    <when test="sorter.content == 'desc'">
+                        , content desc
+                    </when>
+                </choose>
+                <choose>
+                    <when test="sorter.createTime == 'asc'">
+                        , create_time asc
+                    </when>
+                    <when test="sorter.createTime == 'desc'">
+                        , create_time desc
+                    </when>
+                </choose>
+                <choose>
+                    <when test="sorter.userType == 'asc'">
+                        , user_type asc
+                    </when>
+                    <when test="sorter.userType == 'desc'">
+                        , user_type desc
+                    </when>
+                </choose>
+                <choose>
+                    <when test="sorter.orgId == 'asc'">
+                        , org_id asc
+                    </when>
+                    <when test="sorter.orgId == 'desc'">
+                        , org_id desc
+                    </when>
+                </choose>
+                <choose>
+                    <when test="sorter.endTime == 'asc'">
+                        , end_time asc
+                    </when>
+                    <when test="sorter.endTime == 'desc'">
+                        , end_time desc
+                    </when>
+                </choose>
+                <choose>
+                    <when test="sorter.end == 'asc'">
+                        , end asc
+                    </when>
+                    <when test="sorter.end == 'desc'">
+                        , end desc
+                    </when>
+                </choose>
+                <choose>
+                    <when test="sorter.grade == 'asc'">
+                        , grade asc
+                    </when>
+                    <when test="sorter.grade == 'desc'">
+                        , grade desc
+                    </when>
+                </choose>
+                <choose>
+                    <when test="sorter.visibility == 'asc'">
+                        , visibility asc
+                    </when>
+                    <when test="sorter.visibility == 'desc'">
+                        , visibility desc
+                    </when>
+                </choose>
+                <choose>
+                    <when test="sorter.title == 'asc'">
+                        , title asc
+                    </when>
+                    <when test="sorter.title == 'desc'">
+                        , title desc
+                    </when>
+                </choose>
+                <choose>
+                    <when test="sorter.orgName == 'asc'">
+                        , org_name asc
+                    </when>
+                    <when test="sorter.orgName == 'desc'">
+                        , org_name desc
+                    </when>
+                </choose>
+        </trim>
+        </if>
         limit #{offset}, #{limit}
     </select>
     
@@ -180,6 +296,9 @@
                 <if test="param.title != null and param.title != ''">
                     and title like concat(#{param.title}, '%')
                 </if>
+                <if test="param.orgName != null and param.orgName != ''">
+                    and org_name like concat(#{param.orgName}, '%')
+                </if>
             </if>
         </where>
     </select>
@@ -188,8 +307,8 @@
 
     <!--新增所有列，如果不想在代码层管理ID的生成，则可以将fullColumn改为otherColumn,之后再根据需要改逻辑-->
     <insert id="insert" keyProperty="routineId" useGeneratedKeys="true">
-        insert into imserver.routine(routine_id, user_id, user_name, routine_type, content, create_time, user_type, org_id, end_time, end, grade, visibility, title)
-        values (#{routineId}, #{userId}, #{userName}, #{routineType}, #{content}, #{createTime}, #{userType}, #{orgId}, #{endTime}, #{end}, #{grade}, #{visibility}, #{title})
+        insert into imserver.routine(routine_id, user_id, user_name, routine_type, content, create_time, user_type, org_id, end_time, end, grade, visibility, title, org_name)
+        values (#{routineId}, #{userId}, #{userName}, #{routineType}, #{content}, #{createTime}, #{userType}, #{orgId}, #{endTime}, #{end}, #{grade}, #{visibility}, #{title}, #{orgName})
     </insert>
 
     <!--通过主键修改数据-->
@@ -231,6 +350,9 @@
             </if>
             <if test="title != null and title != ''">
                 title = #{title},
+            </if>
+            <if test="orgName != null and orgName != ''">
+                org_name = #{orgName},
             </if>
         </set>
         where routine_id = #{routineId}

@@ -95,6 +95,67 @@
                 </if>
             </if>
         </where>
+        <if test="sorter != null">
+            order by
+            <trim prefixOverrides=",">
+                <choose>
+                    <when test="sorter.authName == 'asc'">
+                        , auth_name asc
+                    </when>
+                    <when test="sorter.authName == 'desc'">
+                        , auth_name desc
+                    </when>
+                </choose>
+                <choose>
+                    <when test="sorter.authUrl == 'asc'">
+                        , auth_url asc
+                    </when>
+                    <when test="sorter.authUrl == 'desc'">
+                        , auth_url desc
+                    </when>
+                </choose>
+                <choose>
+                    <when test="sorter.parentId == 'asc'">
+                        , parent_id asc
+                    </when>
+                    <when test="sorter.parentId == 'desc'">
+                        , parent_id desc
+                    </when>
+                </choose>
+                <choose>
+                    <when test="sorter.authType == 'asc'">
+                        , auth_type asc
+                    </when>
+                    <when test="sorter.authType == 'desc'">
+                        , auth_type desc
+                    </when>
+                </choose>
+                <choose>
+                    <when test="sorter.apiUrl == 'asc'">
+                        , api_url asc
+                    </when>
+                    <when test="sorter.apiUrl == 'desc'">
+                        , api_url desc
+                    </when>
+                </choose>
+                <choose>
+                    <when test="sorter.leaf == 'asc'">
+                        , leaf asc
+                    </when>
+                    <when test="sorter.leaf == 'desc'">
+                        , leaf desc
+                    </when>
+                </choose>
+                <choose>
+                    <when test="sorter.available == 'asc'">
+                        , available asc
+                    </when>
+                    <when test="sorter.available == 'desc'">
+                        , available desc
+                    </when>
+                </choose>
+        </trim>
+        </if>
         limit #{offset}, #{limit}
     </select>
     

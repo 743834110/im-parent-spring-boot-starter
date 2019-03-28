@@ -88,6 +88,59 @@
                 </if>
             </if>
         </where>
+        <if test="sorter != null">
+            order by
+            <trim prefixOverrides=",">
+                <choose>
+                    <when test="sorter.codeItemName == 'asc'">
+                        , code_item_name asc
+                    </when>
+                    <when test="sorter.codeItemName == 'desc'">
+                        , code_item_name desc
+                    </when>
+                </choose>
+                <choose>
+                    <when test="sorter.parentId == 'asc'">
+                        , parent_id asc
+                    </when>
+                    <when test="sorter.parentId == 'desc'">
+                        , parent_id desc
+                    </when>
+                </choose>
+                <choose>
+                    <when test="sorter.createTime == 'asc'">
+                        , create_time asc
+                    </when>
+                    <when test="sorter.createTime == 'desc'">
+                        , create_time desc
+                    </when>
+                </choose>
+                <choose>
+                    <when test="sorter.createPerson == 'asc'">
+                        , create_person asc
+                    </when>
+                    <when test="sorter.createPerson == 'desc'">
+                        , create_person desc
+                    </when>
+                </choose>
+                <choose>
+                    <when test="sorter.modifyPerson == 'asc'">
+                        , modify_person asc
+                    </when>
+                    <when test="sorter.modifyPerson == 'desc'">
+                        , modify_person desc
+                    </when>
+                </choose>
+                <choose>
+                    <when test="sorter.modifyTime == 'asc'">
+                        , modify_time asc
+                    </when>
+                    <when test="sorter.modifyTime == 'desc'">
+                        , modify_time desc
+                    </when>
+                </choose>
+        </trim>
+        </if>
         limit #{offset}, #{limit}
     </select>
     

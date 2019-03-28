@@ -1,6 +1,7 @@
 package xyz.berby.im.vo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 分页视图对象
@@ -30,8 +31,21 @@ public class Pager<T> {
      */
     private Integer size;
 
+    /**
+     * 输出数据排序记录
+     */
+    private Map<String, String> sorter;
+
 
     public Pager() {
+    }
+
+    public Map<String, String> getSorter() {
+        return sorter;
+    }
+
+    public void setSorter(Map<String, String> sorter) {
+        this.sorter = sorter;
     }
 
     public Pager(T param) {
