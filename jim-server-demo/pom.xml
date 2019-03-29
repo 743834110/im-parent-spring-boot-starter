@@ -53,10 +53,10 @@
             <artifactId>hutool-all</artifactId>
         </dependency>
 
-        <!--org组件-->
+        <!--controller组件-->
         <dependency>
             <groupId>xyz.berby.im</groupId>
-            <artifactId>im-org-spring-boot-starter</artifactId>
+            <artifactId>im-controller-spring-boot-starter</artifactId>
             <version>${project.version}</version>
         </dependency>
 

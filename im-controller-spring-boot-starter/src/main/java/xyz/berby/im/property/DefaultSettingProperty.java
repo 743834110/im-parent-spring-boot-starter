@@ -27,8 +27,9 @@ public class DefaultSettingProperty {
     private Map<String, Object> setting;
 
 
+    public static final String DEFAULT_USER_PASSWORD = "defaultUserPassword";
 
-
+    public static final String SALT_DIGIT = "saltDigit";
 
 
 }

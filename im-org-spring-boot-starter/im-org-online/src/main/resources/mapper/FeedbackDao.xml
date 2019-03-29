@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.berby.im.dao.FeedbackDao">
+
+    <resultMap type="xyz.berby.im.entity.Feedback" id="FeedbackMap">
+        <result property="feedbackId" column="feedback_id" jdbcType="VARCHAR"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="orgId" column="org_id" jdbcType="VARCHAR"/>
+        <result property="read" column="read" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="readTime" column="read_time" jdbcType="TIMESTAMP"/>
+        <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+        <result property="imageUrlOne" column="image_url_one" jdbcType="VARCHAR"/>
+        <result property="imageUrlTwo" column="image_url_two" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="FeedbackMap">
+        select
+          feedback_id, content, org_id, read, create_time, read_time, user_id, image_url_one, image_url_two
+        from imserver.feedback
+        where feedback_id = #{feedbackId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="FeedbackMap">
+        select
+          feedback_id, content, org_id, read, create_time, read_time, user_id, image_url_one, image_url_two
+        from imserver.feedback
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="FeedbackMap">
+        select
+          feedback_id, content, org_id, read, create_time, read_time, user_id, image_url_one, image_url_two
+        from imserver.feedback
+        <where>
+            <if test="feedbackId != null and feedbackId != ''">
+                and feedback_id = #{feedbackId}
+            </if>
+            <if test="content != null and content != ''">
+                and content = #{content}
+            </if>
+            <if test="orgId != null and orgId != ''">
+                and org_id = #{orgId}
+            </if>
+            <if test="read != null and read != ''">
+                and read = #{read}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="readTime != null">
+                and read_time = #{readTime}
+            </if>
+            <if test="userId != null and userId != ''">
+                and user_id = #{userId}
+            </if>
+            <if test="imageUrlOne != null and imageUrlOne != ''">
+                and image_url_one = #{imageUrlOne}
+            </if>
+            <if test="imageUrlTwo != null and imageUrlTwo != ''">
+                and image_url_two = #{imageUrlTwo}
+            </if>
+        </where>
+    </select>
+    
+    <!--通过分页对象作为筛选条件查询-->
+    <select id="queryByPager" resultMap="FeedbackMap">
+        select
+          feedback_id, content, org_id, read, create_time, read_time, user_id, image_url_one, image_url_two
+        from imserver.feedback
+        <where>
+            <if test = "param != null">
+                <if test="param.feedbackId != null and param.feedbackId != ''">
+                    and feedback_id like concat(#{param.feedbackId}, '%')
+                </if>
+                <if test="param.content != null and param.content != ''">
+                    and content like concat(#{param.content}, '%')
+                </if>
+                <if test="param.orgId != null and param.orgId != ''">
+                    and org_id like concat(#{param.orgId}, '%')
+                </if>
+                <if test="param.read != null and param.read != ''">
+                    and read like concat(#{param.read}, '%')
+                </if>
+                <if test="param.createTime != null">
+                    and create_time = #{param.createTime}
+                </if>
+                <if test="param.readTime != null">
+                    and read_time = #{param.readTime}
+                </if>
+                <if test="param.userId != null and param.userId != ''">
+                    and user_id like concat(#{param.userId}, '%')
+                </if>
+                <if test="param.imageUrlOne != null and param.imageUrlOne != ''">
+                    and image_url_one like concat(#{param.imageUrlOne}, '%')
+                </if>
+                <if test="param.imageUrlTwo != null and param.imageUrlTwo != ''">
+                    and image_url_two like concat(#{param.imageUrlTwo}, '%')
+                </if>
+            </if>
+        </where>
+        <if test="sorter != null">
+            order by
+            <trim prefixOverrides=",">
+                <choose>
+                    <when test="sorter.content == 'asc'">
+                        , content asc
+                    </when>
+                    <when test="sorter.content == 'desc'">
+                        , content desc
+                    </when>
+                </choose>
+                <choose>
+                    <when test="sorter.orgId == 'asc'">
+                        , org_id asc
+                    </when>
+                    <when test="sorter.orgId == 'desc'">
+                        , org_id desc
+                    </when>
+                </choose>
+                <choose>
+                    <when test="sorter.read == 'asc'">
+                        , read asc
+                    </when>
+                    <when test="sorter.read == 'desc'">
+                        , read desc
+                    </when>
+                </choose>
+                <choose>
+                    <when test="sorter.createTime == 'asc'">
+                        , create_time asc
+                    </when>
+                    <when test="sorter.createTime == 'desc'">
+                        , create_time desc
+                    </when>
+                </choose>
+                <choose>
+                    <when test="sorter.readTime == 'asc'">
+                        , read_time asc
+                    </when>
+                    <when test="sorter.readTime == 'desc'">
+                        , read_time desc
+                    </when>
+                </choose>
+                <choose>
+                    <when test="sorter.userId == 'asc'">
+                        , user_id asc
+                    </when>
+                    <when test="sorter.userId == 'desc'">
+                        , user_id desc
+                    </when>
+                </choose>
+                <choose>
+                    <when test="sorter.imageUrlOne == 'asc'">
+                        , image_url_one asc
+                    </when>
+                    <when test="sorter.imageUrlOne == 'desc'">
+                        , image_url_one desc
+                    </when>
+                </choose>
+                <choose>
+                    <when test="sorter.imageUrlTwo == 'asc'">
+                        , image_url_two asc
+                    </when>
+                    <when test="sorter.imageUrlTwo == 'desc'">
+                        , image_url_two desc
+                    </when>
+                </choose>
+        </trim>
+        </if>
+        limit #{offset}, #{limit}
+    </select>
+    
+    <!--通过分页对象作为筛选条件查询记录条数-->
+    <select id="countByPager" resultType="int">
+        select
+          count(*)
+
+        from imserver.feedback
+        <where>
+            <if test = "param != null">
+                <if test="param.feedbackId != null and param.feedbackId != ''">
+                    and feedback_id like concat(#{param.feedbackId}, '%')
+                </if>
+                <if test="param.content != null and param.content != ''">
+                    and content like concat(#{param.content}, '%')
+                </if>
+                <if test="param.orgId != null and param.orgId != ''">
+                    and org_id like concat(#{param.orgId}, '%')
+                </if>
+                <if test="param.read != null and param.read != ''">
+                    and read like concat(#{param.read}, '%')
+                </if>
+                <if test="param.createTime != null">
+                    and create_time = #{param.createTime}
+                </if>
+                <if test="param.readTime != null">
+                    and read_time = #{param.readTime}
+                </if>
+                <if test="param.userId != null and param.userId != ''">
+                    and user_id like concat(#{param.userId}, '%')
+                </if>
+                <if test="param.imageUrlOne != null and param.imageUrlOne != ''">
+                    and image_url_one like concat(#{param.imageUrlOne}, '%')
+                </if>
+                <if test="param.imageUrlTwo != null and param.imageUrlTwo != ''">
+                    and image_url_two like concat(#{param.imageUrlTwo}, '%')
+                </if>
+            </if>
+        </where>
+    </select>
+
+    
+
+    <!--新增所有列，如果不想在代码层管理ID的生成，则可以将fullColumn改为otherColumn,之后再根据需要改逻辑-->
+    <insert id="insert" keyProperty="feedbackId" useGeneratedKeys="true">
+        insert into imserver.feedback(feedback_id, content, org_id, read, create_time, read_time, user_id, image_url_one, image_url_two)
+        values (#{feedbackId}, #{content}, #{orgId}, #{read}, #{createTime}, #{readTime}, #{userId}, #{imageUrlOne}, #{imageUrlTwo})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update imserver.feedback
+        <set>
+            <if test="content != null and content != ''">
+                content = #{content},
+            </if>
+            <if test="orgId != null and orgId != ''">
+                org_id = #{orgId},
+            </if>
+            <if test="read != null and read != ''">
+                read = #{read},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="readTime != null">
+                read_time = #{readTime},
+            </if>
+            <if test="userId != null and userId != ''">
+                user_id = #{userId},
+            </if>
+            <if test="imageUrlOne != null and imageUrlOne != ''">
+                image_url_one = #{imageUrlOne},
+            </if>
+            <if test="imageUrlTwo != null and imageUrlTwo != ''">
+                image_url_two = #{imageUrlTwo},
+            </if>
+        </set>
+        where feedback_id = #{feedbackId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from imserver.feedback where feedback_id = #{feedbackId}
+    </delete>
+
+    <!--通过主键数组删除数据-->
+    <delete id="deleteByIds">
+        delete from imserver.feedback
+        where feedback_id in
+        <foreach collection="array" item="item" open="(" close=")" separator="," index="index">
+            #{item}
+        </foreach>
+    </delete>
+
+</mapper>

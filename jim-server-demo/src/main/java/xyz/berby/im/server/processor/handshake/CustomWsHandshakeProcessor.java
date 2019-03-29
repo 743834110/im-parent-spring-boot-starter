@@ -9,10 +9,6 @@ import org.jim.common.packets.Command;
 import org.jim.common.packets.RespBody;
 import org.jim.server.command.handler.processor.handshake.WsHandshakeProcessor;
 import org.tio.core.ChannelContext;
-import xyz.berby.im.entity.ServerConfig;
-import xyz.berby.im.service.ServerConfigService;
-import xyz.berby.im.vo.Pager;
-
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,19 +22,13 @@ import java.util.Map;
  */
 public class CustomWsHandshakeProcessor extends WsHandshakeProcessor{
 
-	@Resource
-	private ServerConfigService serverConfigService;
-
 	private final static String PUBLIC_KEY_BASE64 = "publicKeyBase64";
 
 	@Override
 	public void onAfterHandshaked(ImPacket packet, ChannelContext channelContext) throws Exception {
 
-		Pager<ServerConfig> pager = new Pager<>(new ServerConfig(PUBLIC_KEY_BASE64));
-		String value = this.serverConfigService
-				.queryByPager(pager).getResult().get(0).getMappingValue();
 		Map<String, Object> map = new HashMap<>();
-		map.put(PUBLIC_KEY_BASE64, value);
+		map.put(PUBLIC_KEY_BASE64, "");
 
 		RespBody respBody = new RespBody(Command.COMMAND_HANDSHAKE_RESP, map);
 		ImPacket imPacket = new ImPacket(respBody.toByte());

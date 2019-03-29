@@ -3,19 +3,14 @@ package xyz.berby.im.server;
 import org.jim.common.Const;
 import org.jim.common.ImConfig;
 import org.jim.common.ImSessionContext;
-import org.jim.server.*;
 import org.jim.server.command.handler.processor.chat.MsgQueueRunnable;
 import org.jim.server.handler.AbProtocolHandler;
 import org.jim.server.handler.ProtocolHandlerManager;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.tio.core.ChannelContext;
 import org.tio.core.GroupContext;
 import org.tio.core.exception.AioDecodeException;
 import org.tio.core.intf.Packet;
 import org.tio.server.intf.ServerAioHandler;
-
-import javax.annotation.PostConstruct;
 import java.nio.ByteBuffer;
 
 /**

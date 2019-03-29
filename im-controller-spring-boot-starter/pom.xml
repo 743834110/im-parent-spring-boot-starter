@@ -27,6 +27,12 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>xyz.berby.im</groupId>
+            <artifactId>im-common</artifactId>
+            <version>${version}</version>
+        </dependency>
+
         <!--junit-->
         <dependency>
             <groupId>junit</groupId>

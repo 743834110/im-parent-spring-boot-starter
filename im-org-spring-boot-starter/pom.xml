@@ -6,7 +6,12 @@
 
     <groupId>xyz.berby.im</groupId>
     <artifactId>im-org-spring-boot-starter</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>im-org-api</module>
+        <module>im-org-online</module>
+    </modules>
 
     <name>im-org-spring-boot-starter</name>
     <url>http://www.example.com</url>
@@ -26,56 +31,10 @@
 
     <dependencies>
 
-        <!--hutool-->
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-        </dependency>
-
-        <!--junit-->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!--autocofigure-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-autoconfigure</artifactId>
-        </dependency>
-
-        <!--controller-->
-        <dependency>
-            <groupId>xyz.berby.im</groupId>
-            <artifactId>im-controller-spring-boot-starter</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <!--db-->
-        <dependency>
-            <groupId>xyz.berby.im</groupId>
-            <artifactId>im-db-spring-boot-starter</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <!--lombok-->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-
-        <!--主要是为了实现MultipartFile对象的注入-->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-devtools</artifactId>-->
+        <!--</dependency>-->
 
 
     </dependencies>
@@ -117,10 +76,10 @@
         </pluginManagement>
 
         <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.springframework.boot</groupId>-->
+                <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
+            <!--</plugin>-->
         </plugins>
     </build>
 </project>

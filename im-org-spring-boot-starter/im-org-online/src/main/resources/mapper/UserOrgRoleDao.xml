@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.berby.im.dao.UserOrgRoleDao">
+
+    <resultMap type="xyz.berby.im.entity.UserOrgRole" id="UserOrgRoleMap">
+        <result property="userOrgRoleId" column="user_org_role_id" jdbcType="VARCHAR"/>
+        <result property="orgId" column="org_id" jdbcType="VARCHAR"/>
+        <result property="roleId" column="role_id" jdbcType="VARCHAR"/>
+        <result property="roleName" column="role_name" jdbcType="VARCHAR"/>
+        <result property="orgName" column="org_name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="UserOrgRoleMap">
+        select
+          user_org_role_id, org_id, role_id, role_name, org_name
+        from imserver.user_org_role
+        where user_org_role_id = #{userOrgRoleId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="UserOrgRoleMap">
+        select
+          user_org_role_id, org_id, role_id, role_name, org_name
+        from imserver.user_org_role
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="UserOrgRoleMap">
+        select
+          user_org_role_id, org_id, role_id, role_name, org_name
+        from imserver.user_org_role
+        <where>
+            <if test="userOrgRoleId != null and userOrgRoleId != ''">
+                and user_org_role_id = #{userOrgRoleId}
+            </if>
+            <if test="orgId != null and orgId != ''">
+                and org_id = #{orgId}
+            </if>
+            <if test="roleId != null and roleId != ''">
+                and role_id = #{roleId}
+            </if>
+            <if test="roleName != null and roleName != ''">
+                and role_name = #{roleName}
+            </if>
+            <if test="orgName != null and orgName != ''">
+                and org_name = #{orgName}
+            </if>
+        </where>
+    </select>
+    
+    <!--通过分页对象作为筛选条件查询-->
+    <select id="queryByPager" resultMap="UserOrgRoleMap">
+        select
+          user_org_role_id, org_id, role_id, role_name, org_name
+        from imserver.user_org_role
+        <where>
+            <if test = "param != null">
+                <if test="param.userOrgRoleId != null and param.userOrgRoleId != ''">
+                    and user_org_role_id like concat(#{param.userOrgRoleId}, '%')
+                </if>
+                <if test="param.orgId != null and param.orgId != ''">
+                    and org_id like concat(#{param.orgId}, '%')
+                </if>
+                <if test="param.roleId != null and param.roleId != ''">
+                    and role_id like concat(#{param.roleId}, '%')
+                </if>
+                <if test="param.roleName != null and param.roleName != ''">
+                    and role_name like concat(#{param.roleName}, '%')
+                </if>
+                <if test="param.orgName != null and param.orgName != ''">
+                    and org_name like concat(#{param.orgName}, '%')
+                </if>
+            </if>
+        </where>
+        <if test="sorter != null">
+            order by
+            <trim prefixOverrides=",">
+                <choose>
+                    <when test="sorter.orgId == 'asc'">
+                        , org_id asc
+                    </when>
+                    <when test="sorter.orgId == 'desc'">
+                        , org_id desc
+                    </when>
+                </choose>
+                <choose>
+                    <when test="sorter.roleId == 'asc'">
+                        , role_id asc
+                    </when>
+                    <when test="sorter.roleId == 'desc'">
+                        , role_id desc
+                    </when>
+                </choose>
+                <choose>
+                    <when test="sorter.roleName == 'asc'">
+                        , role_name asc
+                    </when>
+                    <when test="sorter.roleName == 'desc'">
+                        , role_name desc
+                    </when>
+                </choose>
+                <choose>
+                    <when test="sorter.orgName == 'asc'">
+                        , org_name asc
+                    </when>
+                    <when test="sorter.orgName == 'desc'">
+                        , org_name desc
+                    </when>
+                </choose>
+        </trim>
+        </if>
+        limit #{offset}, #{limit}
+    </select>
+    
+    <!--通过分页对象作为筛选条件查询记录条数-->
+    <select id="countByPager" resultType="int">
+        select
+          count(*)
+
+        from imserver.user_org_role
+        <where>
+            <if test = "param != null">
+                <if test="param.userOrgRoleId != null and param.userOrgRoleId != ''">
+                    and user_org_role_id like concat(#{param.userOrgRoleId}, '%')
+                </if>
+                <if test="param.orgId != null and param.orgId != ''">
+                    and org_id like concat(#{param.orgId}, '%')
+                </if>
+                <if test="param.roleId != null and param.roleId != ''">
+                    and role_id like concat(#{param.roleId}, '%')
+                </if>
+                <if test="param.roleName != null and param.roleName != ''">
+                    and role_name like concat(#{param.roleName}, '%')
+                </if>
+                <if test="param.orgName != null and param.orgName != ''">
+                    and org_name like concat(#{param.orgName}, '%')
+                </if>
+            </if>
+        </where>
+    </select>
+
+    
+
+    <!--新增所有列，如果不想在代码层管理ID的生成，则可以将fullColumn改为otherColumn,之后再根据需要改逻辑-->
+    <insert id="insert" keyProperty="userOrgRoleId" useGeneratedKeys="true">
+        insert into imserver.user_org_role(user_org_role_id, org_id, role_id, role_name, org_name)
+        values (#{userOrgRoleId}, #{orgId}, #{roleId}, #{roleName}, #{orgName})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update imserver.user_org_role
+        <set>
+            <if test="orgId != null and orgId != ''">
+                org_id = #{orgId},
+            </if>
+            <if test="roleId != null and roleId != ''">
+                role_id = #{roleId},
+            </if>
+            <if test="roleName != null and roleName != ''">
+                role_name = #{roleName},
+            </if>
+            <if test="orgName != null and orgName != ''">
+                org_name = #{orgName},
+            </if>
+        </set>
+        where user_org_role_id = #{userOrgRoleId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from imserver.user_org_role where user_org_role_id = #{userOrgRoleId}
+    </delete>
+
+    <!--通过主键数组删除数据-->
+    <delete id="deleteByIds">
+        delete from imserver.user_org_role
+        where user_org_role_id in
+        <foreach collection="array" item="item" open="(" close=")" separator="," index="index">
+            #{item}
+        </foreach>
+    </delete>
+
+</mapper>

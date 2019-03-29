@@ -171,7 +171,7 @@
                 </choose>
         </trim>
         </if>
-        limit #{offset}, #{limit}
+        limit #{currentOffset}, #{limit}
     </select>
     
     <!--通过分页对象作为筛选条件查询记录条数-->

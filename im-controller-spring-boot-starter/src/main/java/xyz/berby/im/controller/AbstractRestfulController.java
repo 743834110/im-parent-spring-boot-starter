@@ -1,7 +1,6 @@
 package xyz.berby.im.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.multipart.MultipartFile;
 import xyz.berby.im.annotation.Decrypt;
 import xyz.berby.im.annotation.Validate;
@@ -16,8 +15,6 @@ import xyz.berby.im.util.ApplicationContextHolder;
 import xyz.berby.im.util.ReflectUtil;
 import xyz.berby.im.vo.RespBody;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
