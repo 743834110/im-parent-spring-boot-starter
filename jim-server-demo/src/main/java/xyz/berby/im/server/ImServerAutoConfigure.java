@@ -14,6 +14,7 @@ import org.jim.server.listener.ImServerAioListener;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.DependsOn;
 import xyz.berby.im.server.config.PropertyImConfigBuilder;
 import xyz.berby.im.server.listener.ImDemoGroupListener;
@@ -29,6 +30,7 @@ import xyz.berby.im.server.service.LoginServiceProcessor;
  */
 
 @EnableAutoConfiguration(exclude = ImServerAutoConfigure.class)
+@ComponentScan("xyz.berby.im.property")
 public class ImServerAutoConfigure {
 
 	@Bean
@@ -63,6 +65,7 @@ public class ImServerAutoConfigure {
 		CommandManager.getCommand(Command.COMMAND_HANDSHAKE_REQ).addProcessor(processor);
 		return  processor;
 	}
+
 
 
 	/**

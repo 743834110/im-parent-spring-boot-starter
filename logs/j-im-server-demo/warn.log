@@ -1,0 +1,13 @@
+2019-03-31 10:42:39,145 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-03-31 10:43:24,696 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-03-31 11:22:24,203 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-03-31 11:51:04,781 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-03-31 11:51:50,958 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-03-31 11:51:51,005 WARN  o.s.c.a.AnnotationConfigApplicationContext[556]: Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'customWsHandshakeProcessor' defined in xyz.berby.im.server.ImServerAutoConfigure: Post-processing of merged bean definition failed; nested exception is java.lang.IllegalStateException: Failed to introspect Class [xyz.berby.im.server.processor.handshake.CustomWsHandshakeProcessor] from ClassLoader [sun.misc.Launcher$AppClassLoader@18b4aac2]
+2019-03-31 11:53:04,496 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-03-31 11:53:04,543 WARN  o.s.c.a.AnnotationConfigApplicationContext[556]: Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'customWsHandshakeProcessor': Unsatisfied dependency expressed through field 'property'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'xyz.berby.im.property.DefaultSettingProperty' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+2019-03-31 11:55:04,928 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-03-31 15:25:49,804 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-03-31 15:30:34,676 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-03-31 15:41:32,600 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-03-31 20:04:47,514 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880

@@ -8,7 +8,10 @@ import org.jim.common.ImPacket;
 import org.jim.common.packets.Command;
 import org.jim.common.packets.RespBody;
 import org.jim.server.command.handler.processor.handshake.WsHandshakeProcessor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.tio.core.ChannelContext;
+import xyz.berby.im.property.DefaultSettingProperty;
+
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,14 +25,14 @@ import java.util.Map;
  */
 public class CustomWsHandshakeProcessor extends WsHandshakeProcessor{
 
-	private final static String PUBLIC_KEY_BASE64 = "publicKeyBase64";
+	@Autowired
+	private DefaultSettingProperty property;
 
 	@Override
 	public void onAfterHandshaked(ImPacket packet, ChannelContext channelContext) throws Exception {
 
 		Map<String, Object> map = new HashMap<>();
-		map.put(PUBLIC_KEY_BASE64, "");
-
+		map.put(DefaultSettingProperty.PUBLIC_KEY, this.property.getSetting().get(DefaultSettingProperty.PUBLIC_KEY));
 		RespBody respBody = new RespBody(Command.COMMAND_HANDSHAKE_RESP, map);
 		ImPacket imPacket = new ImPacket(respBody.toByte());
 		ImAio.send(channelContext, imPacket);

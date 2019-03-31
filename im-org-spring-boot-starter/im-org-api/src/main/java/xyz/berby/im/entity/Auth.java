@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 import lombok.*;
 
+import javax.validation.Valid;
+
+
 /**
  * 操作权限表(Auth)实体类
  *
@@ -24,6 +27,7 @@ public class Auth extends AbstractAuth implements Serializable {
     /**
      *权限URL(移动端特指页面)
      */
+
     private String authUrl;
     /**
      *父级节点

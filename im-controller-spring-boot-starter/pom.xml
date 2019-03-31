@@ -66,6 +66,13 @@
             </exclusions>
         </dependency>
 
+        <!--莫名错误，需要添加jackson依赖：controller组件需要该依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-json</artifactId>
+            <version>${spring.boot.version}</version>
+        </dependency>
+
         <!--lombok-->
         <dependency>
             <groupId>org.projectlombok</groupId>

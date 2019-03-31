@@ -2,8 +2,8 @@ package xyz.berby.im.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
+import xyz.berby.im.annotation.Authorization;
 import xyz.berby.im.annotation.Decrypt;
-import xyz.berby.im.annotation.Validate;
 import xyz.berby.im.aspect.AuthAspect;
 import xyz.berby.im.constant.Constant;
 import xyz.berby.im.entity.AbstractUser;
@@ -221,9 +221,9 @@ abstract class AbstractRestfulController {
      * @return 返回true表示用户拥有该权限或者该方法不需要进行权限的检查
      */
     private boolean checkAuth(Method method, AbstractUser user) {
-        Annotation annotation = method.getAnnotation(Validate.class);
+        Annotation annotation = method.getAnnotation(Authorization.class);
         if (annotation != null) {
-            return this.authAspect.isAllow( (Validate) annotation, user);
+            return this.authAspect.isAllow( (Authorization) annotation, user);
         }
 
         return true;

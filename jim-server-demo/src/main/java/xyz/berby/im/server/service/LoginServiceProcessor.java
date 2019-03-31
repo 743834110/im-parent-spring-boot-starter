@@ -119,7 +119,7 @@ public class LoginServiceProcessor implements LoginProcessorIntf{
 	
 	/**
 	 * doLogin方法注意：J-IM登陆命令是根据user是否为空判断是否登陆成功,
-	 * 
+	 * **非常重要**
 	 * 当登陆失败时设置user属性需要为空，相反登陆成功user属性是必须非空的;
 	 */
 	@Override

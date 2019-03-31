@@ -22,6 +22,7 @@
     <fastjson.version>1.2.35</fastjson.version>
     <hutool.version>4.1.19</hutool.version>
     <lombook.version>1.18.2</lombook.version>
+    <validation.api.version>2.0.1.Final</validation.api.version>
   </properties>
 
   <dependencyManagement>
@@ -75,7 +76,11 @@
         <optional>true</optional>
       </dependency>
 
-
+      <dependency>
+        <groupId>javax.validation</groupId>
+        <artifactId>validation-api</artifactId>
+        <version>${validation.api.version}</version>
+      </dependency>
 
     </dependencies>
 

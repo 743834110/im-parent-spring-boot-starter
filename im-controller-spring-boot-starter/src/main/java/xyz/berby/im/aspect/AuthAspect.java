@@ -6,7 +6,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
-import xyz.berby.im.annotation.Validate;
+import xyz.berby.im.annotation.Authorization;
 import xyz.berby.im.entity.AbstractAuth;
 import xyz.berby.im.entity.AbstractRole;
 import xyz.berby.im.entity.AbstractUser;
@@ -29,8 +29,8 @@ import java.util.List;
 public class AuthAspect {
 
 
-    @Pointcut(value = "@annotation(validate)", argNames = "validate")
-    public void serve(Validate validate) {
+    @Pointcut(value = "@annotation(authorization)", argNames = "authorization")
+    public void serve(Authorization authorization) {
 
     }
 
@@ -42,13 +42,13 @@ public class AuthAspect {
      * </pre>
      *
      * @param joinPoint 接入点
-     * @param validate  标注有访问权限的注解
+     * @param authorization  标注有访问权限的注解
      * @param user      权限实例
      * @return
      */
-    @Around(value = "serve(validate) && (args(user,..) || args(..,user))", argNames = "joinPoint, validate, user")
-    private Object authValidate(ProceedingJoinPoint joinPoint, Validate validate, AbstractUser user) throws Throwable {
-        boolean allowed = this.isAllow(validate, user);
+    @Around(value = "serve(authorization) && (args(user,..) || args(..,user))", argNames = "joinPoint, authorization, user")
+    private Object authValidate(ProceedingJoinPoint joinPoint, Authorization authorization, AbstractUser user) throws Throwable {
+        boolean allowed = this.isAllow(authorization, user);
         Object object = null;
         if (allowed) {
             object = joinPoint.proceed(joinPoint.getArgs());
@@ -56,12 +56,12 @@ public class AuthAspect {
         return object;
     }
 
-    public boolean isAllow(Validate validate, AbstractUser<AbstractAuth, AbstractRole> user) {
+    public boolean isAllow(Authorization authorization, AbstractUser<AbstractAuth, AbstractRole> user) {
         if (user == null) {
             return false;
         }
         // 检查角色, role名称不为空字符串时
-        String role = validate.role();
+        String role = authorization.role();
         List<AbstractRole> orgRoleList = user.getRoleList();
         if (!role.equals("") && orgRoleList != null) {
             for (AbstractRole orgRole : user.getRoleList()) {
@@ -71,7 +71,7 @@ public class AuthAspect {
         }
 
         // 检查权限
-        String authName = validate.value();
+        String authName = authorization.value();
         List<AbstractAuth> authList = user.getAuthList();
         if (authList != null) {
             for (AbstractAuth auth : user.getAuthList()) {

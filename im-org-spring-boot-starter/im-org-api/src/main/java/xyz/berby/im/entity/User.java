@@ -10,6 +10,8 @@ import lombok.Data;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * 用户表  user_type 学生 教师(User)实体类
  *
@@ -26,10 +28,12 @@ public class User extends AbstractUser<Auth, Role> implements Serializable {
     /**
      *用户账号
      */
+    @NotNull
     private String userAccount;
     /**
      *用户密码
      */
+    @NotNull
     @JSONField(serialize = false)
     private String userPassword;
     /**

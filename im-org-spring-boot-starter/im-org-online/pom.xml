@@ -43,12 +43,6 @@
             <artifactId>spring-boot-autoconfigure</artifactId>
         </dependency>
 
-        <!--controller-->
-        <dependency>
-            <groupId>xyz.berby.im</groupId>
-            <artifactId>im-controller-spring-boot-starter</artifactId>
-            <version>${project.version}</version>
-        </dependency>
         <!--db-->
         <dependency>
             <groupId>xyz.berby.im</groupId>
@@ -62,6 +56,11 @@
             <artifactId>lombok</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+
         <!--主要是为了实现MultipartFile对象的注入-->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -73,6 +72,11 @@
             <groupId>xyz.berby.im</groupId>
             <artifactId>im-org-api</artifactId>
             <version>${version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
         </dependency>
     </dependencies>
 

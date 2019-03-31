@@ -53,17 +53,18 @@
             <artifactId>hutool-all</artifactId>
         </dependency>
 
-        <!--controller组件-->
-        <dependency>
-            <groupId>xyz.berby.im</groupId>
-            <artifactId>im-controller-spring-boot-starter</artifactId>
-            <version>${project.version}</version>
-        </dependency>
 
         <!--SPI组件发现-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+
+        <!-- 项目基本配置 -->
+        <dependency>
+            <groupId>xyz.berby.im</groupId>
+            <artifactId>im-common</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
 
@@ -73,12 +74,7 @@
             <artifactId>junit</artifactId>
         </dependency>
 
-        <!--莫名错误，需要添加jackson依赖-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-json</artifactId>
-            <version>${spring.boot.version}</version>
-        </dependency>
+
 
     </dependencies>
     <build>

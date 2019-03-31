@@ -8,7 +8,6 @@ import org.springframework.context.annotation.*;
 //@EnableAutoConfiguration(exclude = ImDataBaseAutoConfigure.class)
 //@Configuration
 @ComponentScan(value = {"xyz.berby.im.controller", "xyz.berby.im.service"})
-
 @MapperScan("xyz.berby.im.dao")
 @AutoConfigureBefore
 public class ImDataBaseAutoConfigure {

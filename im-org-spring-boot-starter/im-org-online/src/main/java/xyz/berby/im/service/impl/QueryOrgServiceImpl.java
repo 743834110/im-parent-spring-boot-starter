@@ -4,8 +4,6 @@ import cn.hutool.crypto.SecureUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
-import xyz.berby.im.annotation.Validate;
 import xyz.berby.im.dao.AuthDao;
 import xyz.berby.im.dao.RoleAuthDao;
 import xyz.berby.im.dao.RoleDao;
@@ -22,7 +20,7 @@ import java.util.*;
  * 该服务类主要是为了解决多表间的复杂业务逻辑的处理
  * Created on 2019/3/9
  */
-@Service("appOrgService")
+@Service("queryOrgService")
 @Slf4j
 @Transactional
 public class QueryOrgServiceImpl implements QueryOrgService {

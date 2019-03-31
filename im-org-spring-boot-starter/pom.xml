@@ -11,6 +11,7 @@
     <modules>
         <module>im-org-api</module>
         <module>im-org-online</module>
+        <module>im-org-integration</module>
     </modules>
 
     <name>im-org-spring-boot-starter</name>

@@ -31,5 +31,9 @@ public class DefaultSettingProperty {
 
     public static final String SALT_DIGIT = "saltDigit";
 
+    public static final String PUBLIC_KEY = "publicKey";
+
+    public static final String PRIVATE_KEY = "privateKey";
+
 
 }

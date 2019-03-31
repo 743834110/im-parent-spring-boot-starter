@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 
 @EnableAutoConfiguration(exclude = ImOrgAutoConfigure.class)
 @Configuration
+@ComponentScan("xyz.berby.im.property")
 public class ImOrgAutoConfigure {
 
     public static void main( String[] args ) {
