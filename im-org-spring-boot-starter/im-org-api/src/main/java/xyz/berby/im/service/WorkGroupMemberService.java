@@ -10,7 +10,7 @@ import java.util.List;
  * 工作群成员表(WorkGroupMember)表服务接口
  *
  * @author makejava
- * @since 2019-03-03 10:31:20
+ * @since 2019-04-01 17:38:08
  */
 public interface WorkGroupMemberService {
 
@@ -38,6 +38,8 @@ public interface WorkGroupMemberService {
      * @return 对象列表
      */
      Pager<WorkGroupMember> queryByPager(Pager<WorkGroupMember> pager);
+
+    Pager<WorkGroupMember> queryByPagerWithNoCount(Pager<WorkGroupMember> pager);
 
     /**
      * 根据分页对象统计记录条数

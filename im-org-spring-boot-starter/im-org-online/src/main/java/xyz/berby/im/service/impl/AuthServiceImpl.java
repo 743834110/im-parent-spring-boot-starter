@@ -14,7 +14,7 @@ import java.util.List;
  * 操作权限表(Auth)表服务实现类
  *
  * @author makejava
- * @since 2019-03-20 22:20:57
+ * @since 2019-04-01 17:30:45
  */
 @Service("authService")
 @Transactional
@@ -57,6 +57,18 @@ public class AuthServiceImpl implements AuthService {
         pager.setResult(result);
         return pager;
      }
+     
+   /**
+     * 
+     * 根据分页对象查询数据,不计算页数
+     * @param pager 分页对象
+     * @return 对象列表
+     */
+     public Pager<Auth> queryByPagerWithNoCount(Pager<Auth> pager) {         
+        List<Auth> result = authDao.queryByPager(pager);
+        pager.setResult(result);
+        return pager;
+     }
 
     /**
      * 根据分页对象统计记录条数
@@ -76,7 +88,7 @@ public class AuthServiceImpl implements AuthService {
      */
     @Override
     public Auth insert(Auth auth) {
-        auth.setAuthId(IdUtil.fastSimpleUUID());
+  auth.setAuthId(IdUtil.fastSimpleUUID());
         this.authDao.insert(auth);
         return auth;
     }

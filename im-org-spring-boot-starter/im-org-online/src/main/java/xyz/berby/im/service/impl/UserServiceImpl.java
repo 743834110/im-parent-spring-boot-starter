@@ -1,35 +1,26 @@
 package xyz.berby.im.service.impl;
 
-import cn.hutool.core.util.RandomUtil;
-import cn.hutool.crypto.SecureUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import xyz.berby.im.annotation.Integrity;
 import xyz.berby.im.entity.User;
 import xyz.berby.im.dao.UserDao;
-import xyz.berby.im.property.DefaultSettingProperty;
 import xyz.berby.im.service.UserService;
 import xyz.berby.im.vo.Pager;
 import org.springframework.stereotype.Service;
 import cn.hutool.core.util.IdUtil;
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 用户表  user_type 学生 教师(User)表服务实现类
  *
  * @author makejava
- * @since 2019-03-20 22:21:00
+ * @since 2019-04-01 17:30:55
  */
 @Service("userService")
 @Transactional
 public class UserServiceImpl implements UserService {
     @Resource
     private UserDao userDao;
-
-    @Autowired
-    private DefaultSettingProperty property;
 
     /**
      * 通过ID查询单条数据
@@ -66,6 +57,18 @@ public class UserServiceImpl implements UserService {
         pager.setResult(result);
         return pager;
      }
+     
+   /**
+     * 
+     * 根据分页对象查询数据,不计算页数
+     * @param pager 分页对象
+     * @return 对象列表
+     */
+     public Pager<User> queryByPagerWithNoCount(Pager<User> pager) {         
+        List<User> result = userDao.queryByPager(pager);
+        pager.setResult(result);
+        return pager;
+     }
 
     /**
      * 根据分页对象统计记录条数
@@ -79,20 +82,13 @@ public class UserServiceImpl implements UserService {
     }
     /**
      * 新增数据
-     * 密码和盐值由后台配置进行生成。
-     * channel: admin
+     *
      * @param user 实例对象
      * @return 实例对象
      */
     @Override
-    @Integrity
     public User insert(User user) {
         user.setUserId(IdUtil.fastSimpleUUID());
-        Map<String, Object> setting = this.property.getSetting();
-        String defaultUserPassword = (String) setting.get(DefaultSettingProperty.DEFAULT_USER_PASSWORD);
-        int saltDigit = Integer.parseInt((String) setting.get(DefaultSettingProperty.SALT_DIGIT));
-        String salt = RandomUtil.randomNumbers(saltDigit);
-        user.setUserPassword(SecureUtil.hmacSha1(salt).digestHex(defaultUserPassword));
         this.userDao.insert(user);
         return user;
     }
@@ -129,6 +125,4 @@ public class UserServiceImpl implements UserService {
     public boolean deleteByIds(String[] userIds) {
         return this.userDao.deleteByIds(userIds) == userIds.length;
     }
-
-
 }

@@ -39,6 +39,8 @@ public interface DictionaryTypeService {
      */
      Pager<DictionaryType> queryByPager(Pager<DictionaryType> pager);
 
+    Pager<DictionaryType> queryByPagerWithNoCount(Pager<DictionaryType> pager);
+
     /**
      * 根据分页对象统计记录条数
      * @param pager 分页对象

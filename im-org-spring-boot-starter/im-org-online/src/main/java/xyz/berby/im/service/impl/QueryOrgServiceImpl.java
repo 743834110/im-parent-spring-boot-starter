@@ -4,10 +4,7 @@ import cn.hutool.crypto.SecureUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import xyz.berby.im.dao.AuthDao;
-import xyz.berby.im.dao.RoleAuthDao;
-import xyz.berby.im.dao.RoleDao;
-import xyz.berby.im.dao.UserDao;
+import xyz.berby.im.dao.*;
 import xyz.berby.im.entity.*;
 import xyz.berby.im.service.QueryOrgService;
 
@@ -38,6 +35,7 @@ public class QueryOrgServiceImpl implements QueryOrgService {
     RoleAuthDao roleAuthDao;
 
 
+
     /**
      * app端登录业务流程(已解密,使用sha1文本摘要算法)：
      * 1. 从服务器当中获取该登录用户的盐值
@@ -58,25 +56,23 @@ public class QueryOrgServiceImpl implements QueryOrgService {
         // 判断用户是否存在
         if (queriedUser == null)
             throw new RuntimeException("用户或密码错误");
-        String password = new String(SecureUtil.hmacSha1(queryUser.getSalt()).digest(user.getUserPassword()));
+        String password = SecureUtil.hmacSha1(queriedUser.getSalt()).digestHex(user.getUserPassword());
         // 判断登录密码是否正确
         if (!password.equals(queriedUser.getUserPassword())) {
             throw new RuntimeException("用户或密码错误");
         }
         // 查询用户所在组织及相关权限
         Role role = this.roleDao.queryById(queriedUser.getRoleId());
-        List<RoleAuth> roleAuthList = this.roleAuthDao.queryAll(
-                RoleAuth.builder().roleId(role.getRoleId()).build()
-        );
-        Set<Auth> authSet = new HashSet<>();
-        roleAuthList.forEach(roleAuth -> authSet.add(this.authDao.queryById(roleAuth.getAuthId())));
-        queriedUser.setRoleList(Collections.singletonList(role));
-        queriedUser.setAuthList(new ArrayList<>(authSet));
+        if (role != null) {
+            List<RoleAuth> roleAuthList = this.roleAuthDao.queryAll(
+                    RoleAuth.builder().roleId(role.getRoleId()).build()
+            );
+            Set<Auth> authSet = new HashSet<>();
+            roleAuthList.forEach(roleAuth -> authSet.add(this.authDao.queryById(roleAuth.getAuthId())));
+            queriedUser.setRoleList(Collections.singletonList(role));
+            queriedUser.setAuthList(new ArrayList<>(authSet));
+        }
         return queriedUser;
     }
-
-
-
-
 
 }

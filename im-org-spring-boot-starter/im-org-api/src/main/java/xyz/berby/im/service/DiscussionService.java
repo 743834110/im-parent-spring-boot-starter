@@ -39,6 +39,8 @@ public interface DiscussionService {
      */
      Pager<Discussion> queryByPager(Pager<Discussion> pager);
 
+    Pager<Discussion> queryByPagerWithNoCount(Pager<Discussion> pager);
+
     /**
      * 根据分页对象统计记录条数
      * @param pager 分页对象

@@ -7,4 +7,8 @@ public abstract class AbstractUser<A extends AbstractAuth, R extends AbstractRol
     public abstract List<A> getAuthList();
 
     public abstract List<R> getRoleList();
+
+
+
+
 }

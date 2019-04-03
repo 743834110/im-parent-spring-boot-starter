@@ -11,14 +11,14 @@ import lombok.NoArgsConstructor;
  * 工作群成员表(WorkGroupMember)实体类
  *
  * @author makejava
- * @since 2019-03-03 10:31:19
+ * @since 2019-04-01 12:30:12
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class WorkGroupMember implements Serializable {
-    private static final long serialVersionUID = 106082250848648091L;
+    private static final long serialVersionUID = 472496437271988358L;
         private String memberId;
     /**
      *用户ID
@@ -36,6 +36,10 @@ public class WorkGroupMember implements Serializable {
      *用户名称
      */
     private String userName;
+    /**
+     *头像地址
+     */
+    private String memberImageUrl;
 
 
 }

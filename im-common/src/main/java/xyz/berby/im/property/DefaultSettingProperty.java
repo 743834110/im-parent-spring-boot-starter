@@ -35,5 +35,9 @@ public class DefaultSettingProperty {
 
     public static final String PRIVATE_KEY = "privateKey";
 
+    public static final String LOGIN_SERVICE_NAME = "loginServiceName";
+
+    public static final String LOGIN_SERVICE_METHOD = "loginServiceMethod";
+
 
 }

@@ -10,7 +10,7 @@ import java.util.List;
  * 操作权限表(Auth)表服务接口
  *
  * @author makejava
- * @since 2019-03-03 10:31:00
+ * @since 2019-04-01 17:37:55
  */
 public interface AuthService {
 
@@ -38,6 +38,14 @@ public interface AuthService {
      * @return 对象列表
      */
      Pager<Auth> queryByPager(Pager<Auth> pager);
+
+    /**
+     *
+     * 根据分页对象查询数据
+     * @param pager 分页对象
+     * @return 对象列表
+     */
+    Pager<Auth> queryByPagerWithNoCount(Pager<Auth> pager);
 
     /**
      * 根据分页对象统计记录条数

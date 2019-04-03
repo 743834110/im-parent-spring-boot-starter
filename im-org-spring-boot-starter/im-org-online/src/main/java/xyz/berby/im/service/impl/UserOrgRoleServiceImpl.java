@@ -14,7 +14,7 @@ import java.util.List;
  * 用户部门角色表(UserOrgRole)表服务实现类
  *
  * @author makejava
- * @since 2019-03-20 22:21:01
+ * @since 2019-04-01 17:30:55
  */
 @Service("userOrgRoleService")
 @Transactional
@@ -57,6 +57,18 @@ public class UserOrgRoleServiceImpl implements UserOrgRoleService {
         pager.setResult(result);
         return pager;
      }
+     
+   /**
+     * 
+     * 根据分页对象查询数据,不计算页数
+     * @param pager 分页对象
+     * @return 对象列表
+     */
+     public Pager<UserOrgRole> queryByPagerWithNoCount(Pager<UserOrgRole> pager) {         
+        List<UserOrgRole> result = userOrgRoleDao.queryByPager(pager);
+        pager.setResult(result);
+        return pager;
+     }
 
     /**
      * 根据分页对象统计记录条数
@@ -76,7 +88,7 @@ public class UserOrgRoleServiceImpl implements UserOrgRoleService {
      */
     @Override
     public UserOrgRole insert(UserOrgRole userOrgRole) {
-        userOrgRole.setUserOrgRoleId(IdUtil.fastSimpleUUID());
+  userOrgRole.setUserOrgRoleId(IdUtil.fastSimpleUUID());
         this.userOrgRoleDao.insert(userOrgRole);
         return userOrgRole;
     }

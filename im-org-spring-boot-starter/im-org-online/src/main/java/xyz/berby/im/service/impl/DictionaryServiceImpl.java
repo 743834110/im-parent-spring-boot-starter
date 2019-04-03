@@ -14,7 +14,7 @@ import java.util.List;
  * 字典表(Dictionary)表服务实现类
  *
  * @author makejava
- * @since 2019-03-20 22:20:58
+ * @since 2019-04-01 17:30:55
  */
 @Service("dictionaryService")
 @Transactional
@@ -57,6 +57,18 @@ public class DictionaryServiceImpl implements DictionaryService {
         pager.setResult(result);
         return pager;
      }
+     
+   /**
+     * 
+     * 根据分页对象查询数据,不计算页数
+     * @param pager 分页对象
+     * @return 对象列表
+     */
+     public Pager<Dictionary> queryByPagerWithNoCount(Pager<Dictionary> pager) {         
+        List<Dictionary> result = dictionaryDao.queryByPager(pager);
+        pager.setResult(result);
+        return pager;
+     }
 
     /**
      * 根据分页对象统计记录条数
@@ -76,7 +88,7 @@ public class DictionaryServiceImpl implements DictionaryService {
      */
     @Override
     public Dictionary insert(Dictionary dictionary) {
-        dictionary.setDictionaryId(IdUtil.fastSimpleUUID());
+  dictionary.setDictionaryId(IdUtil.fastSimpleUUID());
         this.dictionaryDao.insert(dictionary);
         return dictionary;
     }

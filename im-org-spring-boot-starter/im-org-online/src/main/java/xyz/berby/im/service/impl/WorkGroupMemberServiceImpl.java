@@ -14,7 +14,7 @@ import java.util.List;
  * 工作群成员表(WorkGroupMember)表服务实现类
  *
  * @author makejava
- * @since 2019-03-20 22:21:02
+ * @since 2019-04-01 17:30:55
  */
 @Service("workGroupMemberService")
 @Transactional
@@ -57,6 +57,18 @@ public class WorkGroupMemberServiceImpl implements WorkGroupMemberService {
         pager.setResult(result);
         return pager;
      }
+     
+   /**
+     * 
+     * 根据分页对象查询数据,不计算页数
+     * @param pager 分页对象
+     * @return 对象列表
+     */
+     public Pager<WorkGroupMember> queryByPagerWithNoCount(Pager<WorkGroupMember> pager) {         
+        List<WorkGroupMember> result = workGroupMemberDao.queryByPager(pager);
+        pager.setResult(result);
+        return pager;
+     }
 
     /**
      * 根据分页对象统计记录条数
@@ -76,7 +88,7 @@ public class WorkGroupMemberServiceImpl implements WorkGroupMemberService {
      */
     @Override
     public WorkGroupMember insert(WorkGroupMember workGroupMember) {
-        workGroupMember.setMemberId(IdUtil.fastSimpleUUID());
+  workGroupMember.setMemberId(IdUtil.fastSimpleUUID());
         this.workGroupMemberDao.insert(workGroupMember);
         return workGroupMember;
     }

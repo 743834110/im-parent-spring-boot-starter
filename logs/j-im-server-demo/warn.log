@@ -1,13 +1,138 @@
-2019-03-31 10:42:39,145 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
-2019-03-31 10:43:24,696 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
-2019-03-31 11:22:24,203 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
-2019-03-31 11:51:04,781 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
-2019-03-31 11:51:50,958 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
-2019-03-31 11:51:51,005 WARN  o.s.c.a.AnnotationConfigApplicationContext[556]: Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'customWsHandshakeProcessor' defined in xyz.berby.im.server.ImServerAutoConfigure: Post-processing of merged bean definition failed; nested exception is java.lang.IllegalStateException: Failed to introspect Class [xyz.berby.im.server.processor.handshake.CustomWsHandshakeProcessor] from ClassLoader [sun.misc.Launcher$AppClassLoader@18b4aac2]
-2019-03-31 11:53:04,496 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
-2019-03-31 11:53:04,543 WARN  o.s.c.a.AnnotationConfigApplicationContext[556]: Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'customWsHandshakeProcessor': Unsatisfied dependency expressed through field 'property'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'xyz.berby.im.property.DefaultSettingProperty' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-2019-03-31 11:55:04,928 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
-2019-03-31 15:25:49,804 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
-2019-03-31 15:30:34,676 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
-2019-03-31 15:41:32,600 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
-2019-03-31 20:04:47,514 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 09:06:44,490 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 09:06:54,208 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 10:18:29,285 WARN  c.zaxxer.hikari.pool.PoolBase[173]: HikariPool-1 - Failed to validate connection com.mysql.jdbc.JDBC4Connection@ae2715f (Communications link failure
+
+Last packet sent to the server was 21480 ms ago.)
+2019-04-03 10:18:57,933 WARN  c.zaxxer.hikari.pool.PoolBase[173]: HikariPool-1 - Failed to validate connection com.mysql.jdbc.JDBC4Connection@74f328e4 (Communications link failure
+
+Last packet sent to the server was 28647 ms ago.)
+2019-04-03 10:43:15,781 WARN  c.zaxxer.hikari.pool.PoolBase[173]: HikariPool-1 - Failed to validate connection com.mysql.jdbc.JDBC4Connection@33bbd4f5 (Communications link failure
+
+Last packet sent to the server was 28498 ms ago.)
+2019-04-03 10:43:23,204 WARN  c.zaxxer.hikari.pool.PoolBase[173]: HikariPool-1 - Failed to validate connection com.mysql.jdbc.JDBC4Connection@4ea9cbd1 (Communications link failure
+
+Last packet sent to the server was 21301 ms ago.)
+2019-04-03 11:11:07,192 WARN  c.zaxxer.hikari.pool.PoolBase[173]: HikariPool-1 - Failed to validate connection com.mysql.jdbc.JDBC4Connection@577b24fb (Communications link failure
+
+Last packet sent to the server was 18905 ms ago.)
+2019-04-03 11:18:56,968 WARN  c.zaxxer.hikari.pool.PoolBase[173]: HikariPool-1 - Failed to validate connection com.mysql.jdbc.JDBC4Connection@64a6dc1a (Communications link failure
+
+Last packet sent to the server was 23727 ms ago.)
+2019-04-03 11:18:56,980 WARN  c.zaxxer.hikari.pool.PoolBase[173]: HikariPool-1 - Failed to validate connection com.mysql.jdbc.JDBC4Connection@5b9a977f (Communications link failure
+
+Last packet sent to the server was 23748 ms ago.)
+2019-04-03 11:55:37,240 WARN  c.zaxxer.hikari.pool.PoolBase[173]: HikariPool-1 - Failed to validate connection com.mysql.jdbc.JDBC4Connection@393830c8 (Communications link failure
+
+Last packet sent to the server was 18956 ms ago.)
+2019-04-03 11:58:58,993 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 11:59:08,731 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 12:02:51,423 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 12:02:59,439 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 12:08:44,041 WARN  c.z.hikari.pool.HikariPool[758]: HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m49s407ms935µs52ns).
+2019-04-03 12:08:55,286 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 12:09:02,298 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 12:18:18,467 WARN  c.zaxxer.hikari.pool.PoolBase[173]: HikariPool-1 - Failed to validate connection com.mysql.jdbc.JDBC4Connection@cd209a0 (Communications link failure
+
+Last packet sent to the server was 21418 ms ago.)
+2019-04-03 12:18:46,971 WARN  c.zaxxer.hikari.pool.PoolBase[173]: HikariPool-1 - Failed to validate connection com.mysql.jdbc.JDBC4Connection@1d6a0a45 (Communications link failure
+
+Last packet sent to the server was 28503 ms ago.)
+2019-04-03 12:19:05,887 WARN  c.zaxxer.hikari.pool.PoolBase[173]: HikariPool-1 - Failed to validate connection com.mysql.jdbc.JDBC4Connection@48ec8ee6 (Communications link failure
+
+Last packet sent to the server was 18906 ms ago.)
+2019-04-03 12:35:55,704 WARN  c.zaxxer.hikari.pool.PoolBase[173]: HikariPool-1 - Failed to validate connection com.mysql.jdbc.JDBC4Connection@420b99fe (Communications link failure
+
+Last packet sent to the server was 18898 ms ago.)
+2019-04-03 12:36:14,609 WARN  c.zaxxer.hikari.pool.PoolBase[173]: HikariPool-1 - Failed to validate connection com.mysql.jdbc.JDBC4Connection@52704f3d (Communications link failure
+
+Last packet sent to the server was 18900 ms ago.)
+2019-04-03 12:38:00,924 WARN  c.z.hikari.pool.HikariPool[758]: HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m30s588ms40µs429ns).
+2019-04-03 12:39:16,835 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 12:39:24,616 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 15:53:23,468 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 15:53:40,932 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 16:02:42,496 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 16:02:49,514 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 16:06:49,703 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 16:06:56,743 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 16:09:10,942 WARN  c.z.hikari.pool.HikariPool[758]: HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=55s931ms725µs55ns).
+2019-04-03 16:11:36,902 WARN  c.z.hikari.pool.HikariPool[758]: HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m25s957ms41µs610ns).
+2019-04-03 16:14:23,596 WARN  c.z.hikari.pool.HikariPool[758]: HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m46s692ms103µs768ns).
+2019-04-03 17:01:10,754 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 17:01:26,707 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 17:03:17,866 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 17:03:25,988 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 17:06:34,882 WARN  c.z.hikari.pool.HikariPool[758]: HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m7s764ms799µs284ns).
+2019-04-03 17:08:41,641 WARN  c.z.hikari.pool.HikariPool[758]: HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=59s946ms771µs419ns).
+2019-04-03 17:11:10,976 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 17:11:16,652 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 17:12:22,960 WARN  c.z.hikari.pool.HikariPool[758]: HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=45s16ms983µs760ns).
+2019-04-03 17:13:13,321 WARN  c.z.hikari.pool.HikariPool[758]: HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=50s360ms175µs737ns).
+2019-04-03 17:16:09,845 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 17:16:18,009 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 17:17:43,149 WARN  c.z.hikari.pool.HikariPool[758]: HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=59s858ms722µs840ns).
+2019-04-03 17:18:10,466 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 17:18:20,252 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 17:20:11,874 WARN  c.z.hikari.pool.HikariPool[758]: HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=48s87ms269µs757ns).
+2019-04-03 17:22:38,719 WARN  c.z.hikari.pool.HikariPool[758]: HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m26s839ms883µs188ns).
+2019-04-03 17:22:54,268 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 17:23:03,496 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 17:25:26,584 WARN  c.z.hikari.pool.HikariPool[758]: HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m19s294ms636µs329ns).
+2019-04-03 17:25:51,442 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 17:25:57,896 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 17:28:51,729 WARN  c.z.hikari.pool.HikariPool[758]: HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m8s956ms551µs375ns).
+2019-04-03 17:31:04,079 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 17:31:12,321 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 17:32:54,224 WARN  c.z.hikari.pool.HikariPool[758]: HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=47s35ms796µs243ns).
+2019-04-03 17:39:47,334 WARN  c.z.hikari.pool.HikariPool[758]: HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m38s536ms147µs921ns).
+2019-04-03 17:43:58,528 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 17:44:07,924 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 17:45:45,639 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 17:45:54,525 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 17:56:28,517 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 17:56:40,116 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 20:20:24,424 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 20:20:37,057 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 20:39:50,365 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 20:39:58,616 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 20:44:30,279 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 20:44:36,675 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 20:45:58,582 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 20:46:05,000 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 20:49:52,200 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 20:50:00,735 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 20:58:09,695 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 20:58:20,174 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 21:13:25,739 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 21:13:40,873 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 21:14:36,161 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 21:14:44,514 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 21:18:04,359 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 21:18:10,903 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 21:26:12,152 WARN  c.zaxxer.hikari.pool.PoolBase[173]: HikariPool-1 - Failed to validate connection com.mysql.jdbc.JDBC4Connection@19d4889e (Communications link failure
+
+Last packet sent to the server was 21342 ms ago.)
+2019-04-03 21:26:31,061 WARN  c.zaxxer.hikari.pool.PoolBase[173]: HikariPool-1 - Failed to validate connection com.mysql.jdbc.JDBC4Connection@f7ae1af (Communications link failure
+
+Last packet sent to the server was 18903 ms ago.)
+2019-04-03 21:31:08,708 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 21:31:18,876 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 21:32:25,956 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 21:32:32,109 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 21:36:04,850 WARN  c.z.hikari.pool.HikariPool[758]: HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m1s718ms857µs220ns).
+2019-04-03 21:42:44,597 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 21:42:51,269 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 21:46:05,123 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 21:46:11,567 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 22:17:00,166 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 22:17:10,543 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 22:18:32,845 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 22:18:42,164 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 22:22:22,710 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 22:22:29,991 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 22:24:56,711 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 22:25:03,541 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 22:29:28,919 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 22:29:35,791 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880
+2019-04-03 22:42:10,673 WARN  o.m.s.m.ClassPathMapperScanner[166]: No MyBatis mapper was found in '[xyz.berby.im.server]' package. Please check your configuration.
+2019-04-03 22:42:16,869 WARN  org.tio.server.AioServer[109]: null started, listen on 127.0.0.1:8880

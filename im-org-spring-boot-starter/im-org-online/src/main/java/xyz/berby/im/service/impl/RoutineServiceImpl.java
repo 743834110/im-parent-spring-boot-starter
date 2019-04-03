@@ -14,7 +14,7 @@ import java.util.List;
  * 日常活动表  user_type: 直接是查询字段得到的学生或者老师等着两个身份，用来显示的，身份有为：学生、教师  此处留下user_id字段是为了知道是哪位用户发的消息  end_time和end字段之间的关系。(Routine)表服务实现类
  *
  * @author makejava
- * @since 2019-03-20 22:21:00
+ * @since 2019-04-01 18:36:46
  */
 @Service("routineService")
 @Transactional
@@ -52,7 +52,19 @@ public class RoutineServiceImpl implements RoutineService {
      * @return 对象列表
      */
      public Pager<Routine> queryByPager(Pager<Routine> pager) {
-         pager = this.countByPager(pager);                
+        pager = this.countByPager(pager);                
+        List<Routine> result = routineDao.queryByPager(pager);
+        pager.setResult(result);
+        return pager;
+     }
+     
+   /**
+     * 
+     * 根据分页对象查询数据,不计算页数
+     * @param pager 分页对象
+     * @return 对象列表
+     */
+     public Pager<Routine> queryByPagerWithNoCount(Pager<Routine> pager) {         
         List<Routine> result = routineDao.queryByPager(pager);
         pager.setResult(result);
         return pager;
@@ -76,7 +88,7 @@ public class RoutineServiceImpl implements RoutineService {
      */
     @Override
     public Routine insert(Routine routine) {
-        routine.setRoutineId(IdUtil.fastSimpleUUID());
+  routine.setRoutineId(IdUtil.fastSimpleUUID());
         this.routineDao.insert(routine);
         return routine;
     }

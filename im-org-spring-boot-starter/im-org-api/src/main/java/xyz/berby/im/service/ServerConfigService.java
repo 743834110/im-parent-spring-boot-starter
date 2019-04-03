@@ -39,6 +39,8 @@ public interface ServerConfigService {
      */
      Pager<ServerConfig> queryByPager(Pager<ServerConfig> pager);
 
+    Pager<ServerConfig> queryByPagerWithNoCount(Pager<ServerConfig> pager);
+
     /**
      * 根据分页对象统计记录条数
      * @param pager 分页对象

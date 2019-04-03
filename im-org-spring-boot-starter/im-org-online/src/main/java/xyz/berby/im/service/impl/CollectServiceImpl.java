@@ -14,7 +14,7 @@ import java.util.List;
  * 收藏表  collection_type: 简单文本 文件 访问内容(Collect)表服务实现类
  *
  * @author makejava
- * @since 2019-03-20 22:20:58
+ * @since 2019-04-01 17:30:55
  */
 @Service("collectService")
 @Transactional
@@ -57,6 +57,18 @@ public class CollectServiceImpl implements CollectService {
         pager.setResult(result);
         return pager;
      }
+     
+   /**
+     * 
+     * 根据分页对象查询数据,不计算页数
+     * @param pager 分页对象
+     * @return 对象列表
+     */
+     public Pager<Collect> queryByPagerWithNoCount(Pager<Collect> pager) {         
+        List<Collect> result = collectDao.queryByPager(pager);
+        pager.setResult(result);
+        return pager;
+     }
 
     /**
      * 根据分页对象统计记录条数
@@ -76,7 +88,7 @@ public class CollectServiceImpl implements CollectService {
      */
     @Override
     public Collect insert(Collect collect) {
-        collect.setCollectionId(IdUtil.fastSimpleUUID());
+  collect.setCollectionId(IdUtil.fastSimpleUUID());
         this.collectDao.insert(collect);
         return collect;
     }

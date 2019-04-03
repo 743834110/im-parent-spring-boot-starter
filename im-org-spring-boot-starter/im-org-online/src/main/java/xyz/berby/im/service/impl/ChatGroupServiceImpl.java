@@ -14,7 +14,7 @@ import java.util.List;
  * 工作群表(ChatGroup)表服务实现类
  *
  * @author makejava
- * @since 2019-03-20 22:20:58
+ * @since 2019-04-01 17:30:55
  */
 @Service("chatGroupService")
 @Transactional
@@ -57,6 +57,18 @@ public class ChatGroupServiceImpl implements ChatGroupService {
         pager.setResult(result);
         return pager;
      }
+     
+   /**
+     * 
+     * 根据分页对象查询数据,不计算页数
+     * @param pager 分页对象
+     * @return 对象列表
+     */
+     public Pager<ChatGroup> queryByPagerWithNoCount(Pager<ChatGroup> pager) {         
+        List<ChatGroup> result = chatGroupDao.queryByPager(pager);
+        pager.setResult(result);
+        return pager;
+     }
 
     /**
      * 根据分页对象统计记录条数
@@ -76,7 +88,7 @@ public class ChatGroupServiceImpl implements ChatGroupService {
      */
     @Override
     public ChatGroup insert(ChatGroup chatGroup) {
-        chatGroup.setGroupId(IdUtil.fastSimpleUUID());
+  chatGroup.setGroupId(IdUtil.fastSimpleUUID());
         this.chatGroupDao.insert(chatGroup);
         return chatGroup;
     }

@@ -6,7 +6,7 @@ import xyz.berby.im.dao.DictionaryTypeDao;
 import xyz.berby.im.service.DictionaryTypeService;
 import xyz.berby.im.vo.Pager;
 import org.springframework.stereotype.Service;
-
+import cn.hutool.core.util.IdUtil;
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
  * 字典类型表(DictionaryType)表服务实现类
  *
  * @author makejava
- * @since 2019-03-20 22:20:58
+ * @since 2019-04-01 17:30:55
  */
 @Service("dictionaryTypeService")
 @Transactional
@@ -57,6 +57,18 @@ public class DictionaryTypeServiceImpl implements DictionaryTypeService {
         pager.setResult(result);
         return pager;
      }
+     
+   /**
+     * 
+     * 根据分页对象查询数据,不计算页数
+     * @param pager 分页对象
+     * @return 对象列表
+     */
+     public Pager<DictionaryType> queryByPagerWithNoCount(Pager<DictionaryType> pager) {         
+        List<DictionaryType> result = dictionaryTypeDao.queryByPager(pager);
+        pager.setResult(result);
+        return pager;
+     }
 
     /**
      * 根据分页对象统计记录条数
@@ -76,7 +88,7 @@ public class DictionaryTypeServiceImpl implements DictionaryTypeService {
      */
     @Override
     public DictionaryType insert(DictionaryType dictionaryType) {
-//        dictionaryType.setCodeItemId(IdUtil.fastSimpleUUID());
+  dictionaryType.setCodeItemId(IdUtil.fastSimpleUUID());
         this.dictionaryTypeDao.insert(dictionaryType);
         return dictionaryType;
     }

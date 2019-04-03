@@ -39,6 +39,8 @@ public interface CollectService {
      */
      Pager<Collect> queryByPager(Pager<Collect> pager);
 
+    Pager<Collect> queryByPagerWithNoCount(Pager<Collect> pager);
+
     /**
      * 根据分页对象统计记录条数
      * @param pager 分页对象

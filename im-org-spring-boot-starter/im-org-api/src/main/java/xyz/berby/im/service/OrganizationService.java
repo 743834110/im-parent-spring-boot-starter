@@ -39,6 +39,8 @@ public interface OrganizationService {
      */
      Pager<Organization> queryByPager(Pager<Organization> pager);
 
+    Pager<Organization> queryByPagerWithNoCount(Pager<Organization> pager);
+
     /**
      * 根据分页对象统计记录条数
      * @param pager 分页对象

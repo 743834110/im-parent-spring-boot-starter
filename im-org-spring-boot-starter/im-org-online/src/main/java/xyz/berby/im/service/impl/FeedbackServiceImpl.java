@@ -14,7 +14,7 @@ import java.util.List;
  * (Feedback)表服务实现类
  *
  * @author makejava
- * @since 2019-03-20 22:20:59
+ * @since 2019-04-01 17:30:55
  */
 @Service("feedbackService")
 @Transactional
@@ -57,6 +57,18 @@ public class FeedbackServiceImpl implements FeedbackService {
         pager.setResult(result);
         return pager;
      }
+     
+   /**
+     * 
+     * 根据分页对象查询数据,不计算页数
+     * @param pager 分页对象
+     * @return 对象列表
+     */
+     public Pager<Feedback> queryByPagerWithNoCount(Pager<Feedback> pager) {         
+        List<Feedback> result = feedbackDao.queryByPager(pager);
+        pager.setResult(result);
+        return pager;
+     }
 
     /**
      * 根据分页对象统计记录条数
@@ -76,7 +88,7 @@ public class FeedbackServiceImpl implements FeedbackService {
      */
     @Override
     public Feedback insert(Feedback feedback) {
-        feedback.setFeedbackId(IdUtil.fastSimpleUUID());
+  feedback.setFeedbackId(IdUtil.fastSimpleUUID());
         this.feedbackDao.insert(feedback);
         return feedback;
     }

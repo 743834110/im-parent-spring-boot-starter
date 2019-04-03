@@ -14,7 +14,7 @@ import java.util.List;
  * 角色权限表(RoleAuth)表服务实现类
  *
  * @author makejava
- * @since 2019-03-20 22:21:00
+ * @since 2019-04-01 17:30:55
  */
 @Service("roleAuthService")
 @Transactional
@@ -57,6 +57,18 @@ public class RoleAuthServiceImpl implements RoleAuthService {
         pager.setResult(result);
         return pager;
      }
+     
+   /**
+     * 
+     * 根据分页对象查询数据,不计算页数
+     * @param pager 分页对象
+     * @return 对象列表
+     */
+     public Pager<RoleAuth> queryByPagerWithNoCount(Pager<RoleAuth> pager) {         
+        List<RoleAuth> result = roleAuthDao.queryByPager(pager);
+        pager.setResult(result);
+        return pager;
+     }
 
     /**
      * 根据分页对象统计记录条数
@@ -76,7 +88,7 @@ public class RoleAuthServiceImpl implements RoleAuthService {
      */
     @Override
     public RoleAuth insert(RoleAuth roleAuth) {
-        roleAuth.setRoleAuthId(IdUtil.fastSimpleUUID());
+  roleAuth.setRoleAuthId(IdUtil.fastSimpleUUID());
         this.roleAuthDao.insert(roleAuth);
         return roleAuth;
     }

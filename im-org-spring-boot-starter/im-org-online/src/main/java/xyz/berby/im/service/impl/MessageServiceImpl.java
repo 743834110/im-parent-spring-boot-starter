@@ -14,7 +14,7 @@ import java.util.List;
  * 聊天信息表(Message)表服务实现类
  *
  * @author makejava
- * @since 2019-03-20 22:20:59
+ * @since 2019-04-01 17:30:55
  */
 @Service("messageService")
 @Transactional
@@ -57,6 +57,18 @@ public class MessageServiceImpl implements MessageService {
         pager.setResult(result);
         return pager;
      }
+     
+   /**
+     * 
+     * 根据分页对象查询数据,不计算页数
+     * @param pager 分页对象
+     * @return 对象列表
+     */
+     public Pager<Message> queryByPagerWithNoCount(Pager<Message> pager) {         
+        List<Message> result = messageDao.queryByPager(pager);
+        pager.setResult(result);
+        return pager;
+     }
 
     /**
      * 根据分页对象统计记录条数
@@ -76,7 +88,7 @@ public class MessageServiceImpl implements MessageService {
      */
     @Override
     public Message insert(Message message) {
-        message.setId(IdUtil.fastSimpleUUID());
+  message.setId(IdUtil.fastSimpleUUID());
         this.messageDao.insert(message);
         return message;
     }

@@ -28,13 +28,10 @@ import java.util.TreeMap;
  * 抽象控制类
  * 用于控制层的封装
  */
-abstract class AbstractRestfulController {
+public abstract class AbstractRestfulController {
 
     @Autowired
     private AuthAspect authAspect;
-
-    @Autowired
-    private HttpSession session;
 
     @Autowired
     private DefaultSettingProperty defaultSetting;
@@ -59,16 +56,15 @@ abstract class AbstractRestfulController {
      * @param response 响应对象
      * @return
      */
-    Object getCommandDeal(String serviceName, String operateName
+    public Object getCommandDeal(String serviceName, String operateName
             , HttpServletRequest request
             , HttpServletResponse response
             , String string, MultipartFile[] files) throws Exception {
 
-        // 解决跨域问题
+        // 解决跨域sessionId问题
 
         // 明确请求端：admin|app|web|plain(即是统一处理所有端的请求)
         String requestHeader = request.getHeader("user-agent");
-
 
         Object service = null;
         try {
@@ -139,16 +135,16 @@ abstract class AbstractRestfulController {
 
             // 按照约定高于配置的原则，如果方法名为login时session则将保存该运行结果
             // logout则消除数据
-            String loginMethodName = actualMethod.getName();
             String sessionId;
-            switch (loginMethodName) {
+            HttpSession session = request.getSession();
+            switch (operateName) {
                 case Constant.LOGIN_METHOD_NAME:
-                    sessionId = this.session.getId();
-                    this.session.setAttribute(sessionId, data);
+                    sessionId = session.getId();
+                    session.setAttribute(sessionId, data);
                     break;
                 case Constant.LOGOUT_METHOD_NAME:
-                    sessionId = this.session.getId();
-                    this.session.removeAttribute(sessionId);
+                    sessionId = session.getId();
+                    session.removeAttribute(sessionId);
                     break;
                 default:
             }

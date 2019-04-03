@@ -1,6 +1,9 @@
 package xyz.berby.im.service.impl;
 
 import org.springframework.transaction.annotation.Transactional;
+import xyz.berby.im.annotation.TokenValidate;
+import xyz.berby.im.dao.ChatGroupDao;
+import xyz.berby.im.entity.ChatGroup;
 import xyz.berby.im.entity.Organization;
 import xyz.berby.im.dao.OrganizationDao;
 import xyz.berby.im.service.OrganizationService;
@@ -14,13 +17,16 @@ import java.util.List;
  * 部门表 org_type: 社团 机构 班级 pro_type 专业类型(Organization)表服务实现类
  *
  * @author makejava
- * @since 2019-03-20 22:20:59
+ * @since 2019-04-01 17:30:55
  */
 @Service("organizationService")
 @Transactional
 public class OrganizationServiceImpl implements OrganizationService {
     @Resource
     private OrganizationDao organizationDao;
+
+    @Resource
+    private ChatGroupDao chatGroupDao;
 
     /**
      * 通过ID查询单条数据
@@ -57,6 +63,18 @@ public class OrganizationServiceImpl implements OrganizationService {
         pager.setResult(result);
         return pager;
      }
+     
+   /**
+     * 
+     * 根据分页对象查询数据,不计算页数
+     * @param pager 分页对象
+     * @return 对象列表
+     */
+     public Pager<Organization> queryByPagerWithNoCount(Pager<Organization> pager) {         
+        List<Organization> result = organizationDao.queryByPager(pager);
+        pager.setResult(result);
+        return pager;
+     }
 
     /**
      * 根据分页对象统计记录条数
@@ -78,6 +96,15 @@ public class OrganizationServiceImpl implements OrganizationService {
     public Organization insert(Organization organization) {
         organization.setOrgId(IdUtil.fastSimpleUUID());
         this.organizationDao.insert(organization);
+        // 同时创建聊天群
+        ChatGroup chatGroup = ChatGroup.builder()
+                .avatar(organization.getOrgImageUrl())
+                .orgId(organization.getOrgId())
+                .name(organization.getShortName())
+                .groupId(organization.getOrgId())
+                .userId(organization.getUserId())
+                .build();
+        this.chatGroupDao.insert(chatGroup);
         return organization;
     }
 

@@ -14,7 +14,7 @@ import java.util.List;
  * 横幅表(Banner)表服务实现类
  *
  * @author makejava
- * @since 2019-03-20 22:20:58
+ * @since 2019-04-01 17:30:55
  */
 @Service("bannerService")
 @Transactional
@@ -57,6 +57,18 @@ public class BannerServiceImpl implements BannerService {
         pager.setResult(result);
         return pager;
      }
+     
+   /**
+     * 
+     * 根据分页对象查询数据,不计算页数
+     * @param pager 分页对象
+     * @return 对象列表
+     */
+     public Pager<Banner> queryByPagerWithNoCount(Pager<Banner> pager) {         
+        List<Banner> result = bannerDao.queryByPager(pager);
+        pager.setResult(result);
+        return pager;
+     }
 
     /**
      * 根据分页对象统计记录条数
@@ -76,7 +88,7 @@ public class BannerServiceImpl implements BannerService {
      */
     @Override
     public Banner insert(Banner banner) {
-        banner.setBannerId(IdUtil.fastSimpleUUID());
+  banner.setBannerId(IdUtil.fastSimpleUUID());
         this.bannerDao.insert(banner);
         return banner;
     }

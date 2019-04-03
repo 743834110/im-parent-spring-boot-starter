@@ -39,6 +39,8 @@ public interface FeedbackService {
      */
      Pager<Feedback> queryByPager(Pager<Feedback> pager);
 
+    Pager<Feedback> queryByPagerWithNoCount(Pager<Feedback> pager);
+
     /**
      * 根据分页对象统计记录条数
      * @param pager 分页对象

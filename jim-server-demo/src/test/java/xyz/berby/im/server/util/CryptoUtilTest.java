@@ -7,6 +7,8 @@ import cn.hutool.crypto.asymmetric.AsymmetricCrypto;
 import cn.hutool.crypto.asymmetric.KeyType;
 import cn.hutool.crypto.asymmetric.RSA;
 import cn.hutool.crypto.symmetric.AES;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.jfinal.kit.AesKit;
 import com.jfinal.kit.Base64Kit;
 import com.jfinal.kit.HashKit;
@@ -16,10 +18,14 @@ import org.slf4j.LoggerFactory;
 import sun.security.rsa.RSAPrivateCrtKeyImpl;
 import sun.security.rsa.RSAPrivateKeyImpl;
 import sun.security.util.DerValue;
+import xyz.berby.im.entity.User;
+import xyz.berby.im.util.JwtUtil;
+import xyz.berby.im.vo.AccessToken;
 
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.PrivateKey;
+import java.util.HashMap;
 
 /**
  * Created by Administrator on 2018/10/27.
@@ -46,5 +52,26 @@ public class CryptoUtilTest {
         long a = System.currentTimeMillis();
         byte[] messageBytes = rsa.decryptFromBase64(cipher, KeyType.PrivateKey);
         System.out.println(System.currentTimeMillis() - a);
+    }
+
+    /**
+     * 尝试加密
+     */
+    @Test
+    public void testCryptoToken() {
+        long start = System.currentTimeMillis();
+        String token = JwtUtil.createJWT("SSSS", 30000, publicKeyBase64);
+        System.out.println(token);
+        String origin = JwtUtil.validateJWT(token, privateKeyBase64);
+        System.out.println(origin);
+        System.out.println(System.currentTimeMillis() - start);
+        JSONObject jsonObject = new JSONObject(new HashMap<String, Object>() {
+            {
+                this.put("token", "SS");
+            }
+        });
+        System.out.println(jsonObject);
+
+
     }
 }

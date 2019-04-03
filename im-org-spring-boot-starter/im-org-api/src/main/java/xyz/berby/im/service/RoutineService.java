@@ -39,12 +39,15 @@ public interface RoutineService {
      */
      Pager<Routine> queryByPager(Pager<Routine> pager);
 
+    Pager<Routine> queryByPagerWithNoCount(Pager<Routine> pager);
     /**
      * 根据分页对象统计记录条数
      * @param pager 分页对象
      * @return 对象列表
      */
-    Pager<Routine> countByPager(Pager<Routine> pager);    
+    Pager<Routine> countByPager(Pager<Routine> pager);
+
+
     /**
      * 新增数据
      *

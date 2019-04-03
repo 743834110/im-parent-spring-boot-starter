@@ -14,7 +14,7 @@ import java.util.List;
  * (Discussion)表服务实现类
  *
  * @author makejava
- * @since 2019-03-20 22:20:59
+ * @since 2019-04-01 17:30:55
  */
 @Service("discussionService")
 @Transactional
@@ -57,6 +57,18 @@ public class DiscussionServiceImpl implements DiscussionService {
         pager.setResult(result);
         return pager;
      }
+     
+   /**
+     * 
+     * 根据分页对象查询数据,不计算页数
+     * @param pager 分页对象
+     * @return 对象列表
+     */
+     public Pager<Discussion> queryByPagerWithNoCount(Pager<Discussion> pager) {         
+        List<Discussion> result = discussionDao.queryByPager(pager);
+        pager.setResult(result);
+        return pager;
+     }
 
     /**
      * 根据分页对象统计记录条数
@@ -76,7 +88,7 @@ public class DiscussionServiceImpl implements DiscussionService {
      */
     @Override
     public Discussion insert(Discussion discussion) {
-        discussion.setDiscussionId(IdUtil.fastSimpleUUID());
+  discussion.setDiscussionId(IdUtil.fastSimpleUUID());
         this.discussionDao.insert(discussion);
         return discussion;
     }

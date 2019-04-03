@@ -14,7 +14,7 @@ import java.util.List;
  * 服务器配置表(ServerConfig)表服务实现类
  *
  * @author makejava
- * @since 2019-03-20 22:21:00
+ * @since 2019-04-01 17:30:55
  */
 @Service("serverConfigService")
 @Transactional
@@ -57,6 +57,18 @@ public class ServerConfigServiceImpl implements ServerConfigService {
         pager.setResult(result);
         return pager;
      }
+     
+   /**
+     * 
+     * 根据分页对象查询数据,不计算页数
+     * @param pager 分页对象
+     * @return 对象列表
+     */
+     public Pager<ServerConfig> queryByPagerWithNoCount(Pager<ServerConfig> pager) {         
+        List<ServerConfig> result = serverConfigDao.queryByPager(pager);
+        pager.setResult(result);
+        return pager;
+     }
 
     /**
      * 根据分页对象统计记录条数
@@ -76,7 +88,7 @@ public class ServerConfigServiceImpl implements ServerConfigService {
      */
     @Override
     public ServerConfig insert(ServerConfig serverConfig) {
-        serverConfig.setConfigId(IdUtil.fastSimpleUUID());
+  serverConfig.setConfigId(IdUtil.fastSimpleUUID());
         this.serverConfigDao.insert(serverConfig);
         return serverConfig;
     }

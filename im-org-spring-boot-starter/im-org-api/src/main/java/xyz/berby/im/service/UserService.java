@@ -39,6 +39,8 @@ public interface UserService {
      */
      Pager<User> queryByPager(Pager<User> pager);
 
+    Pager<User> queryByPagerWithNoCount(Pager<User> pager);
+
     /**
      * 根据分页对象统计记录条数
      * @param pager 分页对象

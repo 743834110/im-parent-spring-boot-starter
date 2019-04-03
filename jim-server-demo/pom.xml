@@ -74,7 +74,12 @@
             <artifactId>junit</artifactId>
         </dependency>
 
-
+        <!--添加org-online组件依赖-->
+        <dependency>
+            <groupId>xyz.berby.im</groupId>
+            <artifactId>im-org-integration</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
     </dependencies>
     <build>

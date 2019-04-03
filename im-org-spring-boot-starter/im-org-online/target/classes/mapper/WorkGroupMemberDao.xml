@@ -8,12 +8,13 @@
         <result property="userAccount" column="user_account" jdbcType="VARCHAR"/>
         <result property="chatGroupId" column="chat_group_id" jdbcType="VARCHAR"/>
         <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+        <result property="memberImageUrl" column="member_image_url" jdbcType="VARCHAR"/>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="WorkGroupMemberMap">
         select
-          member_id, user_id, user_account, chat_group_id, user_name
+          member_id, user_id, user_account, chat_group_id, user_name, member_image_url
         from imserver.work_group_member
         where member_id = #{memberId}
     </select>
@@ -21,7 +22,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="WorkGroupMemberMap">
         select
-          member_id, user_id, user_account, chat_group_id, user_name
+          member_id, user_id, user_account, chat_group_id, user_name, member_image_url
         from imserver.work_group_member
         limit #{offset}, #{limit}
     </select>
@@ -29,7 +30,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="WorkGroupMemberMap">
         select
-          member_id, user_id, user_account, chat_group_id, user_name
+          member_id, user_id, user_account, chat_group_id, user_name, member_image_url
         from imserver.work_group_member
         <where>
             <if test="memberId != null and memberId != ''">
@@ -47,13 +48,16 @@
             <if test="userName != null and userName != ''">
                 and user_name = #{userName}
             </if>
+            <if test="memberImageUrl != null and memberImageUrl != ''">
+                and member_image_url = #{memberImageUrl}
+            </if>
         </where>
     </select>
     
     <!--通过分页对象作为筛选条件查询-->
     <select id="queryByPager" resultMap="WorkGroupMemberMap">
         select
-          member_id, user_id, user_account, chat_group_id, user_name
+          member_id, user_id, user_account, chat_group_id, user_name, member_image_url
         from imserver.work_group_member
         <where>
             <if test = "param != null">
@@ -71,6 +75,9 @@
                 </if>
                 <if test="param.userName != null and param.userName != ''">
                     and user_name like concat(#{param.userName}, '%')
+                </if>
+                <if test="param.memberImageUrl != null and param.memberImageUrl != ''">
+                    and member_image_url like concat(#{param.memberImageUrl}, '%')
                 </if>
             </if>
         </where>
@@ -109,9 +116,17 @@
                         , user_name desc
                     </when>
                 </choose>
+                <choose>
+                    <when test="sorter.memberImageUrl == 'asc'">
+                        , member_image_url asc
+                    </when>
+                    <when test="sorter.memberImageUrl == 'desc'">
+                        , member_image_url desc
+                    </when>
+                </choose>
         </trim>
         </if>
-        limit #{offset}, #{limit}
+        limit #{currentOffset}, #{limit}
     </select>
     
     <!--通过分页对象作为筛选条件查询记录条数-->
@@ -137,6 +152,9 @@
                 <if test="param.userName != null and param.userName != ''">
                     and user_name like concat(#{param.userName}, '%')
                 </if>
+                <if test="param.memberImageUrl != null and param.memberImageUrl != ''">
+                    and member_image_url like concat(#{param.memberImageUrl}, '%')
+                </if>
             </if>
         </where>
     </select>
@@ -145,8 +163,8 @@
 
     <!--新增所有列，如果不想在代码层管理ID的生成，则可以将fullColumn改为otherColumn,之后再根据需要改逻辑-->
     <insert id="insert" keyProperty="memberId" useGeneratedKeys="true">
-        insert into imserver.work_group_member(member_id, user_id, user_account, chat_group_id, user_name)
-        values (#{memberId}, #{userId}, #{userAccount}, #{chatGroupId}, #{userName})
+        insert into imserver.work_group_member(member_id, user_id, user_account, chat_group_id, user_name, member_image_url)
+        values (#{memberId}, #{userId}, #{userAccount}, #{chatGroupId}, #{userName}, #{memberImageUrl})
     </insert>
 
     <!--通过主键修改数据-->
@@ -164,6 +182,9 @@
             </if>
             <if test="userName != null and userName != ''">
                 user_name = #{userName},
+            </if>
+            <if test="memberImageUrl != null and memberImageUrl != ''">
+                member_image_url = #{memberImageUrl},
             </if>
         </set>
         where member_id = #{memberId}

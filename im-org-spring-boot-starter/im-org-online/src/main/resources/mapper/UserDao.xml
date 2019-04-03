@@ -137,10 +137,10 @@
                     and user_id like concat(#{param.userId}, '%')
                 </if>
                 <if test="param.userAccount != null and param.userAccount != ''">
-                    and user_account like concat(#{param.userAccount}, '%')
+                    and user_account = #{param.userAccount}
                 </if>
                 <if test="param.userPassword != null and param.userPassword != ''">
-                    and user_password like concat(#{param.userPassword}, '%')
+                    and user_password = #{param.userPassword}
                 </if>
                 <if test="param.userName != null and param.userName != ''">
                     and user_name like concat(#{param.userName}, '%')

@@ -33,7 +33,7 @@ public class User extends AbstractUser<Auth, Role> implements Serializable {
     /**
      *用户密码
      */
-    @NotNull
+
     @JSONField(serialize = false)
     private String userPassword;
     /**

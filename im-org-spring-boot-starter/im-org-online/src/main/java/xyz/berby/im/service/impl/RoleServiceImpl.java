@@ -14,7 +14,7 @@ import java.util.List;
  * 角色表： role_type用于区分班学生社团和机构的角色(Role)表服务实现类
  *
  * @author makejava
- * @since 2019-03-20 22:21:00
+ * @since 2019-04-01 17:30:55
  */
 @Service("roleService")
 @Transactional
@@ -57,6 +57,18 @@ public class RoleServiceImpl implements RoleService {
         pager.setResult(result);
         return pager;
      }
+     
+   /**
+     * 
+     * 根据分页对象查询数据,不计算页数
+     * @param pager 分页对象
+     * @return 对象列表
+     */
+     public Pager<Role> queryByPagerWithNoCount(Pager<Role> pager) {         
+        List<Role> result = roleDao.queryByPager(pager);
+        pager.setResult(result);
+        return pager;
+     }
 
     /**
      * 根据分页对象统计记录条数
@@ -76,7 +88,7 @@ public class RoleServiceImpl implements RoleService {
      */
     @Override
     public Role insert(Role role) {
-        role.setRoleId(IdUtil.fastSimpleUUID());
+  role.setRoleId(IdUtil.fastSimpleUUID());
         this.roleDao.insert(role);
         return role;
     }

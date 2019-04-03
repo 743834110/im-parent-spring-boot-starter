@@ -39,6 +39,7 @@ public interface FileService {
      */
      Pager<File> queryByPager(Pager<File> pager);
 
+    Pager<File> queryByPagerWithNoCount(Pager<File> pager);
     /**
      * 根据分页对象统计记录条数
      * @param pager 分页对象

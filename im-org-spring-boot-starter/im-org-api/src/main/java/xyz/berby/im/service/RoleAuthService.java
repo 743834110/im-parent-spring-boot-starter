@@ -39,6 +39,8 @@ public interface RoleAuthService {
      */
      Pager<RoleAuth> queryByPager(Pager<RoleAuth> pager);
 
+    Pager<RoleAuth> queryByPagerWithNoCount(Pager<RoleAuth> pager);
+
     /**
      * 根据分页对象统计记录条数
      * @param pager 分页对象
