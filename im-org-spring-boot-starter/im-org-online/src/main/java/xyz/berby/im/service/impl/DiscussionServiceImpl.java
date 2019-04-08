@@ -1,6 +1,7 @@
 package xyz.berby.im.service.impl;
 
 import org.springframework.transaction.annotation.Transactional;
+import xyz.berby.im.annotation.DefaultValue;
 import xyz.berby.im.entity.Discussion;
 import xyz.berby.im.dao.DiscussionDao;
 import xyz.berby.im.service.DiscussionService;
@@ -87,6 +88,7 @@ public class DiscussionServiceImpl implements DiscussionService {
      * @return 实例对象
      */
     @Override
+    @DefaultValue(expression = "0.routineUserId=user.userId, 0.createTime=now")
     public Discussion insert(Discussion discussion) {
   discussion.setDiscussionId(IdUtil.fastSimpleUUID());
         this.discussionDao.insert(discussion);

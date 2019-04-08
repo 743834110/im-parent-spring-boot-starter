@@ -273,8 +273,7 @@ public class ReflectUtil {
             // 从传输过来的map中获取对象方法字段中的值
             Object[] value = params.get(parameterNames[i]);
             // 当用户对象和paramType是AbstractUser的子类时。
-            Class<?> superClass = paramType.getSuperclass();
-            if (user != null && superClass != null && superClass.isAssignableFrom(AbstractUser.class)) {
+            if (user != null && AbstractUser.class.isAssignableFrom(paramType)) {
                 paramValues[i] = user;
             }
             else if (paramType.isAssignableFrom(MultipartFile.class)) {

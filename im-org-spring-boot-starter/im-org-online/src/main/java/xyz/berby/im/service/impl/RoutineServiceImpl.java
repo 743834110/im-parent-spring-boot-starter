@@ -88,7 +88,7 @@ public class RoutineServiceImpl implements RoutineService {
      */
     @Override
     public Routine insert(Routine routine) {
-  routine.setRoutineId(IdUtil.fastSimpleUUID());
+        routine.setRoutineId(IdUtil.fastSimpleUUID());
         this.routineDao.insert(routine);
         return routine;
     }

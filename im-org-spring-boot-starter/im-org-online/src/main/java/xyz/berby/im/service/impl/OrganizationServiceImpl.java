@@ -23,10 +23,10 @@ import java.util.List;
 @Transactional
 public class OrganizationServiceImpl implements OrganizationService {
     @Resource
-    private OrganizationDao organizationDao;
+    protected OrganizationDao organizationDao;
 
     @Resource
-    private ChatGroupDao chatGroupDao;
+    protected ChatGroupDao chatGroupDao;
 
     /**
      * 通过ID查询单条数据

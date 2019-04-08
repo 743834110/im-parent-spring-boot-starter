@@ -39,6 +39,9 @@ public abstract class AbstractRestfulController {
     @Autowired
     private Security security;
 
+    @Autowired
+    private HttpSession session;
+
     /**
      * 路径到方法的映射
      */
@@ -102,8 +105,8 @@ public abstract class AbstractRestfulController {
             else {
                 actualMethod = actualObject.getClass().getMethod(operateName, method.getParameterTypes());
             }
-            // 暂时假设user实体接入
-            AbstractUser user = null;
+            // user实体接入
+            AbstractUser user = (AbstractUser) this.session.getAttribute(Constant.USER);
             // 检查信息是否需要进行解密操作
             String securityMode = this.defaultSetting.getSecurityMode();
             if (actualMethod.isAnnotationPresent(Decrypt.class)) {
@@ -124,6 +127,9 @@ public abstract class AbstractRestfulController {
                 }
             }
 
+            // 进行某默认值的注入：
+
+
             Object[] paramValues = ReflectUtil.getParamValues(stringMap, actualMethod, files, user);
 
             if (paramValues == null) {
@@ -135,16 +141,13 @@ public abstract class AbstractRestfulController {
 
             // 按照约定高于配置的原则，如果方法名为login时session则将保存该运行结果
             // logout则消除数据
-            String sessionId;
             HttpSession session = request.getSession();
             switch (operateName) {
                 case Constant.LOGIN_METHOD_NAME:
-                    sessionId = session.getId();
-                    session.setAttribute(sessionId, data);
+                    session.setAttribute(Constant.USER, data);
                     break;
                 case Constant.LOGOUT_METHOD_NAME:
-                    sessionId = session.getId();
-                    session.removeAttribute(sessionId);
+                    session.removeAttribute(Constant.USER);
                     break;
                 default:
             }

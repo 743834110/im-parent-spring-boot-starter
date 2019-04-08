@@ -93,6 +93,7 @@
     <module>im-controller-spring-boot-starter</module>
     <module>jim-server-demo</module>
     <module>im-common</module>
+    <module>im-chat-server</module>
   </modules>
 
   <build>
@@ -157,5 +158,6 @@
         </configuration>
       </plugin>
     </plugins>
+
   </build>
 </project>

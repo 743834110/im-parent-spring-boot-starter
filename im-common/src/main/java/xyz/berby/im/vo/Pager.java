@@ -52,6 +52,11 @@ public class Pager<T> {
         this.param = param;
     }
 
+    public Pager(T param, int limit) {
+        this.param = param;
+        this.limit = limit;
+    }
+
     public T getParam() {
         return param;
     }

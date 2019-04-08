@@ -27,4 +27,8 @@ public interface Constant {
      * 退出登录方法名
      */
     String LOGOUT_METHOD_NAME = "logout";
+    /**
+     * 取用户对象的键名
+     */
+    String USER = "user";
 }

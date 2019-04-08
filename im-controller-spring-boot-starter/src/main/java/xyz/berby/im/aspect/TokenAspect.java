@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.mvc.AbstractController;
 import xyz.berby.im.annotation.TokenValidate;
+import xyz.berby.im.constant.Constant;
 import xyz.berby.im.controller.AbstractRestfulController;
 import xyz.berby.im.controller.RestfulController;
 import xyz.berby.im.entity.AbstractUser;
@@ -47,7 +48,7 @@ public class TokenAspect {
 
         HttpServletRequest request = ApplicationContextHolder.getRequest();
         HttpSession session = request.getSession();
-        AbstractUser user = (AbstractUser) session.getAttribute(session.getId());
+        AbstractUser user = (AbstractUser) session.getAttribute(Constant.USER);
         // 当user为空时才进行token的检查
         if (user != null) {
             return;
@@ -76,7 +77,4 @@ public class TokenAspect {
         }
 
     }
-
-
-
 }
