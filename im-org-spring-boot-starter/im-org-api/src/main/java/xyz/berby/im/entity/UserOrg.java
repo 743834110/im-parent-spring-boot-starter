@@ -11,14 +11,14 @@ import lombok.NoArgsConstructor;
  * 用户部门（班级）表(UserOrg)实体类
  *
  * @author makejava
- * @since 2019-03-03 10:31:18
+ * @since 2019-04-14 16:59:27
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserOrg implements Serializable {
-    private static final long serialVersionUID = 878586453396589358L;
+    private static final long serialVersionUID = 834408772237712941L;
         private String userOrgId;
     /**
      *用户ID
@@ -60,6 +60,10 @@ public class UserOrg implements Serializable {
      *组织简称
      */
     private String shortName;
+    /**
+     *角色名称
+     */
+    private String roleName;
 
 
 }

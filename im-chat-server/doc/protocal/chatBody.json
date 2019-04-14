@@ -1,0 +1,17 @@
+{
+  "msgId": "消息ID",
+  "from": "来源ID",
+  "to": "目标ID",
+  "cmd":"11",
+  "createTime": "消息创建时间long类型",
+  "msgType": "消息类型",
+  "chatType":"聊天类型",
+  "groupId":"群组id",
+  "content": "内容",
+  "extras" : "扩展字段"
+}
+
+
+
+
+

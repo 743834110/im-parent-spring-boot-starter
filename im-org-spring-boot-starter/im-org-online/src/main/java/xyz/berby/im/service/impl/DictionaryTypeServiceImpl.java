@@ -88,7 +88,7 @@ public class DictionaryTypeServiceImpl implements DictionaryTypeService {
      */
     @Override
     public DictionaryType insert(DictionaryType dictionaryType) {
-  dictionaryType.setCodeItemId(IdUtil.fastSimpleUUID());
+//      dictionaryType.setCodeItemId(IdUtil.fastSimpleUUID());
         this.dictionaryTypeDao.insert(dictionaryType);
         return dictionaryType;
     }

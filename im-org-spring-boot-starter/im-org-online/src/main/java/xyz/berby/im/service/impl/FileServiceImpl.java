@@ -1,14 +1,28 @@
 package xyz.berby.im.service.impl;
 
+import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.lang.UUID;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.util.WebUtils;
 import xyz.berby.im.entity.File;
 import xyz.berby.im.dao.FileDao;
+import xyz.berby.im.entity.User;
+import xyz.berby.im.property.DefaultSettingProperty;
 import xyz.berby.im.service.FileService;
+import xyz.berby.im.util.ApplicationContextHolder;
 import xyz.berby.im.vo.Pager;
 import org.springframework.stereotype.Service;
 import cn.hutool.core.util.IdUtil;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 文件表(File)表服务实现类
@@ -21,6 +35,10 @@ import java.util.List;
 public class FileServiceImpl implements FileService {
     @Resource
     private FileDao fileDao;
+
+    @Autowired
+    private DefaultSettingProperty property;
+
 
     /**
      * 通过ID查询单条数据
@@ -88,9 +106,54 @@ public class FileServiceImpl implements FileService {
      */
     @Override
     public File insert(File file) {
-  file.setFileId(IdUtil.fastSimpleUUID());
+        file.setFileId(IdUtil.fastSimpleUUID());
         this.fileDao.insert(file);
+
         return file;
+    }
+
+    /**
+     * 进行文件上传
+     * @param multipartFile
+     * @return
+     */
+    public File upload(MultipartFile multipartFile, File newFile, User user) throws IOException {
+        Map<String, Object> setting = this.property.getSetting();
+        String storageMode = (String) setting.get(DefaultSettingProperty.STORAGE_MODE);
+        // 本地模式
+        if ("local".equals(storageMode)) {
+            String uploadDir = (String) setting.get(DefaultSettingProperty.UPLOAD_FOLDER);
+            String resourcePrefix = (String) setting.get(DefaultSettingProperty.RESOURCE_PREFIX);
+            ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+            HttpServletRequest request = requestAttributes.getRequest();
+            String fileName = IdUtil.fastSimpleUUID();
+            // 设置基本值
+            String originName = multipartFile.getOriginalFilename() == null? "": multipartFile.getOriginalFilename();
+            java.io.File file = new java.io.File(uploadDir,  fileName + originName.substring(originName.lastIndexOf('.')));
+            FileUtil.mkParentDirs(file);
+            newFile.setFilePath(resourcePrefix + java.io.File.separator + file.getName());
+            newFile.setCreateTime(new Date());
+            newFile.setFileSize((double) multipartFile.getSize());
+            newFile.setMimeType(multipartFile.getContentType());
+            newFile.setOriginName(multipartFile.getOriginalFilename());
+            newFile.setValid("Y");
+            newFile.setUserId(user.getUserId());
+            newFile.setFileId(fileName);
+            this.insert(newFile);
+            // 进行文件的存储
+            multipartFile.transferTo(file);
+        }
+        // 三方服务器托管模式
+        else {
+
+        }
+        return newFile;
+    }
+
+    public File[] uploadFiles(MultipartFile[] multipartFiles) {
+
+        File[] files = new File[multipartFiles.length];
+        return files;
     }
 
     /**

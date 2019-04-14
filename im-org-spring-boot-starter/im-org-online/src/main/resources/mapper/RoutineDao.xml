@@ -18,6 +18,232 @@
         <result property="title" column="title" jdbcType="VARCHAR"/>
         <result property="orgName" column="org_name" jdbcType="VARCHAR"/>
     </resultMap>
+    
+<!--实体参数or运算-->    
+    <sql id = "orOperator">
+        <if test="orOperator.routineId != null and orOperator.routineId != ''">
+            or routine_id like concat(#{orOperator.routineId}, '%')
+        </if>
+        <if test="orOperator.userId != null and orOperator.userId != ''">
+            or user_id like concat(#{orOperator.userId}, '%')
+        </if>
+        <if test="orOperator.userName != null and orOperator.userName != ''">
+            or user_name like concat(#{orOperator.userName}, '%')
+        </if>
+        <if test="orOperator.routineType != null and orOperator.routineType != ''">
+            or routine_type like concat(#{orOperator.routineType}, '%')
+        </if>
+        <if test="orOperator.content != null and orOperator.content != ''">
+            or content like concat(#{orOperator.content}, '%')
+        </if>
+        <if test="orOperator.createTime != null">
+            or create_time = #{orOperator.createTime}
+        </if>
+        <if test="orOperator.userType != null and orOperator.userType != ''">
+            or user_type like concat(#{orOperator.userType}, '%')
+        </if>
+        <if test="orOperator.orgId != null and orOperator.orgId != ''">
+            or org_id like concat(#{orOperator.orgId}, '%')
+        </if>
+        <if test="orOperator.endTime != null">
+            or end_time = #{orOperator.endTime}
+        </if>
+        <if test="orOperator.end != null and orOperator.end != ''">
+            or end like concat(#{orOperator.end}, '%')
+        </if>
+        <if test="orOperator.grade != null and orOperator.grade != ''">
+            or grade like concat(#{orOperator.grade}, '%')
+        </if>
+        <if test="orOperator.visibility != null and orOperator.visibility != ''">
+            or visibility like concat(#{orOperator.visibility}, '%')
+        </if>
+        <if test="orOperator.title != null and orOperator.title != ''">
+            or title like concat(#{orOperator.title}, '%')
+        </if>
+        <if test="orOperator.orgName != null and orOperator.orgName != ''">
+            or org_name like concat(#{orOperator.orgName}, '%')
+        </if>
+    </sql>
+    
+    <!--实体参数and运算-->
+    <sql id="andOperator">
+            <if test="andOperator.routineId != null and andOperator.routineId != ''">
+            and routine_id like concat(#{andOperator.routineId}, '%')
+        </if>
+            <if test="andOperator.userId != null and andOperator.userId != ''">
+            and user_id like concat(#{andOperator.userId}, '%')
+        </if>
+            <if test="andOperator.userName != null and andOperator.userName != ''">
+            and user_name like concat(#{andOperator.userName}, '%')
+        </if>
+            <if test="andOperator.routineType != null and andOperator.routineType != ''">
+            and routine_type like concat(#{andOperator.routineType}, '%')
+        </if>
+            <if test="andOperator.content != null and andOperator.content != ''">
+            and content like concat(#{andOperator.content}, '%')
+        </if>
+            <if test="andOperator.createTime != null">
+            and create_time = #{andOperator.createTime}
+        </if>
+            <if test="andOperator.userType != null and andOperator.userType != ''">
+            and user_type like concat(#{andOperator.userType}, '%')
+        </if>
+            <if test="andOperator.orgId != null and andOperator.orgId != ''">
+            and org_id like concat(#{andOperator.orgId}, '%')
+        </if>
+            <if test="andOperator.endTime != null">
+            and end_time = #{andOperator.endTime}
+        </if>
+            <if test="andOperator.end != null and andOperator.end != ''">
+            and end like concat(#{andOperator.end}, '%')
+        </if>
+            <if test="andOperator.grade != null and andOperator.grade != ''">
+            and grade like concat(#{andOperator.grade}, '%')
+        </if>
+            <if test="andOperator.visibility != null and andOperator.visibility != ''">
+            and visibility like concat(#{andOperator.visibility}, '%')
+        </if>
+            <if test="andOperator.title != null and andOperator.title != ''">
+            and title like concat(#{andOperator.title}, '%')
+        </if>
+            <if test="andOperator.orgName != null and andOperator.orgName != ''">
+            and org_name like concat(#{andOperator.orgName}, '%')
+        </if>
+    </sql>
+    
+    <!--param-->
+    <sql id="param">
+            <if test="param.routineId != null and param.routineId != ''">
+            and routine_id like concat(#{param.routineId}, '%')
+        </if>
+            <if test="param.userId != null and param.userId != ''">
+            and user_id like concat(#{param.userId}, '%')
+        </if>
+            <if test="param.userName != null and param.userName != ''">
+            and user_name like concat(#{param.userName}, '%')
+        </if>
+            <if test="param.routineType != null and param.routineType != ''">
+            and routine_type like concat(#{param.routineType}, '%')
+        </if>
+            <if test="param.content != null and param.content != ''">
+            and content like concat(#{param.content}, '%')
+        </if>
+            <if test="param.createTime != null">
+            and create_time = #{param.createTime}
+        </if>
+            <if test="param.userType != null and param.userType != ''">
+            and user_type like concat(#{param.userType}, '%')
+        </if>
+            <if test="param.orgId != null and param.orgId != ''">
+            and org_id like concat(#{param.orgId}, '%')
+        </if>
+            <if test="param.endTime != null">
+            and end_time = #{param.endTime}
+        </if>
+            <if test="param.end != null and param.end != ''">
+            and end like concat(#{param.end}, '%')
+        </if>
+            <if test="param.grade != null and param.grade != ''">
+            and grade like concat(#{param.grade}, '%')
+        </if>
+            <if test="param.visibility != null and param.visibility != ''">
+            and visibility like concat(#{param.visibility}, '%')
+        </if>
+            <if test="param.title != null and param.title != ''">
+            and title like concat(#{param.title}, '%')
+        </if>
+            <if test="param.orgName != null and param.orgName != ''">
+            and org_name like concat(#{param.orgName}, '%')
+        </if>
+    </sql>
+
+    <!--表数据成组过滤-->    
+    <sql id="filter">
+        <if test="filter.routineId != null">
+            and routine_id in
+            <foreach item="item" collection="filter.routineId" open="(" separator="," close=")" >
+                #{item}
+            </foreach>
+        </if>
+        <if test="filter.userId != null">
+            and user_id in
+            <foreach item="item" collection="filter.userId" open="(" separator="," close=")" >
+                #{item}
+            </foreach>
+        </if>
+        <if test="filter.userName != null">
+            and user_name in
+            <foreach item="item" collection="filter.userName" open="(" separator="," close=")" >
+                #{item}
+            </foreach>
+        </if>
+        <if test="filter.routineType != null">
+            and routine_type in
+            <foreach item="item" collection="filter.routineType" open="(" separator="," close=")" >
+                #{item}
+            </foreach>
+        </if>
+        <if test="filter.content != null">
+            and content in
+            <foreach item="item" collection="filter.content" open="(" separator="," close=")" >
+                #{item}
+            </foreach>
+        </if>
+        <if test="filter.createTime != null">
+            and create_time in
+            <foreach item="item" collection="filter.createTime" open="(" separator="," close=")" >
+                #{item}
+            </foreach>
+        </if>
+        <if test="filter.userType != null">
+            and user_type in
+            <foreach item="item" collection="filter.userType" open="(" separator="," close=")" >
+                #{item}
+            </foreach>
+        </if>
+        <if test="filter.orgId != null">
+            and org_id in
+            <foreach item="item" collection="filter.orgId" open="(" separator="," close=")" >
+                #{item}
+            </foreach>
+        </if>
+        <if test="filter.endTime != null">
+            and end_time in
+            <foreach item="item" collection="filter.endTime" open="(" separator="," close=")" >
+                #{item}
+            </foreach>
+        </if>
+        <if test="filter.end != null">
+            and end in
+            <foreach item="item" collection="filter.end" open="(" separator="," close=")" >
+                #{item}
+            </foreach>
+        </if>
+        <if test="filter.grade != null">
+            and grade in
+            <foreach item="item" collection="filter.grade" open="(" separator="," close=")" >
+                #{item}
+            </foreach>
+        </if>
+        <if test="filter.visibility != null">
+            and visibility in
+            <foreach item="item" collection="filter.visibility" open="(" separator="," close=")" >
+                #{item}
+            </foreach>
+        </if>
+        <if test="filter.title != null">
+            and title in
+            <foreach item="item" collection="filter.title" open="(" separator="," close=")" >
+                #{item}
+            </foreach>
+        </if>
+        <if test="filter.orgName != null">
+            and org_name in
+            <foreach item="item" collection="filter.orgName" open="(" separator="," close=")" >
+                #{item}
+            </foreach>
+        </if>
+    </sql>
 
     <!--查询单个-->
     <select id="queryById" resultMap="RoutineMap">
@@ -91,52 +317,27 @@
         select
           routine_id, user_id, user_name, routine_type, content, create_time, user_type, org_id, end_time, end, grade, visibility, title, org_name
         from imserver.routine
-        <where>
-            <if test = "param != null">
-                <if test="param.routineId != null and param.routineId != ''">
-                    and routine_id like concat(#{param.routineId}, '%')
-                </if>
-                <if test="param.userId != null and param.userId != ''">
-                    and user_id like concat(#{param.userId}, '%')
-                </if>
-                <if test="param.userName != null and param.userName != ''">
-                    and user_name like concat(#{param.userName}, '%')
-                </if>
-                <if test="param.routineType != null and param.routineType != ''">
-                    and routine_type like concat(#{param.routineType}, '%')
-                </if>
-                <if test="param.content != null and param.content != ''">
-                    and content like concat(#{param.content}, '%')
-                </if>
-                <if test="param.createTime != null">
-                    and create_time = #{param.createTime}
-                </if>
-                <if test="param.userType != null and param.userType != ''">
-                    and user_type like concat(#{param.userType}, '%')
-                </if>
-                <if test="param.orgId != null and param.orgId != ''">
-                    and org_id like concat(#{param.orgId}, '%')
-                </if>
-                <if test="param.endTime != null">
-                    and end_time = #{param.endTime}
-                </if>
-                <if test="param.end != null and param.end != ''">
-                    and end like concat(#{param.end}, '%')
-                </if>
-                <if test="param.grade != null and param.grade != ''">
-                    and grade like concat(#{param.grade}, '%')
-                </if>
-                <if test="param.visibility != null and param.visibility != ''">
-                    and visibility like concat(#{param.visibility}, '%')
-                </if>
-                <if test="param.title != null and param.title != ''">
-                    and title like concat(#{param.title}, '%')
-                </if>
-                <if test="param.orgName != null and param.orgName != ''">
-                    and org_name like concat(#{param.orgName}, '%')
-                </if>
+        <trim prefixOverrides="and" suffixOverrides="and" prefix="where">
+            <if test= "param != null">
+                <include refid="param" />
             </if>
-        </where>
+            <!--以下为高级查询模式，带括号and、or以及数据成组过滤-->
+            <if test="andOperator != null">
+                and
+                <trim prefix="(" suffix=")" prefixOverrides="and">
+                    <include refid="andOperator" />
+                </trim>
+            </if>
+            <if test="orOperator != null">
+                and
+                <trim prefix="(" suffix=")" prefixOverrides="or">
+                    <include refid="orOperator" />
+                </trim>
+            </if>
+            <if test="filter != null">
+                <include refid="filter" />
+            </if>
+        </trim>
         <if test="sorter != null">
             order by
             <trim prefixOverrides=",">
@@ -255,52 +456,27 @@
           count(*)
 
         from imserver.routine
-        <where>
-            <if test = "param != null">
-                <if test="param.routineId != null and param.routineId != ''">
-                    and routine_id like concat(#{param.routineId}, '%')
-                </if>
-                <if test="param.userId != null and param.userId != ''">
-                    and user_id like concat(#{param.userId}, '%')
-                </if>
-                <if test="param.userName != null and param.userName != ''">
-                    and user_name like concat(#{param.userName}, '%')
-                </if>
-                <if test="param.routineType != null and param.routineType != ''">
-                    and routine_type like concat(#{param.routineType}, '%')
-                </if>
-                <if test="param.content != null and param.content != ''">
-                    and content like concat(#{param.content}, '%')
-                </if>
-                <if test="param.createTime != null">
-                    and create_time = #{param.createTime}
-                </if>
-                <if test="param.userType != null and param.userType != ''">
-                    and user_type like concat(#{param.userType}, '%')
-                </if>
-                <if test="param.orgId != null and param.orgId != ''">
-                    and org_id like concat(#{param.orgId}, '%')
-                </if>
-                <if test="param.endTime != null">
-                    and end_time = #{param.endTime}
-                </if>
-                <if test="param.end != null and param.end != ''">
-                    and end like concat(#{param.end}, '%')
-                </if>
-                <if test="param.grade != null and param.grade != ''">
-                    and grade like concat(#{param.grade}, '%')
-                </if>
-                <if test="param.visibility != null and param.visibility != ''">
-                    and visibility like concat(#{param.visibility}, '%')
-                </if>
-                <if test="param.title != null and param.title != ''">
-                    and title like concat(#{param.title}, '%')
-                </if>
-                <if test="param.orgName != null and param.orgName != ''">
-                    and org_name like concat(#{param.orgName}, '%')
-                </if>
+        <trim prefixOverrides="and" suffixOverrides="and" prefix="where">
+            <if test= "param != null">
+                <include refid="param" />
             </if>
-        </where>
+            <!--以下为高级查询模式，带括号and、or以及数据成组过滤-->
+            <if test="andOperator != null">
+                and
+                <trim prefix="(" suffix=")" prefixOverrides="and">
+                    <include refid="andOperator" />
+                </trim>
+            </if>
+            <if test="orOperator != null">
+                and
+                <trim prefix="(" suffix=")" prefixOverrides="or">
+                    <include refid="orOperator" />
+                </trim>
+            </if>
+            <if test="filter != null">
+               <include refid="filter" />
+            </if>
+        </trim>
     </select>
 
     

@@ -1,14 +1,23 @@
 package xyz.berby.im.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import xyz.berby.im.annotation.DefaultValue;
+import xyz.berby.im.constant.Constant;
 import xyz.berby.im.entity.Feedback;
 import xyz.berby.im.dao.FeedbackDao;
+import xyz.berby.im.property.DefaultSettingProperty;
 import xyz.berby.im.service.FeedbackService;
+import xyz.berby.im.util.IpUtil;
 import xyz.berby.im.vo.Pager;
 import org.springframework.stereotype.Service;
 import cn.hutool.core.util.IdUtil;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 /**
  * (Feedback)表服务实现类
@@ -21,6 +30,10 @@ import java.util.List;
 public class FeedbackServiceImpl implements FeedbackService {
     @Resource
     private FeedbackDao feedbackDao;
+
+    @Autowired
+    private DefaultSettingProperty property;
+
 
     /**
      * 通过ID查询单条数据
@@ -54,6 +67,24 @@ public class FeedbackServiceImpl implements FeedbackService {
      public Pager<Feedback> queryByPager(Pager<Feedback> pager) {
         pager = this.countByPager(pager);                
         List<Feedback> result = feedbackDao.queryByPager(pager);
+        // 确定本地文件保存配置
+         Map<String, Object> setting = this.property.getSetting();
+         String temp = null;
+         if (Constant.LOCAL.equals(setting.get(DefaultSettingProperty.STORAGE_MODE))) {
+             temp = IpUtil.getServerIpAddress();
+         }
+
+         final String webRoot = temp;
+         result.forEach(feedback -> {
+            String one = feedback.getImageUrlOne();
+            String two = feedback.getImageUrlTwo();
+            if (one != null) {
+                feedback.setImageUrlOne(webRoot + one);
+            }
+            if (two != null) {
+                feedback.setImageUrlTwo(webRoot + two);
+            }
+        });
         pager.setResult(result);
         return pager;
      }
@@ -87,8 +118,10 @@ public class FeedbackServiceImpl implements FeedbackService {
      * @return 实例对象
      */
     @Override
+    @DefaultValue(expression = "0.pubUserId=user.userId")
     public Feedback insert(Feedback feedback) {
-  feedback.setFeedbackId(IdUtil.fastSimpleUUID());
+        feedback.setFeedbackId(IdUtil.fastSimpleUUID());
+        feedback.setRead("N");
         this.feedbackDao.insert(feedback);
         return feedback;
     }
@@ -100,6 +133,7 @@ public class FeedbackServiceImpl implements FeedbackService {
      * @return 实例对象
      */
     @Override
+    @DefaultValue(expression = "0.userId=user.userId")
     public Feedback update(Feedback feedback) {
         this.feedbackDao.update(feedback);
         return this.queryById(feedback.getFeedbackId());

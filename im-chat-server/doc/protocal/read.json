@@ -1,0 +1,13 @@
+{
+  "msgId": "消息ID",
+  "from": "来源ID",
+  "to": "目标ID",
+  "cmd":"11",
+  "msgType": "消息类型",
+  "chatType":"聊天类型",
+  "groupId":"群组id",
+  "referer": "消息请求源"
+}
+
+
+

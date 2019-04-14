@@ -63,8 +63,14 @@ public class ReflectUtil {
     public static Object jsonForParam(Class<?> paramType, Object[] value, ParameterizedType genericType) {
         String[] datas = Convert.convert(String[].class, value);
 
+        // 处理{...}
+        if (!paramType.isArray() && datas.length == 1) {
+            return genericType == null?
+                    JSON.parseObject(datas[0], paramType):
+                    JSON.parseObject(datas[0], genericType);
+        }
         // 数组对象时:[{}, {}, {}]
-        if (datas.length == 1 && datas[0].startsWith("[")) {
+        else if (datas.length == 1 && datas[0].startsWith("[")) {
             Class<?> componentType = paramType.getComponentType();
             String data = datas[0];
 
@@ -96,10 +102,6 @@ public class ReflectUtil {
                         JSON.parseObject(data, componentType): JSON.parseObject(data, genericType);
             }
             return Convert.convert(paramType, objects);
-        }
-        // 处理{...}
-        else if (!paramType.isArray() && datas.length == 1) {
-            return JSON.parseObject(datas[0], paramType);
         }
 
         return null;

@@ -14,6 +14,20 @@ public class Pager<T> {
      * 实体入参数
      */
     private T param;
+
+    /**
+     * 进行or运算的参数
+     */
+    private T and;
+    /**
+     * 进行or运算的参数
+     */
+    private T or;
+    /**
+     * 数据成组过滤
+     */
+    private Map<String, String[]> filter;
+
     /**
      * 偏离值
      */
@@ -57,6 +71,8 @@ public class Pager<T> {
         this.limit = limit;
     }
 
+
+
     public T getParam() {
         return param;
     }
@@ -96,6 +112,32 @@ public class Pager<T> {
 
     public void setSize(Integer size) {
         this.size = size;
+    }
+
+    // 由于mybatis中and属于关键字，所以做一层转换
+    public T getAndOperator() {
+        return and;
+    }
+
+    public void setAnd(T and) {
+        this.and = and;
+    }
+
+    // 由于mybatis中or属于关键字，所以做一层转换
+    public T getOrOperator() {
+        return or;
+    }
+
+    public void setOr(T or) {
+        this.or = or;
+    }
+
+    public Map<String, String[]> getFilter() {
+        return filter;
+    }
+
+    public void setFilter(Map<String, String[]> filter) {
+        this.filter = filter;
     }
 
     /**

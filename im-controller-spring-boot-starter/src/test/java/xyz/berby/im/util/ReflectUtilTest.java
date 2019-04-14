@@ -92,7 +92,8 @@ public class ReflectUtilTest {
 //        }
 //    }
 //
-//    @Test
-//    public void testDynamicNewInstance() {
-//    }
+    @Test
+    public void testDynamicNewInstance() {
+
+    }
 }

@@ -29,13 +29,15 @@ public class AppOrganizationServiceImpl extends OrganizationServiceImpl implemen
      * @return list
      */
     public List<OrganizationTreeResponse> queryOrgTreeByPager(Pager<Organization> pager) {
+
         List<OrganizationTreeResponse> responses = new ArrayList<>();
-        List<Organization> organizationList = this.organizationDao.queryByPager(pager);
+        List<Organization> organizationList = this.organizationDao.queryAll(pager.getParam());
         organizationList.forEach(organization -> {
-            List<Organization> studentAgencies = this.organizationDao.queryByPager(new Pager<>(Organization.builder()
-                    .orgType(STUDENT_AGENCY)
-                    .parentId(organization.getOrgId())
-                    .build()));
+            List<Organization> studentAgencies = this.organizationDao.queryAll(
+                    Organization.builder()
+                            .orgType(STUDENT_AGENCY)
+                            .parentId(organization.getOrgId())
+                            .build());
             OrganizationTreeResponse response = new OrganizationTreeResponse(organization, studentAgencies);
             responses.add(response);
         });

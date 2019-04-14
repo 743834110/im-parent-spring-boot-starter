@@ -14,12 +14,209 @@
         <result property="orgName" column="org_name" jdbcType="VARCHAR"/>
         <result property="userImageUrl" column="user_image_url" jdbcType="VARCHAR"/>
         <result property="shortName" column="short_name" jdbcType="VARCHAR"/>
+        <result property="roleName" column="role_name" jdbcType="VARCHAR"/>
     </resultMap>
+    
+<!--实体参数or运算-->    
+    <sql id = "orOperator">
+        <if test="orOperator.userOrgId != null and orOperator.userOrgId != ''">
+            or user_org_id like concat(#{orOperator.userOrgId}, '%')
+        </if>
+        <if test="orOperator.userId != null and orOperator.userId != ''">
+            or user_id like concat(#{orOperator.userId}, '%')
+        </if>
+        <if test="orOperator.orgId != null and orOperator.orgId != ''">
+            or org_id like concat(#{orOperator.orgId}, '%')
+        </if>
+        <if test="orOperator.userName != null and orOperator.userName != ''">
+            or user_name like concat(#{orOperator.userName}, '%')
+        </if>
+        <if test="orOperator.roleId != null and orOperator.roleId != ''">
+            or role_id like concat(#{orOperator.roleId}, '%')
+        </if>
+        <if test="orOperator.parentOrgId != null and orOperator.parentOrgId != ''">
+            or parent_org_id like concat(#{orOperator.parentOrgId}, '%')
+        </if>
+        <if test="orOperator.orgType != null and orOperator.orgType != ''">
+            or org_type like concat(#{orOperator.orgType}, '%')
+        </if>
+        <if test="orOperator.grade != null and orOperator.grade != ''">
+            or grade like concat(#{orOperator.grade}, '%')
+        </if>
+        <if test="orOperator.orgName != null and orOperator.orgName != ''">
+            or org_name like concat(#{orOperator.orgName}, '%')
+        </if>
+        <if test="orOperator.userImageUrl != null and orOperator.userImageUrl != ''">
+            or user_image_url like concat(#{orOperator.userImageUrl}, '%')
+        </if>
+        <if test="orOperator.shortName != null and orOperator.shortName != ''">
+            or short_name like concat(#{orOperator.shortName}, '%')
+        </if>
+        <if test="orOperator.roleName != null and orOperator.roleName != ''">
+            or role_name like concat(#{orOperator.roleName}, '%')
+        </if>
+    </sql>
+    
+    <!--实体参数and运算-->
+    <sql id="andOperator">
+            <if test="andOperator.userOrgId != null and andOperator.userOrgId != ''">
+            and user_org_id like concat(#{andOperator.userOrgId}, '%')
+        </if>
+            <if test="andOperator.userId != null and andOperator.userId != ''">
+            and user_id like concat(#{andOperator.userId}, '%')
+        </if>
+            <if test="andOperator.orgId != null and andOperator.orgId != ''">
+            and org_id like concat(#{andOperator.orgId}, '%')
+        </if>
+            <if test="andOperator.userName != null and andOperator.userName != ''">
+            and user_name like concat(#{andOperator.userName}, '%')
+        </if>
+            <if test="andOperator.roleId != null and andOperator.roleId != ''">
+            and role_id like concat(#{andOperator.roleId}, '%')
+        </if>
+            <if test="andOperator.parentOrgId != null and andOperator.parentOrgId != ''">
+            and parent_org_id like concat(#{andOperator.parentOrgId}, '%')
+        </if>
+            <if test="andOperator.orgType != null and andOperator.orgType != ''">
+            and org_type like concat(#{andOperator.orgType}, '%')
+        </if>
+            <if test="andOperator.grade != null and andOperator.grade != ''">
+            and grade like concat(#{andOperator.grade}, '%')
+        </if>
+            <if test="andOperator.orgName != null and andOperator.orgName != ''">
+            and org_name like concat(#{andOperator.orgName}, '%')
+        </if>
+            <if test="andOperator.userImageUrl != null and andOperator.userImageUrl != ''">
+            and user_image_url like concat(#{andOperator.userImageUrl}, '%')
+        </if>
+            <if test="andOperator.shortName != null and andOperator.shortName != ''">
+            and short_name like concat(#{andOperator.shortName}, '%')
+        </if>
+            <if test="andOperator.roleName != null and andOperator.roleName != ''">
+            and role_name like concat(#{andOperator.roleName}, '%')
+        </if>
+    </sql>
+    
+    <!--param-->
+    <sql id="param">
+            <if test="param.userOrgId != null and param.userOrgId != ''">
+            and user_org_id like concat(#{param.userOrgId}, '%')
+        </if>
+            <if test="param.userId != null and param.userId != ''">
+            and user_id like concat(#{param.userId}, '%')
+        </if>
+            <if test="param.orgId != null and param.orgId != ''">
+            and org_id like concat(#{param.orgId}, '%')
+        </if>
+            <if test="param.userName != null and param.userName != ''">
+            and user_name like concat(#{param.userName}, '%')
+        </if>
+            <if test="param.roleId != null and param.roleId != ''">
+            and role_id like concat(#{param.roleId}, '%')
+        </if>
+            <if test="param.parentOrgId != null and param.parentOrgId != ''">
+            and parent_org_id like concat(#{param.parentOrgId}, '%')
+        </if>
+            <if test="param.orgType != null and param.orgType != ''">
+            and org_type like concat(#{param.orgType}, '%')
+        </if>
+            <if test="param.grade != null and param.grade != ''">
+            and grade like concat(#{param.grade}, '%')
+        </if>
+            <if test="param.orgName != null and param.orgName != ''">
+            and org_name like concat(#{param.orgName}, '%')
+        </if>
+            <if test="param.userImageUrl != null and param.userImageUrl != ''">
+            and user_image_url like concat(#{param.userImageUrl}, '%')
+        </if>
+            <if test="param.shortName != null and param.shortName != ''">
+            and short_name like concat(#{param.shortName}, '%')
+        </if>
+            <if test="param.roleName != null and param.roleName != ''">
+            and role_name like concat(#{param.roleName}, '%')
+        </if>
+    </sql>
+
+    <!--表数据成组过滤-->    
+    <sql id="filter">
+        <if test="filter.userOrgId != null">
+            and user_org_id in
+            <foreach item="item" collection="filter.userOrgId" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="filter.userId != null">
+            and user_id in
+            <foreach item="item" collection="filter.userId" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="filter.orgId != null">
+            and org_id in
+            <foreach item="item" collection="filter.orgId" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="filter.userName != null">
+            and user_name in
+            <foreach item="item" collection="filter.userName" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="filter.roleId != null">
+            and role_id in
+            <foreach item="item" collection="filter.roleId" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="filter.parentOrgId != null">
+            and parent_org_id in
+            <foreach item="item" collection="filter.parentOrgId" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="filter.orgType != null">
+            and org_type in
+            <foreach item="item" collection="filter.orgType" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="filter.grade != null">
+            and grade in
+            <foreach item="item" collection="filter.grade" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="filter.orgName != null">
+            and org_name in
+            <foreach item="item" collection="filter.orgName" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="filter.userImageUrl != null">
+            and user_image_url in
+            <foreach item="item" collection="filter.userImageUrl" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="filter.shortName != null">
+            and short_name in
+            <foreach item="item" collection="filter.shortName" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="filter.roleName != null">
+            and role_name in
+            <foreach item="item" collection="filter.roleName" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+    </sql>
 
     <!--查询单个-->
     <select id="queryById" resultMap="UserOrgMap">
         select
-          user_org_id, user_id, org_id, user_name, role_id, parent_org_id, org_type, grade, org_name, user_image_url, short_name
+          user_org_id, user_id, org_id, user_name, role_id, parent_org_id, org_type, grade, org_name, user_image_url, short_name, role_name
         from imserver.user_org
         where user_org_id = #{userOrgId}
     </select>
@@ -27,7 +224,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="UserOrgMap">
         select
-          user_org_id, user_id, org_id, user_name, role_id, parent_org_id, org_type, grade, org_name, user_image_url, short_name
+          user_org_id, user_id, org_id, user_name, role_id, parent_org_id, org_type, grade, org_name, user_image_url, short_name, role_name
         from imserver.user_org
         limit #{offset}, #{limit}
     </select>
@@ -35,7 +232,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="UserOrgMap">
         select
-          user_org_id, user_id, org_id, user_name, role_id, parent_org_id, org_type, grade, org_name, user_image_url, short_name
+          user_org_id, user_id, org_id, user_name, role_id, parent_org_id, org_type, grade, org_name, user_image_url, short_name, role_name
         from imserver.user_org
         <where>
             <if test="userOrgId != null and userOrgId != ''">
@@ -71,51 +268,38 @@
             <if test="shortName != null and shortName != ''">
                 and short_name = #{shortName}
             </if>
+            <if test="roleName != null and roleName != ''">
+                and role_name = #{roleName}
+            </if>
         </where>
     </select>
     
     <!--通过分页对象作为筛选条件查询-->
     <select id="queryByPager" resultMap="UserOrgMap">
         select
-          user_org_id, user_id, org_id, user_name, role_id, parent_org_id, org_type, grade, org_name, user_image_url, short_name
+          user_org_id, user_id, org_id, user_name, role_id, parent_org_id, org_type, grade, org_name, user_image_url, short_name, role_name
         from imserver.user_org
-        <where>
-            <if test = "param != null">
-                <if test="param.userOrgId != null and param.userOrgId != ''">
-                    and user_org_id like concat(#{param.userOrgId}, '%')
-                </if>
-                <if test="param.userId != null and param.userId != ''">
-                    and user_id like concat(#{param.userId}, '%')
-                </if>
-                <if test="param.orgId != null and param.orgId != ''">
-                    and org_id like concat(#{param.orgId}, '%')
-                </if>
-                <if test="param.userName != null and param.userName != ''">
-                    and user_name like concat(#{param.userName}, '%')
-                </if>
-                <if test="param.roleId != null and param.roleId != ''">
-                    and role_id like concat(#{param.roleId}, '%')
-                </if>
-                <if test="param.parentOrgId != null and param.parentOrgId != ''">
-                    and parent_org_id like concat(#{param.parentOrgId}, '%')
-                </if>
-                <if test="param.orgType != null and param.orgType != ''">
-                    and org_type like concat(#{param.orgType}, '%')
-                </if>
-                <if test="param.grade != null and param.grade != ''">
-                    and grade like concat(#{param.grade}, '%')
-                </if>
-                <if test="param.orgName != null and param.orgName != ''">
-                    and org_name like concat(#{param.orgName}, '%')
-                </if>
-                <if test="param.userImageUrl != null and param.userImageUrl != ''">
-                    and user_image_url like concat(#{param.userImageUrl}, '%')
-                </if>
-                <if test="param.shortName != null and param.shortName != ''">
-                    and short_name like concat(#{param.shortName}, '%')
-                </if>
+        <trim prefixOverrides="and" suffixOverrides="and" prefix="where">
+            <if test= "param != null">
+                <include refid="param" />
             </if>
-        </where>
+            <!--以下为高级查询模式，带括号and、or以及数据成组过滤-->
+            <if test="andOperator != null">
+                and
+                <trim prefix="(" suffix=")" prefixOverrides="and">
+                    <include refid="andOperator" />
+                </trim>
+            </if>
+            <if test="orOperator != null">
+                and
+                <trim prefix="(" suffix=")" prefixOverrides="or">
+                    <include refid="orOperator" />
+                </trim>
+            </if>
+            <if test="filter != null">
+               <include refid="filter" />
+            </if>
+        </trim>
         <if test="sorter != null">
             order by
             <trim prefixOverrides=",">
@@ -199,9 +383,17 @@
                         , short_name desc
                     </when>
                 </choose>
+                <choose>
+                    <when test="sorter.roleName == 'asc'">
+                        , role_name asc
+                    </when>
+                    <when test="sorter.roleName == 'desc'">
+                        , role_name desc
+                    </when>
+                </choose>
         </trim>
         </if>
-        limit #{offset}, #{limit}
+        limit #{currentOffset}, #{limit}
     </select>
     
     <!--通过分页对象作为筛选条件查询记录条数-->
@@ -210,51 +402,35 @@
           count(*)
 
         from imserver.user_org
-        <where>
-            <if test = "param != null">
-                <if test="param.userOrgId != null and param.userOrgId != ''">
-                    and user_org_id like concat(#{param.userOrgId}, '%')
-                </if>
-                <if test="param.userId != null and param.userId != ''">
-                    and user_id like concat(#{param.userId}, '%')
-                </if>
-                <if test="param.orgId != null and param.orgId != ''">
-                    and org_id like concat(#{param.orgId}, '%')
-                </if>
-                <if test="param.userName != null and param.userName != ''">
-                    and user_name like concat(#{param.userName}, '%')
-                </if>
-                <if test="param.roleId != null and param.roleId != ''">
-                    and role_id like concat(#{param.roleId}, '%')
-                </if>
-                <if test="param.parentOrgId != null and param.parentOrgId != ''">
-                    and parent_org_id like concat(#{param.parentOrgId}, '%')
-                </if>
-                <if test="param.orgType != null and param.orgType != ''">
-                    and org_type like concat(#{param.orgType}, '%')
-                </if>
-                <if test="param.grade != null and param.grade != ''">
-                    and grade like concat(#{param.grade}, '%')
-                </if>
-                <if test="param.orgName != null and param.orgName != ''">
-                    and org_name like concat(#{param.orgName}, '%')
-                </if>
-                <if test="param.userImageUrl != null and param.userImageUrl != ''">
-                    and user_image_url like concat(#{param.userImageUrl}, '%')
-                </if>
-                <if test="param.shortName != null and param.shortName != ''">
-                    and short_name like concat(#{param.shortName}, '%')
-                </if>
+        <trim prefixOverrides="and" suffixOverrides="and" prefix="where">
+            <if test= "param != null">
+                <include refid="param" />
             </if>
-        </where>
+            <!--以下为高级查询模式，带括号and、or以及数据成组过滤-->
+            <if test="andOperator != null">
+                and
+                <trim prefix="(" suffix=")" prefixOverrides="and">
+                    <include refid="andOperator" />
+                </trim>
+            </if>
+            <if test="orOperator != null">
+                and
+                <trim prefix="(" suffix=")" prefixOverrides="or">
+                    <include refid="orOperator" />
+                </trim>
+            </if>
+            <if test="filter != null">
+               <include refid="filter" />
+            </if>
+        </trim>
     </select>
 
     
 
     <!--新增所有列，如果不想在代码层管理ID的生成，则可以将fullColumn改为otherColumn,之后再根据需要改逻辑-->
     <insert id="insert" keyProperty="userOrgId" useGeneratedKeys="true">
-        insert into imserver.user_org(user_org_id, user_id, org_id, user_name, role_id, parent_org_id, org_type, grade, org_name, user_image_url, short_name)
-        values (#{userOrgId}, #{userId}, #{orgId}, #{userName}, #{roleId}, #{parentOrgId}, #{orgType}, #{grade}, #{orgName}, #{userImageUrl}, #{shortName})
+        insert into imserver.user_org(user_org_id, user_id, org_id, user_name, role_id, parent_org_id, org_type, grade, org_name, user_image_url, short_name, role_name)
+        values (#{userOrgId}, #{userId}, #{orgId}, #{userName}, #{roleId}, #{parentOrgId}, #{orgType}, #{grade}, #{orgName}, #{userImageUrl}, #{shortName}, #{roleName})
     </insert>
 
     <!--通过主键修改数据-->
@@ -290,6 +466,9 @@
             </if>
             <if test="shortName != null and shortName != ''">
                 short_name = #{shortName},
+            </if>
+            <if test="roleName != null and roleName != ''">
+                role_name = #{roleName},
             </if>
         </set>
         where user_org_id = #{userOrgId}

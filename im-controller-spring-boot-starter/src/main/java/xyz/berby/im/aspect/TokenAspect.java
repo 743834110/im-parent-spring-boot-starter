@@ -20,6 +20,7 @@ import xyz.berby.im.exception.HttpException;
 import xyz.berby.im.property.DefaultSettingProperty;
 import xyz.berby.im.util.ApplicationContextHolder;
 import xyz.berby.im.util.JwtUtil;
+import xyz.berby.im.util.ServletUtil;
 import xyz.berby.im.vo.AccessToken;
 
 import javax.servlet.http.HttpServletRequest;
@@ -46,7 +47,7 @@ public class TokenAspect {
     @Before(value = "tokenAspect(tokenValidate)", argNames = "joinPoint, tokenValidate")
     public void validate(JoinPoint joinPoint, TokenValidate tokenValidate) throws Exception {
 
-        HttpServletRequest request = ApplicationContextHolder.getRequest();
+        HttpServletRequest request = ServletUtil.getRequest();
         HttpSession session = request.getSession();
         AbstractUser user = (AbstractUser) session.getAttribute(Constant.USER);
         // 当user为空时才进行token的检查

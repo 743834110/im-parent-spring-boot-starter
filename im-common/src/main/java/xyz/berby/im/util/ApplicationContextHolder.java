@@ -2,14 +2,6 @@ package xyz.berby.im.util;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.context.request.ServletWebRequest;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  * 实现对spring context 的管理
@@ -19,6 +11,7 @@ import javax.servlet.http.HttpSession;
 public class ApplicationContextHolder implements ApplicationContextAware {
 
     private static ApplicationContext applicationContext;
+
 
     /**
      * 实现ApplicationContextAware接口的context注入函数, 将其存入静态变量.
@@ -68,32 +61,4 @@ public class ApplicationContextHolder implements ApplicationContextAware {
                     "applicaitonContext未注入,请在applicationContext.xml中定义SpringContextHolder");
         }
     }
-
-    /**
-     * 获取当前请求的Request对象
-     * @return HttpServletRequest
-     */
-    public static HttpServletRequest getRequest() {
-        ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        return requestAttributes.getRequest();
-    }
-
-    /**
-     * 获取response
-     * @return
-     */
-    public static HttpServletResponse getResponse(){
-        HttpServletResponse resp = ((ServletWebRequest)RequestContextHolder.getRequestAttributes()).getResponse();
-        return resp;
-    }
-
-    /**
-     * 获取当前请求的session对象
-     * @return HttpSession
-     */
-    public static HttpSession getSession() {
-        return getRequest().getSession();
-    }
-
-
 }

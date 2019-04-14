@@ -22,10 +22,10 @@ import java.util.List;
 @Transactional
 public class UserOrgServiceImpl implements UserOrgService {
     @Resource
-    private UserOrgDao userOrgDao;
+    protected UserOrgDao userOrgDao;
 
     @Resource
-    private WorkGroupMemberDao workGroupMemberDao;
+    protected WorkGroupMemberDao workGroupMemberDao;
 
     /**
      * 通过ID查询单条数据

@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 import lombok.*;
 
-import javax.validation.Valid;
-
 
 /**
  * 操作权限表(Auth)实体类

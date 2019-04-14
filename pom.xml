@@ -91,7 +91,6 @@
     <module>im-db-spring-boot-starter</module>
     <module>im-org-spring-boot-starter</module>
     <module>im-controller-spring-boot-starter</module>
-    <module>jim-server-demo</module>
     <module>im-common</module>
     <module>im-chat-server</module>
   </modules>

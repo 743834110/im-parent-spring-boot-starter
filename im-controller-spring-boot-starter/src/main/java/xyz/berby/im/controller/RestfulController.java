@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import xyz.berby.im.util.ApplicationContextHolder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,6 +46,7 @@ public class RestfulController extends AbstractRestfulController{
         Object body = super.getCommandDeal(service, operate
                 , httpServletRequest, httpServletResponse
                 , string, files);
+
         System.out.println("耗时：" + (System.currentTimeMillis() - a) + "ms");
         return JSON.toJSONString(body);
     }

@@ -1,0 +1,13 @@
+{
+  "cmd":"19",
+  "fromUserId":"消息发送用户ID",
+  "userId":"当前用户ID",
+  "groupId":"群组ID",
+  "beginTime":"消息区间开始时间",
+  "endTime":"消息区间结束时间",
+  "offset":"分页偏移量int类型",
+  "count":"显示消息数量",
+  "type":"消息类型"
+}
+
+

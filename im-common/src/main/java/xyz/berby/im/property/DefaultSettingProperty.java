@@ -39,5 +39,13 @@ public class DefaultSettingProperty {
 
     public static final String LOGIN_SERVICE_METHOD = "loginServiceMethod";
 
+    public static final String STORAGE_MODE = "storageMode";
+
+    public static final String RESOURCE_PREFIX = "resourcePrefix";
+
+    public static final String STATIC_ACCESS_PATH = "staticAccessPath";
+
+    public static final String UPLOAD_FOLDER = "uploadFolder";
+
 
 }
